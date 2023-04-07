@@ -1,0 +1,64 @@
+<div class="container-fluid cont">
+    <div 
+    *ngIf="router.url === '/cart' else OrderSuccess"
+    class="container cont_body cart-page main-container">
+        
+        <app-loader *ngIf="loading"></app-loader>
+
+        <div class="cart-page-top-row mb-4" *ngIf="!loading && !cartIsNull && !order">
+            <div class="cart-breadcrumbs">
+                <span>Список товаров </span>
+                <svg class="ml-2 mr-3" fill="none" height="14" viewBox="0 0 8 14" width="8" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L7 7L0.999999 13" stroke="#B8B6B6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>Доставка</span>
+            </div>
+            <div class="cart_delete_all">
+                <button (click)="clearCart()">
+                    Удалить все
+                </button>
+            </div>
+        </div>
+
+        <app-cart-view *ngIf="!loading && !order && cart != undefined && (cart.items.length > 0 || cart.obsolete.length>0)"
+        [products] = "cart.items"
+        [obsolets] = "cart.obsolete"
+        [minSum] = "cart.minOrderSum"
+        (cartIsNull) = "nulledCart()"
+        (OrderProducts) = "OrderProducts($event)"
+        (changeProducts) = "setItemsWithPromocode($event)"
+        ></app-cart-view>
+
+        <app-order 
+        *ngIf="!loading && order && cart != undefined"
+        [beforeOrderParams]="beforeOrderParams"
+        (backToCart)="getCart() ;order = !order"
+        (orderComplete)="order = false; cartIsNull = true; cart = undefined;"
+        ></app-order>
+
+        <div class="cart_is_null" *ngIf="cartIsNull && !loading">
+            <svg xmlns="http://www.w3.org/2000/svg" width="178" height="178" viewBox="0 0 178 178" fill="none">
+                <circle cx="89" cy="89" r="89" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M77.8169 136.76C81.7831 136.76 84.9971 133.456 84.9971 129.383C84.9971 125.309 81.7831 122.006 77.8169 122.006C73.8506 122.006 70.6367 125.309 70.6367 129.383C70.6367 133.456 73.8506 136.76 77.8169 136.76V136.76Z" stroke="#FF7308" stroke-width="4"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M108.334 136.76C112.301 136.76 115.515 133.456 115.515 129.383C115.515 125.309 112.301 122.006 108.334 122.006C104.368 122.006 101.154 125.309 101.154 129.383C101.154 133.456 104.368 136.76 108.334 136.76V136.76Z" stroke="#FF7308" stroke-width="4"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M59.4522 65.1895H128.494C129.506 65.1895 130.096 65.3259 129.8 66.2712L119.277 100.166C118.987 101.094 118.194 102.221 117.5 102.221H70.4466C69.7547 102.221 68.9654 100.812 68.6691 99.8663L58.1464 66.6064C57.8541 65.6787 58.4349 65.1895 59.4522 65.1895V65.1895Z" stroke="#FF7308" stroke-width="4"/>
+                <path d="M58.5 68.043L54 56.043" stroke="#FF7308" stroke-width="4" stroke-linecap="round"/>
+                <path d="M70.6387 101.799C69.976 101.799 69.2178 102.547 68.9333 103.506L62.9995 119.544" stroke="#FF7308" stroke-width="4" stroke-linecap="round"/>
+                <path d="M44 55.543H53.5" stroke="#FF7308" stroke-width="4" stroke-linecap="round"/>
+                <path d="M63.3745 119.764H119.896" stroke="#FF7308" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <h1 class="text-center">
+                Ваша корзина пуста
+            </h1>
+            <a class="btn green mt-4" (click)="goToCategory()">Перейти в каталог</a>
+        </div>
+
+    </div>
+
+    <ng-template #OrderSuccess>
+        <div class="container cont_body main-container">
+            <router-outlet></router-outlet>
+        </div>
+    </ng-template>
+
+</div>

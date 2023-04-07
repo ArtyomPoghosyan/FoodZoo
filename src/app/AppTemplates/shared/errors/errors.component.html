@@ -1,0 +1,61 @@
+<div 
+*ngIf="errorsService.errorsArray.length > 0" 
+class="container-fluid errors_wrapper"
+[ngClass]="{'category_page' : router.url == '/category'}"
+>
+    <div 
+    *ngFor="let error of errorsService.errorsArray;" 
+    class="row warning-row mb-3"
+    [ngClass]="{
+        'warning' : error.errorType === type.WARNING,
+        'default' : error.errorType === type.DEFAULT,
+        'inside' : error.errorType === type.INSIDE
+    }"
+    >
+        <div class="container">
+            <span class="error_close" (click)="errorsService.clearError(error.errorID)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="51" viewBox="0 0 52 51" fill="none">
+                    <path d="M1.02522 5.91521C2.81774 4.12269 4.30972 2.63071 6.07324 0.867188C20.9904 15.7843 35.7307 30.5246 50.9017 45.6956C49.4217 47.3297 47.9326 48.9745 46.1047 50.9947C31.0136 35.9036 16.192 21.0819 1.02522 5.91521Z" fill="#FAF9EC"/>
+                    <path d="M45.7537 0.405106C47.5463 2.19762 49.0382 3.6896 50.8018 5.45312C35.8846 20.3702 21.1443 35.1106 5.97333 50.2815C4.3392 48.8016 2.69448 47.3124 0.674276 45.4846C15.7653 30.3935 30.587 15.5718 45.7537 0.405106Z" fill="#FAF9EC"/>
+                </svg>
+            </span>
+            <div class="error_body">
+                <div *ngIf="error.errorType === type.WARNING" class="error-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path d="M12.5 9.375V14.0625" stroke="#FAF9EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M11.1478 3.90476L2.55639 18.7478C2.41892 18.9853 2.34642 19.2548 2.34619 19.5292C2.34596 19.8036 2.41802 20.0733 2.5551 20.311C2.69218 20.5487 2.88945 20.7462 3.12707 20.8835C3.36469 21.0207 3.63427 21.093 3.9087 21.093H21.0916C21.366 21.093 21.6356 21.0207 21.8732 20.8835C22.1108 20.7462 22.3081 20.5487 22.4452 20.311C22.5822 20.0733 22.6543 19.8036 22.6541 19.5292C22.6538 19.2548 22.5813 18.9853 22.4439 18.7478L13.8524 3.90476C13.7152 3.66763 13.518 3.47077 13.2806 3.3339C13.0433 3.19704 12.7741 3.125 12.5001 3.125C12.2261 3.125 11.957 3.19704 11.7196 3.3339C11.4823 3.47077 11.2851 3.66763 11.1478 3.90476V3.90476Z" stroke="#FAF9EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12.5 18.75C13.1472 18.75 13.6719 18.2253 13.6719 17.5781C13.6719 16.9309 13.1472 16.4062 12.5 16.4062C11.8528 16.4062 11.3281 16.9309 11.3281 17.5781C11.3281 18.2253 11.8528 18.75 12.5 18.75Z" fill="#FAF9EC"/>
+                    </svg>
+                    <span class="error-title">
+                        Предупреждение!
+                    </span>
+                </div>
+
+                <div *ngIf="error.errorType === type.DEFAULT" class="error-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path d="M3.90625 10.4167V4.6875C3.90625 4.4803 3.98856 4.28159 4.13507 4.13507C4.28159 3.98856 4.4803 3.90625 4.6875 3.90625H20.3125C20.5197 3.90625 20.7184 3.98856 20.8649 4.13507C21.0114 4.28159 21.0938 4.4803 21.0938 4.6875V10.4167C21.0938 18.6213 14.1303 21.3395 12.7399 21.8005C12.5844 21.854 12.4156 21.854 12.2601 21.8005C10.8697 21.3395 3.90625 18.6213 3.90625 10.4167Z" stroke="#FAF9EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12.5 8.59375V12.5" stroke="#FAF9EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12.5 17.1875C13.1472 17.1875 13.6719 16.6628 13.6719 16.0156C13.6719 15.3684 13.1472 14.8438 12.5 14.8438C11.8528 14.8438 11.3281 15.3684 11.3281 16.0156C11.3281 16.6628 11.8528 17.1875 12.5 17.1875Z" fill="#FAF9EC"/>
+                    </svg>
+                    <span class="error-title">
+                        Ошибка!
+                    </span>
+                </div>
+
+                <div *ngIf="error.errorType === type.INSIDE" class="error-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path d="M12.5 21.875C17.6777 21.875 21.875 17.6777 21.875 12.5C21.875 7.32233 17.6777 3.125 12.5 3.125C7.32233 3.125 3.125 7.32233 3.125 12.5C3.125 17.6777 7.32233 21.875 12.5 21.875Z" stroke="#FAF9EC" stroke-width="2" stroke-miterlimit="10"/>
+                        <path d="M12.5 7.8125V13.2812" stroke="#FAF9EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12.5 17.9688C13.1472 17.9688 13.6719 17.4441 13.6719 16.7969C13.6719 16.1497 13.1472 15.625 12.5 15.625C11.8528 15.625 11.3281 16.1497 11.3281 16.7969C11.3281 17.4441 11.8528 17.9688 12.5 17.9688Z" fill="#FAF9EC"/>
+                    </svg>
+                    <span class="error-title">
+                        Внутренняя ошибка!
+                    </span>
+                </div>               
+                <div class="error-context">
+                    <p>{{error.errorMessage}} <!--<span *ngIf="error.errorCode">Код ошибки:{{error.errorCode}}</span>--></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

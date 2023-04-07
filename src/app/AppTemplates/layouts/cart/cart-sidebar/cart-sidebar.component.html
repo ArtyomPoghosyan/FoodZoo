@@ -1,0 +1,31 @@
+<p class="price-summ">
+    {{orderSum | number:'1.2-2':'ru-RU'}} ₽ ({{returnPercent() | number:'1.2-2':'ru-RU'}}%)
+</p>
+<span class="price-counter">
+    <span class="price-counter-counter"
+    [style.width]="returnPercent() + '%'"></span>
+</span>
+<p class="price-min-sum">
+    Минимальная сумма заказа: {{minOrderSum}}₽
+</p>
+<hr />
+<p class="prouct-counter">
+    <span>Товаров:</span> <span>{{productCount}}</span>
+</p>
+<p class="product-subscribtion">
+    Товар на фото может отличаться от оригинала
+</p>
+<hr />
+<p class="product-not-min-price" *ngIf="returnNotAllowPrice() > 0; else PriceIsOk">
+    Не хватает до минимальной суммы доставки: <br/>
+    <strong>{{returnNotAllowPrice() | number:'1.2-2':'ru-RU'}} ₽</strong>
+</p>
+<ng-template #PriceIsOk>
+    <p class="products-price-is-good">
+        Минимальная сумма заказа набрана.
+    </p>
+</ng-template>
+<hr />
+<p class="total-price">
+    Сумма заказов: <strong>{{orderSum | number:'1.2-2':'ru-RU'}} ₽</strong>
+</p>

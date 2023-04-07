@@ -1,0 +1,37 @@
+.age-confirm {
+    .target_age {
+        color: #FF7308;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 44px;
+        text-align: center;
+    }
+
+    .target_title {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+        color: #5E697F;
+        padding-top: 10px;
+        padding-bottom: 18px;
+    }
+
+    .form {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.09);
+        padding-top: 45px;
+        padding-bottom: 45px;
+    }
+}
+@media (max-width: 420px) {
+    .age-confirm {
+        .form {
+            width: 344px;
+        }
+        .target_title {
+            font-size: 18px;
+            color: #161616;
+            font-weight: normal;
+        }
+    }
+}

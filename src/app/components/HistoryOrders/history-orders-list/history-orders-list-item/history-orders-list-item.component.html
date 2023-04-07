@@ -1,0 +1,159 @@
+<div class="cart_list_item" [ngClass]="{'is-opened':isOpen}" (clickOutside)="onClickedOutside($event)">
+    <div class="cart_list_item_title cart_list_item_title_planshet" [ngClass]="{'is-opened':isOpen}" (click)="onClickOpen(item?.id)">
+        <div class="order_history_code">
+            №{{item?.number}}
+        </div>
+        <div class="cart_list_item_title_left_planshet">
+            <div class="order_history_code_planshet mobile float-left">
+                №{{item?.number}}
+            </div>
+            <div class="cart_list_item_info-supplier cart_list_item_info_for_mobile float-left cart_list_item_info_for_planshet">
+                <div class="date_input date_input_his">
+                    <label for="orderDate" class="float-left">
+                        Оформлен:
+                    </label>
+                    <span class="d-block input">
+                    {{item?.createdAt}}
+                </span>
+                </div>
+            </div>
+            <div class="cart_list_item_info cart_list_item_info-supplier cart_list_item_info_for_mobile cart_list_item_info_for_planshet_second">
+                <div class="date_input date_input_his">
+                    <label for="deliveryTime">
+                        Время доставки:
+                    </label>
+                    <span class="input">
+                    {{item?.deliveryTime}}
+                </span>
+                </div>
+            </div>
+            <div class="delivery_order_info ">
+                <span class="delivery_order_info-status"
+                    [class.green]="item.status !== 2">{{item?.statusName}}</span>
+                <div class="delivery_order_info-end green">
+                    <span *ngIf="(item.status == 0 || item.status == 4)" >Прибудет: </span>
+                    <span *ngIf="(item.status !== 3 && item.status !== 5)">{{item?.deliveryDate}}</span>
+                </div>
+            </div>
+            <div class="customer_name">{{item?.recipientLegalPersonName}}</div>
+            <div class="point_name">
+                <span>{{item?.recipientAddress}}</span>
+            </div>
+        </div>
+        <div class="cart_list_item_title_right">
+            <div class="total_order_history">
+                <span class="total_order_history_fs">Итого:</span>
+                <span class="total_order_history_ss">{{item?.amount}} ₽</span>
+            </div>
+            <div class="supplier_conrols_cart-items" >
+                <div class="supplier_conrols_cart-item" (click)='getOrderExel(item?.id, $event)'>
+                    <svg>
+                        <use xlink:href="#icon_excel"></use>
+                    </svg>
+                    <span>Скачать<br> Excel файл</span>
+                </div>
+            </div>
+            <svg height="6" width="10">
+                <use xlink:href="#arrow_catalog"></use>
+            </svg>
+        </div>
+    </div>
+    <div *ngIf="true" class="cart_list_item_title cart_list_item_title_mobile" [ngClass]="{'is-opened':isOpen}" (click)="onClickOpen(item?.id)">
+        <div class="order_history_code">
+            №{{item?.number}}
+        </div>
+        <div class="cart_list_item_title_left">
+            <div class="order_history_code mobile">
+                №{{item?.number}}
+            </div>
+            <div class="delivery_order_info ">
+                <span class="delivery_order_info-status"
+                    [class.green]="item.status !== 2">{{item?.statusName}}</span>
+                <div class="delivery_order_info-end green">
+                    <span *ngIf="(item.status == 0 || item.status == 4)" >Прибудет: </span>
+                    <span *ngIf="(item.status !== 3 && item.status !== 5)">{{item?.deliveryDate}}</span>
+                </div>
+            </div>
+            <div class="customer_name">{{item?.recipientLegalPersonName}}</div>
+            <div class="point_name">
+                <span>{{item?.recipientAddress}}</span>
+            </div>
+        </div>
+        <div class="cart_list_item_info cart_list_item_info-supplier cart_list_item_info_for_mobile">
+            <div class="date_input date_input_his">
+                <label for="orderDate">
+                    Оформлен:
+                </label>
+                <span class="d-block input">
+                    {{item?.createdAt}}
+                </span>
+            </div>
+        </div>
+        <div class="cart_list_item_info cart_list_item_info-supplier cart_list_item_info_for_mobile">
+            <div class="date_input date_input_his">
+                <label for="deliveryTime">
+                    Время доставки:
+                </label>
+                <span class="input">
+                    {{item?.deliveryTime}}
+                </span>
+            </div>
+        </div>
+        <div class="cart_list_item_title_right">
+            <div class="total_order_history">
+                <span class="total_order_history_fs">Итого:</span>
+                <span class="total_order_history_ss">{{item?.amount}} ₽</span>
+            </div>
+            <div class="supplier_conrols_cart-items" >
+                <div class="supplier_conrols_cart-item" (click)='getOrderExel(item?.id, $event)'>
+                    <svg>
+                        <use xlink:href="#icon_excel"></use>
+                    </svg>
+                    <span>Скачать<br> Excel файл</span>
+                </div>
+            </div>
+            <svg height="6" width="10">
+                <use xlink:href="#arrow_catalog"></use>
+            </svg>
+        </div>
+    </div>
+    <div class="control_order_history_mobile">
+        <button *ngIf="item.status !== 1" class="btn green" (click)="repeateOrder($event)">Добавить в корзину</button>
+        <button class="btn transparent second" (click)="sendProblem($event)">Сообщить о проблеме</button>
+    </div>
+    <div class="cart_list_item_content product_items product_list row cart_list_item_content-supplier" *ngIf="isOpen">
+        <div class="col" *ngFor="let product of item.products">
+            <a class="product_item" [routerLink]="['/product/', product.product_id]">
+                <div class="prod_img">
+                    <div  *ngIf="product.isNew" class="new">
+                        <svg width="67" height="24" viewBox="0 0 67 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0H66.5L55.5 12.5L66.5 24H0V0Z" fill="#8B8BEF"/>
+                            <path d="M19.15 7.2V17H17.288L12.402 11.05V17H10.162V7.2H12.038L16.91 13.15V7.2H19.15ZM29.0566 15.18V17H21.4686V7.2H28.8746V9.02H23.7226V11.148H28.2726V12.912H23.7226V15.18H29.0566ZM45.5365 7.2L42.3305 17H39.8945L37.7385 10.364L35.5125 17H33.0905L29.8705 7.2H32.2225L34.4345 14.088L36.7445 7.2H38.8445L41.0845 14.144L43.3665 7.2H45.5365Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <picture>
+                        <source [srcset]="product?.img">
+                        <img [src]="product?.img" loading="lazy" alt="{{product?.name}}" style="height: 100%;width: 100%;">
+                    </picture>
+                    <svg *ngIf="!product?.img" width="54" height="54" viewBox="0 0 54 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M44.1236 27.4336H10.0971C9.27303 27.4336 8.60577 26.7634 8.60577 25.9356C8.60577 25.1078 9.27303 24.4375 10.0971 24.4375H44.1236C44.9477 24.4375 45.615 25.1078 45.615 25.9356C45.615 26.7634 44.9464 27.4336 44.1236 27.4336Z" fill="#FF7308"/>
+                        <path d="M11.6389 32.2207H42.5803C43.4044 32.2207 44.073 32.891 44.073 33.7188C44.073 34.5466 43.4044 35.2182 42.5803 35.2182H11.6389C10.8148 35.2182 10.1475 34.5466 10.1475 33.7188C10.1475 32.8923 10.8148 32.2207 11.6389 32.2207Z" fill="#9CB538"/>
+                        <path d="M8.01289 40.0032H26.6976H27.3263H46.0111L50.1861 19.6537H27.0126H3.83916L8.01289 40.0032ZM27.3263 43.0007H26.6976H8.01289C6.60392 43.0007 5.3744 41.9939 5.08995 40.608L0.916229 20.2586C0.735456 19.372 0.957434 18.4614 1.52634 17.7604C2.09524 17.0581 2.93796 16.6562 3.83916 16.6562H26.6976H27.3263H50.1861C51.086 16.6562 51.9287 17.0581 52.4976 17.7604C53.0678 18.4614 53.2898 19.372 53.1077 20.2586L48.934 40.608C48.6509 41.9939 47.42 43.0007 46.0111 43.0007H27.3263Z" fill="#FF7308"/>
+                        <path d="M35.8454 12.9651C35.8454 13.8396 36.5525 14.5486 37.4218 14.5486C38.2925 14.5486 38.9983 13.8396 38.9983 12.9651C38.9983 9.64049 37.6571 6.631 35.4878 4.45199C33.3186 2.27298 30.3225 0.925781 27.0128 0.925781C23.7031 0.925781 20.707 2.27298 18.5377 4.45199C16.3685 6.631 15.026 9.64049 15.026 12.9651C15.026 13.8396 15.7331 14.5486 16.6024 14.5486C17.473 14.5486 18.1788 13.8396 18.1788 12.9651C18.1788 10.515 19.1678 8.29597 20.7668 6.69108C22.3645 5.08486 24.5724 4.09282 27.0128 4.09282C29.4519 4.09282 31.661 5.08486 33.2588 6.69108C34.8578 8.29597 35.8454 10.515 35.8454 12.9651Z" fill="#FF7308"/>
+                    </svg>
+                </div>
+                <div class="prod_desc">
+                    <span class="product_code type_product">#{{product?.barcode}}</span>
+                    <span class="product_name">{{product?.name}}</span>
+                    <span class="type_product">{{product?.desc}}<br> </span>
+                </div>
+                <div class="add_product">
+                    <div class="product_counter">
+                        <span class="product_counter-static">{{product?.quantity * product?.unitSize | number:'1.0-3':'ru-RU'}} {{product.measure}}</span>
+                    </div>
+                </div>
+                <div class="total_amount total_amount_order_history">{{product?.quantity * product?.unitSize * product?.price | number:'1.2-2':'ru-RU'}}<span>₽</span></div>
+            </a>
+        </div>
+    </div>
+</div>

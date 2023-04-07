@@ -1,0 +1,30 @@
+<header id="header" class="top-catalog">
+
+    <div class="container scroll_down">
+        <app-not-auth-header
+        *ngIf="!returnAuth() ; else Auth"
+        [burgerOpen]="burgerOpen"
+        [totalCart]="returnTotalCart()"
+        [queryParams]="queryParams"
+        (openBurger)="openBurger($event)"
+        (backClicked)="backClicked($event)"
+        (login)="this.LoginModal.emit(true)"
+        ></app-not-auth-header>    
+
+        <ng-template #Auth tabindex="0">
+            <app-auth-header
+            [burgerOpen]="burgerOpen"
+            [userData]="userData"
+            [totalCart]="returnTotalCart()"
+            [queryParams]="queryParams"
+            (openBurger)="openBurger($event)"
+            (backClicked)="backClicked($event)"
+            ></app-auth-header>
+        </ng-template>
+    </div>
+
+    <app-search-form *ngIf="!ifIsCat()"
+    [filterShow]="showFilter()"
+    ></app-search-form>
+    
+</header>

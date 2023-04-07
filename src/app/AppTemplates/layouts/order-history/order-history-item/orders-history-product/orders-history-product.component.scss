@@ -1,0 +1,249 @@
+.orders_history_page__element__product__wrapper{
+    margin-inline: -34px;
+    padding-inline: 144px 142px;
+    position: relative;
+    min-height: 101px;
+    align-items: center;
+    padding-block: 10px;
+    &.old_product > div {
+        opacity: 0.7;
+    }
+    .orders_history_page__element__product__image {
+        position: absolute;
+        left: 39px;
+        max-width: 64px;
+        top: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(-50%);
+        &.old_product::before {
+            content: "Раскупили";
+            font-size: 9px;
+            line-height: 11px;
+            color: #FF0201;
+            display: flex;
+            width: 99px;
+            height: 20px;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #FF0201;
+            border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-9.95deg);
+            z-index: 1;
+            background-color: #fff;
+        }
+        &.old_product{
+            opacity: 1;
+            .orders_history_page__element__product__image__image{
+                opacity: 0.7;
+            }
+        }
+        .orders_history_page__element__product__image__image {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    .orders_history_page__element__product__desctiption {
+        max-width: 320px;
+        flex: 0 0 50%;
+        .orders_history_page__element__product__desctiption__name {
+            display: -webkit-box;
+            font-size: 16px;
+            color: #000;
+            max-width: 100%;
+            line-height: 19.5px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .orders_history_page__element__product__desctiption__unit, 
+        .orders_history_page__element__product__desctiption__brand {
+            font-size: 13px;
+            font-weight: 400;
+            color: #000;
+            margin-top: 4px;
+            line-height: 16px;
+        }
+        .orders_history_page__element__product__desctiption__brand {
+            font-weight: 500;
+            color: #9CB538;
+        }
+    }
+    .orders_history_page__element__product__total_count {
+        flex: 0 0 150px;
+        max-width: 150px;
+        text-align: end;
+        .orders_history_page__element__product__total_count__quantity{
+            font-size: 13px;
+            line-height: 16px;
+            color: #000;
+            font-weight: 500;
+        }
+    }
+    .orders_history_page__element__product__total_price {
+        text-align: end;
+        flex: 0 0 178px;
+        max-width: 178px;
+        .orders_history_page__element__product__total_price__price {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 17px;
+            color: #000;
+        }
+    }
+    .orders_history_page__element__product__toggle_favorites {
+        position: absolute;
+        top: 10px;
+        right: 47px;
+        width: 18px;
+        height: 18px;
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    .orders_history_page__element__product__toggle_cart {
+        position: absolute;
+        right: 47px;
+        bottom: 10px;
+        .orders_history_page__element__product__toggle_cart__checkbox{
+            display: flex;
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+            border: 1.2px solid #B8B6B6;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            &.checked::before {
+                content: "\2713";
+                color: #FF7308;
+                font-size: 20px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    &.old_product .orders_history_page__element__product__exchange_product {
+        opacity: 1;
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        .orders_history_page__element__product__exchange_product__button {
+            border-radius: 5px;
+            border: 1px solid #9CB538;
+            color: #9CB538;
+            outline: none!important;
+            background-color: transparent;
+            display: flex;
+            width: 105px;
+            height: 35px;
+            padding: 0;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+            line-height: 16px;
+            &:hover{
+                color: #fff;
+                background-color: #9CB538;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .orders_history_page__element__product__wrapper {
+        padding-inline: 100px 135px;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__image {
+        left: 50px;
+        transform: translate(-50%, -50%);
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__desctiption {
+        max-width: 46.526315789%;
+        flex: 0 0 46.526315789%;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__total_count {
+        flex: 0 0 20.421052632%;
+        max-width: 20.421052632%;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__total_price {
+        flex: 0 0 33.052631579%;
+        max-width: 33.052631579%;
+    }
+}
+
+@media screen and (max-width: 568px){
+    .orders_history_page__element__product__wrapper {
+        padding-inline: 78px 52px;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__image {
+        left: 2px;
+        transform: translate(0%, -50%);
+    }
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__desctiption,
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__total_count,
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__total_price {
+        flex: 0 0 100%;
+        max-width: 100%;
+        text-align: start;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__desctiption .orders_history_page__element__product__desctiption__name {
+        font-size: 11px;
+        line-height: 14px;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__desctiption .orders_history_page__element__product__desctiption__unit, 
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__desctiption .orders_history_page__element__product__desctiption__brand {
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 14px;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__desctiption .orders_history_page__element__product__desctiption__brand{
+        font-weight: 500;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__total_count .orders_history_page__element__product__total_count__quantity {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__total_price .orders_history_page__element__product__total_price__price {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 15px;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__toggle_favorites {
+        right: 18px;
+    }
+
+    .orders_history_page__element__product__wrapper .orders_history_page__element__product__image.old_product::before {
+        width: 64px;
+    }
+
+    .orders_history_page__element__product__wrapper.old_product .orders_history_page__element__product__exchange_product {
+        top: unset;
+        bottom: 0;
+    }
+
+    .orders_history_page__element__product__wrapper.old_product .orders_history_page__element__product__exchange_product .orders_history_page__element__product__exchange_product__button {
+        width: 108px;
+        height: 29px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

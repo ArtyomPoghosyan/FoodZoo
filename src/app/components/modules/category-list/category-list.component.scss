@@ -1,0 +1,72 @@
+:host {
+  .seoH1 {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 37px;
+  }
+
+  @media screen and (min-width: 1206px) {
+    .hide-title {
+      &:hover {
+        .cat_title {
+          display: none;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 1206px) {
+    .seoH1 {
+      font-size: 26px!important;
+      line-height: 22px!important;
+    }
+    .seoText {
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 460px) {
+    .footer{
+      margin-bottom: 70px !important;
+    }
+  }
+  @media screen and (max-width: 1100px) {
+    .d-col{
+      flex-direction: column;
+    }
+    .mt-4{
+      margin-top: 0.75em!important;
+    }
+    .ml-3{
+      margin-left: 0!important;
+    }
+    .new_cat{
+      margin-bottom: 0;
+      a{
+        margin-top: 14px;
+      }
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .new_cat{
+      a{
+        margin-top: 11px;
+      }
+    }
+    .seoH1 {
+      font-size: 20px!important;
+    }
+    .seoText {
+      font-size: 12px;
+    }
+  }
+  @media screen and (max-width: 420px) {
+    .mt-4 {
+      margin-top: 0.25em !important;
+    }
+    .new_cat{
+      a{
+        margin-top: 4px;
+      }
+    }
+  }
+}
+

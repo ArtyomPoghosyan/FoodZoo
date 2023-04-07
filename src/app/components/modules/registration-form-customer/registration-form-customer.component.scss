@@ -1,0 +1,25 @@
+:host{
+  .checkbox{
+    a:hover{
+      text-decoration: underline!important;
+    }
+  }
+    .registration_autorization{
+      .input_label{
+        color:#000000!important;
+      }
+    }
+  .message_success{
+    padding: 88px 0;
+  }
+  @media (min-width: 480px) {
+    .pass_conf{
+      top:0!important;
+    }
+  }
+  @media (max-width: 480px) {
+    .pass_conf{
+      top: 11px!important;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<div *ngIf="!success_send && !error_send " class="mt-5">
+    <div class="modal_content mt-5">
+        <div class="form">
+            <div class="modal_close" (click)="activeModal.dismiss('Cross click')">
+                <svg style="font-weight: bold;" width='18px' height="18px" viewBox="0 0 68 68">
+                    <g>
+                        <path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="form_content">
+                <label class="input_label mb-3" for="emailcus">Электронный адрес</label>
+                <input (keyup)="changeEmail($event)" id="emailcus"  required class="input" type="email" [value]="email ? email : ''">
+                <span class="input-error-message collapse show"
+                      *ngIf="errorMsg">{{errorMsg}}</span>
+                <div class="checkbox mt-3">
+                    <input [checked]="try_to_send" id="privacyy" type="checkbox" name="privacy">
+                    <label (click)="try_to_send = !try_to_send"><span>Я соглашаюсь с </span> <a target="_blank" href="https://foodzo.ru/assets/doc/usloviya.pdf"> Пользовательским
+                        соглашением </a> <span> и </span> <a target="_blank" href="https://foodzo.ru/assets/doc/personaldata.pdf"> Политикой
+                        обработки персональных данных.</a></label>
+                </div>
+                <div class="target_buttons mt-3">
+                    <button (click)="socialRegister()" class="btn green"
+                            [disabled]="!try_to_send || oneTime">Зарегистрироваться</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal_content mt-5">
+    <div *ngIf="success_send" class="message_success">
+        <div class="form registration_autorization transparent">
+        <span class="form-title"><span>
+            Проверьте почту
+          </span>
+        </span>
+        <p>На электронный адрес <span>{{changedEmail ? changedEmail : (email ? email : registrationCustomer.value.emailcust)}}</span> отправлено сообщение по активации
+          аккаунта.</p>
+        </div>
+    </div>
+    <div *ngIf="error_send" class="message_error">
+        <div class="form registration_autorization transparent">
+        <span class="form-title">
+          <span>{{error_message}}</span>
+        </span>
+        </div>
+    </div>
+</div>

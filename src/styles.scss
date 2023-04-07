@@ -1,0 +1,65 @@
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  src: local(''),
+  url('assets/fonts/Montserrat-Light.ttf');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+  url('assets/fonts/Montserrat-Regular.ttf');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  src: local(''),
+  url('assets/fonts/Montserrat-Medium.ttf');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  src: local(''),
+  url('assets/fonts/Montserrat-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  src: local(''),
+  url('assets/fonts/Montserrat-ExtraBold.ttf');
+}
+
+@import "assets/scss/variables.scss";
+@import "assets/scss/general.scss";
+@import "assets/scss/header.scss";
+@import "assets/scss/main_page.scss";
+@import "assets/scss/catalog.scss";
+@import "assets/scss/products.scss";
+@import "assets/scss/modals_style.scss";
+@import "assets/scss/age.scss";
+@import "assets/scss/outlets.scss";
+@import "assets/scss/profile-forms.scss";
+@import "assets/scss/cart.scss";
+@import "assets/scss/history_orders.scss";
+@import "assets/scss/information_page.scss";
+@import "assets/scss/footer.scss";
+
+
+
+
+// .button_count{
+//   outline: black solid 0px !important;
+//   border: none !important;
+//   svg{
+//     outline: black solid 0px !important;
+//   border: none !important;
+//   }
+// }
+// button{
+//   border: none;
+// }

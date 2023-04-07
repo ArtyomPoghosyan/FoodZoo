@@ -1,0 +1,328 @@
+.orders_history_page__element__item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-inline: 45px 146px;
+    background-color: #FFF;
+    margin-bottom: 7px;
+    padding-block: 19px;
+    border-radius: 8px;
+    .orders_history_page__element__item__detalis {
+        flex: 0 0 60.8%;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+        .orders_history_page__element__item__detalis__top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 19px;
+            .orders_history_page__element__item__detalis__number {
+                color: #000;
+                font-size: 15px;
+                line-height: 18px;
+                font-weight: 500;
+            }
+            .orders_history_page__element__item__detalis__status {
+                color: #8D8BFD;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 17px;
+                margin-inline: 10px 20px;
+                padding-left: 8px;
+                position: relative;
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background-color: #8D8BFD;
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+            .orders_history_page__element__item__detalis__disable_order {
+                outline: none!important;
+                background-color: transparent;
+                font-size: 13px;
+                line-height: 15.5px;
+                color: #645D5D;
+                border: none;
+                border-bottom: 1px solid #645D5D;
+            }
+        }
+        .orders_history_page__element__item__detalis__delivery_info {
+            font-size: 14px;
+            font-weight: 500;
+            color: #000;
+            line-height: 17px;
+        }
+        .orders_history_page__element__item__detalis__delivery_address {
+            font-size: 14px;
+            color: #9CB538;
+            line-height: 17px;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+    }
+    .orders_history_page__element__item__meta {
+        flex: 0 0 15.333%;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        text-align: end;
+        .orders_history_page__element__item__meta__bottom {
+            height: 41px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .orders_history_page__element__item__meta__{
+                &title,&time_ordered,&date_ordered{
+                    font-size: 14px;
+                    color: #000;
+                    line-height: 17px;
+                    font-weight: 500;
+                    display: block;
+                }
+            }
+        }        
+    }
+    .orders_history_page__element__item__total_sum {
+        flex: 0 0 23.867%;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        .orders_history_page__element__item__total_sum__title {
+            font-size: 14px;
+            color: #000;
+            font-weight: 500;
+        }
+        .orders_history_page__element__item__total_sum__ordered {
+            font-size: 21px;
+            line-height: 25px;
+            font-weight: 500;
+            color: #000;
+        }
+    }
+
+    .orders_hitory_page__element__item__view_products {
+        position: absolute;
+        top: 50%;
+        right: 45px;
+        transform: translateY(-50%);
+        .orders_hitory_page__element__item__view_products__button {
+            border: none;
+            outline: none!important;
+            background-color: transparent;
+            padding: 0;
+            transition: all 0.25s ease;
+            &.close {
+                transform: rotateX(180deg);
+            }
+        }
+    }
+}
+.orders_history_page__element__products {
+    background-color: #FFF;
+    margin-block: -20px 8px;
+    padding-top: 35px;
+    padding-inline: 34px;
+    .orders_history_page__element__products__toggle_selected {
+        justify-content: flex-end;
+        margin-inline: 0;
+        border-top: 1px solid #B8B6B6;
+        padding: 23px 14px 0;
+        .orders_history_page__element__products__toggle_selected__selector {
+            display: flex;
+            align-items: center;
+            .orders_history_page__element__products__toggle_selected__selector__label {
+                color: #645D5D;
+                font-size: 14px;
+                line-height: 17px;
+            }
+            .orders_history_page__element__products__toggle_selected__selector__checkbox {
+                display: flex;
+                width: 16px;
+                height: 16px;
+                border-radius: 2px;
+                border: 1.2px solid #B8B6B6;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                margin-left: 78px;
+                &.checked::before {
+                    content: "\2713";
+                    color: #FF7308;
+                    font-size: 20px;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+    .orders_history_page__element__products__add_to_cart_selected {
+        margin-block: 42px 52px;
+        justify-content: center;
+        .orders_history_page__element__products__add_to_cart_selected__button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 31px;
+            width: 216px;
+            background-color: #FF7308;
+            border: 1px solid #FF7308;
+            border-radius: 5px;
+            font-size: 13px;
+            line-height: 15.5px;
+            color: #FFF;
+            outline: none!important;
+            padding: 0;
+            &:hover {
+                color: #FF7308;
+                background-color: #FFF;
+            }
+        }
+    }
+}
+.orders-history_page__element__has_problems.tablet_and_mobile  {
+    display: none;
+}
+@media screen and (max-width:1206px) {
+    .orders-history_page__element__has_problems.tablet_and_mobile {
+        display: block;
+        margin-inline: auto;
+    }
+}
+.opener {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+@media screen and (max-width: 991px) {
+    .orders_history_page__element__item {
+        padding-inline: 34px 135px;
+        min-height: 130px;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__detalis .orders_history_page__element__item__detalis__top{
+        margin-bottom: 0;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__meta {
+        position: absolute;
+        bottom: 15px;
+        right: 135px;
+        height: 42px;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__total_sum {
+        position: absolute;
+        top: 19px;
+        right: 135px;
+        height: 42px;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__total_sum .orders_history_page__element__item__total_sum__title {
+        font-size: 15px;
+        color: #000;
+        font-weight: 500;
+    }
+
+    .orders_history_page__element__item__meta__title {
+        font-size: 15px;
+        font-weight: 500;
+        color: #000;
+        line-height: 18px;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__total_sum .orders_history_page__element__item__total_sum__ordered {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__meta .orders_history_page__element__item__meta__bottom {
+        flex-direction: row-reverse;
+        height: auto;
+        .orders_history_page__element__item__meta__time_ordered {
+            margin-left: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 568px){
+    .orders_history_page__element__item {
+        padding: 19px 18px 27px 18px;
+        min-height: 169px;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__detalis {
+        flex: 0 0 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__meta {
+        position: relative;
+        right: unset;
+        bottom: unset;
+        height: auto;
+        flex: 0 0 100%;
+        align-items: flex-start;
+        order: 1;
+    }
+
+    .orders_history_page__element__item__meta__top {
+        display: none;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__total_sum {
+        position: relative;
+        top: unset;
+        right: unset;
+        height: auto;
+        flex-direction: row;
+        flex: 0 0 100%;
+        max-width: 100%;
+        justify-content: flex-start;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__detalis .orders_history_page__element__item__detalis__delivery_info,
+    .orders_history_page__element__item .orders_history_page__element__item__detalis .orders_history_page__element__item__detalis__top .orders_history_page__element__item__detalis__number,
+    .orders_history_page__element__item .orders_history_page__element__item__detalis .orders_history_page__element__item__detalis__top .orders_history_page__element__item__detalis__status,
+    .orders_history_page__element__item .orders_history_page__element__item__detalis .orders_history_page__element__item__detalis__delivery_address,
+    .orders_history_page__element__item .orders_history_page__element__item__meta .orders_history_page__element__item__meta__bottom .orders_history_page__element__item__meta__time_ordered,
+    .orders_history_page__element__item .orders_history_page__element__item__meta .orders_history_page__element__item__meta__bottom .orders_history_page__element__item__meta__date_ordered,
+    .orders_history_page__element__item .orders_history_page__element__item__total_sum .orders_history_page__element__item__total_sum__title {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .orders_history_page__element__item .orders_history_page__element__item__total_sum .orders_history_page__element__item__total_sum__ordered {
+        font-size: 16px;
+        line-height: 19px;
+        margin-left: 10px;
+    }
+
+    .orders_history_page__element__item .orders_hitory_page__element__item__view_products {
+        top: 22px;
+        right: 17px;
+    }
+
+    .orders_history_page__element__item .orders_hitory_page__element__item__view_products .orders_hitory_page__element__item__view_products__button {
+        width: 10px;
+        height: 5px;
+        svg {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

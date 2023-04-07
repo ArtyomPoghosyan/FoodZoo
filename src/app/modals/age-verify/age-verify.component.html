@@ -1,0 +1,15 @@
+<ng-template #modalVerifyAge let-modal>
+    <div class="modal_content age-confirm">
+        <div class="form">
+            <div class="form_content">
+                <p class="target_age">18+</p>
+                <p class="target_title">Вы переходите в раздел «для взрослых». Подтвердите, что вы старше
+                18 лет.</p>
+                <div class="target_buttons">
+                    <button (click)="verifyUserAge(1)" class="btn green">Мне исполнилось 18 лет</button>
+                    <button (click)="verifyUserAge(0)" class="btn green transparent mt-3">Мне нет 18-ти лет</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

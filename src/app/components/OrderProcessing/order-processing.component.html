@@ -1,0 +1,173 @@
+<div class="container-fluid cont">
+  <div class="container cont_body main-container cart-container">
+
+    <div class="cart_container supplier_conteiner" style="min-height:550px">
+      <app-loader *ngIf="isLoading"></app-loader>
+      <ng-container *ngIf="!isLoading">
+        <div class="cart_container-left">
+          <div class="cart_list_item">
+            <div [class.blocked]='editOrder' class="cart_list_item_title is-opened">
+              <div class="cart_list_item_title_left">
+                <div class="customer_name" *ngIf="!editOrder">
+                  {{order.recipientLegalPersonName}}
+                </div>
+                <div class="point_name">
+                  <span>{{order.recipientName}}</span>
+                  <span>{{order.recipientAddress}}</span>
+                </div>
+              </div>
+              <div class="cart_list_item_title_right">
+                <div class="cart_list_item_info cart_list_item_info-supplier">
+                  <div class="date_input">
+                    <label for="orderDate">
+                      Оформлен:
+                    </label>
+                    <input class="input" id="orderDate" type="text" [value]="orderDateCreate" disabled>
+                  </div>
+                  <div class="date_input">
+                    <label for="orderDelivery">
+                      Прибудет:
+                    </label>
+                    <div class="form-group data_picker" *ngIf="editOrder">
+                      <input type="text" class="form-control" id="date" #dp="bsDatepicker" [minDate]="currentDate"
+                        bsDatepicker [bsConfig]="{ dateInputFormat: 'DD.MM.YYYY', adaptivePosition: false, showWeekNumbers:false}"
+                        [ngModel]="orderDateDeliver" (bsValueChange)="setDateDelivery($event)">
+                      <span class="btn-calendar" (click)="dp.toggle()"><i class="fa fa-calendar fa-2x"></i></span>
+                    </div>
+                    <input *ngIf="!editOrder" class="input" id="orderDate" type="text" [value]="dateDeliver" disabled>
+                  </div>
+                </div>
+                <!-- <svg height="6" width="10">
+                              <use xlink:href="#arrow_catalog"></use>
+                            </svg> -->
+              </div>
+            </div>
+            <div class="cart_list_item_content product_items product_list row cart_list_item_content-supplier">
+              <div class="col" *ngFor="let product of order.products">
+                <a class="product_item">
+                  <div class="prod_img">
+                    <img src="{{product.img}}">
+                  </div>
+                  <div class="prod_desc">
+                    <span class="product_code type_product">#{{product.barcode}}</span>
+                    <span class="product_name">{{product.name}}</span>
+                    <span class="type_product">{{product.desc}}<br> </span>
+                  </div>
+                  <div class="price_block">
+                    <p class="price"><span>{{product.price | number:'1.2-2':'ru-RU'}}</span> ₽</p>
+                  </div>
+                  <div class="add_product">
+                    <div class="product_counter">
+                      <span *ngIf="!editOrder" class="product_counter-static">{{product.quantity}} {{product.measure}}</span>
+                      <button *ngIf="editOrder" [disabled]="product.quantity <= product.minOrderAmount" class="button_count"
+                        (click)='changeProductCart(false, product)'>
+                        <svg>
+                          <use xlink:href="#icon_minus"></use>
+                        </svg>
+                      </button>
+                      <input *ngIf="editOrder" class="number_product" [(ngModel)]="product.quantity" (blur)="inputBlur(product)"
+                        type="text" (keypress)="numberOnly($event)" [value]="product.quantity" onCopy="return false"
+                        onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off>
+                      <div class="tooltip_prod" [class.visible]="tooltipmessage !== '' && addCartProductId == product.product_id">
+                        <span>{{tooltipmessage}}</span>
+                      </div>
+                      <button [disabled]="product.quantity >= product.maxvalue" *ngIf="editOrder" class="button_count"
+                        (click)='changeProductCart(true, product)'>
+                        <svg>
+                          <use xlink:href="#icon_plus"></use>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="total_amount">{{product.amount}} <span>₽</span></div>
+                  <button class="remove_product" [class.active]="editOrder" (click)="removeProductOrder(product)">
+                    <svg>
+                      <use xlink:href="#icon_delete"></use>
+                    </svg>
+                  </button>
+                </a>
+              </div>
+            </div>
+            <div class="supplier_conrols_cart">
+              <div class="supplier_conrols_cart-items">
+                <div *ngIf="!editOrder" class="supplier_conrols_cart-item" (click)="editOrderFunc(true)">
+                  <svg>
+                    <use xlink:href="#icon_edit"></use>
+                  </svg>
+                  <span>Редактировать заказ</span>
+                </div>
+                <div *ngIf="!editOrder" (click)=saveExel() class="supplier_conrols_cart-item">
+                  <svg>
+                    <use xlink:href="#icon_excel"></use>
+                  </svg>
+                  <span>Скачать Excel файл</span>
+                </div>
+              </div>
+              <div class="cart_errors" *ngIf="orderDateDeliver == '' || deliveryNone">
+                <div class="cart_errors_item attention">
+                  <svg class="icon_attention" height="16" width="16">
+                    <use xlink:href="#icon_attention"></use>
+                  </svg>
+                  <span>Дата доставки не может быть меньше заданной покупателем</span>
+                </div>
+              </div>
+                <span class="form-title">
+                    <span>
+                    {{hasMessage}}
+                    </span>
+                </span>
+              <button (click)="setOrder(true)" class="btn red b_p cart_next" [disabled]="orderDateDeliver == '' || deliveryNone">Подтвердить
+                заказ</button>
+              <button *ngIf="!editOrder" class="btn red b_p cart_next transparent" (click)="cancelOrder()">Отменить
+                заказ</button>
+              <button *ngIf="editOrder" (click)="editOrderFunc(false)" class="btn red b_p cart_next transparent edit_none">Отменить
+                редактирование</button>
+            </div>
+          </div>
+        </div>
+        <div class="cart_container-right">
+          <div class="total_info">
+            <div class="total_info-container">
+              <div class="total_info_header">
+                <div class="total_info_item">
+                  <span>Товаров:</span>
+                  <span *ngIf="order.products">{{order.products.length}}</span>
+                </div>
+              </div>
+              <div class="total_info_footer">
+                <div class="total_info_item">
+                  <span>Сумма заказа:</span>
+                  <span>{{totalPrice}} ₽</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<ng-template #modalCancelOrder let-modal>
+  <div class="modal_cancel_order">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal_content">
+        <div class="form">
+          <div class="modal_close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <svg width='24px' height="24px">
+              <use xlink:href="#icon_close"></use>
+            </svg>
+          </div>
+          <div class="form_content">
+            <span class="form-title">Отменить заказ</span>
+            <div class="form_row">
+              <ng-select [searchable]="false" *ngIf="reasons && !isLoading" class="select_default " [items]="reasons" bindLabel="name" bindValue="id" placeholder="Выберите причину"
+              [(ngModel)]="selectReason">
+              </ng-select>
+            </div>
+            <button *ngIf="!oneTime" [disabled]="!selectReason" (click)="setOrder(false)" class="btn green">Отправить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </ng-template>

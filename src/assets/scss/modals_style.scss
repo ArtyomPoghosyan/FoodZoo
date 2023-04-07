@@ -1,0 +1,271 @@
+// modals
+.modal-backdrop.show {
+  z-index: 11111 !important;
+}
+.modal {
+  z-index: 11112 !important;
+}
+.modal-content {
+  width: 100%;
+  background: transparent;
+  border: none;
+}
+.modal_registration{
+  min-width: 400px;
+}
+.modal-dialog {
+  margin: 0 auto;
+  max-width: 100%;
+}
+.modal-sm {
+  max-width: 328px !important;
+}
+.message_form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  opacity: 0;
+  z-index: -1;
+  // transition: all 0.2s ease-in-out;
+  text-align: center;
+  max-height: 0;
+  overflow: hidden;
+  &.active {
+    opacity: 1;
+    z-index: 1;
+    // transition: all 0.2s ease-in-out;
+    max-height: 11100px;
+  }
+  &.success {
+    color: $green;
+  }
+  &.error {
+    color: $red;
+  }
+}
+.modal-backdrop {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 10px rgba(130, 144, 167, 0.1), 0 2px 2px rgba(130, 144, 167, 0.05);
+}
+.modal_content {
+  height: 100vh;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  .form {
+    margin-left: 0;
+    margin-right: 0;
+    background: #ffffff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  .message_form {
+    position: absolute;
+    background: $white;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+}
+.modal_close {
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.modal_choose_region {
+  .modal_close {
+    opacity: 0;
+    z-index: -1;
+    &.show {
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+  .form {
+    width: 328px;
+    overflow: inherit;
+  }
+  .sale_point {
+    display: block;
+    margin: auto;
+    margin-bottom: 12px;
+  }
+  .current_region {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $textGreyLight;
+    margin-bottom: 12px;
+    span {
+      font-weight: 700;
+    }
+  }
+
+  .ng-select {
+    margin-bottom: 12px;
+  }
+  .btn {
+    max-width: 220px;
+  }
+}
+.modal_age {
+  .modal_close {
+    opacity: 0;
+    z-index: -1;
+  }
+  .form {
+    max-width: 640px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .target_age {
+    display: block;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    color: $red;
+    margin-bottom: 24px;
+  }
+  .target_title {
+    display: block;
+    font-size: 18px;
+    line-height: 22px;
+    color: $textGrey;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  p {
+    color: $textGrey;
+    font-size: 13px;
+    line-height: 16px;
+    margin-bottom: 16px;
+  }
+  .target_buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .btn {
+      padding-left: 25px;
+      padding-right: 25px;
+      margin-left: 0;
+      width: auto;
+      &:first-child {
+        margin-right: 15px;
+      }
+    }
+  }
+}
+.modal_cancel_order {
+  .form {
+    min-width: 328px;
+    overflow: visible;
+    .btn {
+      margin-top: 24px;
+    }
+  }
+  .ng-select {
+    width: 100%;
+    .ng-placeholder {
+      display: block;
+    }
+    .ng-has-value .ng-placeholder {
+      display: none;
+    }
+  }
+}
+@media screen and (max-width: 1206px) {
+  .modal_choose_region .form {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .modal-sm {
+    margin: auto;
+  }
+  .modal_content {
+    padding-top: 120px;
+    padding-left: 0;
+    padding-right: 0;
+    margin: auto;
+  }
+  .modal_age .modal_content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .modal_age .form {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 24px;
+    padding-bottom: 14px;
+  }
+  .modal_content .form {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .modal_age .target_age {
+    font-size: 28px;
+    line-height: 34px;
+    margin-bottom: 12px;
+  }
+  .modal_age .target_title {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 8px;
+  }
+  .modal_age p {
+    font-size: 11px;
+    line-height: 13px;
+  }
+  .modal_age .target_buttons {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+  .modal_age .target_buttons .btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .modal_age .target_buttons .btn:first-child {
+    margin-bottom: 4px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .modal_choose_region .sale_point {
+    width: 55px;
+    height: 40px;
+  }
+  .modal_choose_region .current_region {
+    font-size: 11px;
+    line-height: 13px;
+    margin-bottom: 8px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .modal_choose_region .form {
+    width: 284px;
+    overflow: inherit;
+  }
+  .modal_content {
+    padding-top: 139px;
+  }
+  .modal_cancel_order {
+    .form {
+      min-width: 300px;
+    }
+    .ng-select {
+      width: 100%;
+      margin-bottom: 14px;
+    }
+  }
+  .modal_registration{
+    min-width: 300px;
+  }
+}

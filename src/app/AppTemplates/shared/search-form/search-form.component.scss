@@ -1,0 +1,17 @@
+@media screen and (max-width: 575px) {
+    .search_container {
+        .input-group {
+            .input{
+                border-radius: 5px!important;
+                background-color: #FFF;
+            }
+        }
+        button.btn.red {
+            display: none;
+        }
+        .search_result.show {
+            width: 100%;
+            max-height: calc(100vh - 148px)!important;
+        }
+    }
+}

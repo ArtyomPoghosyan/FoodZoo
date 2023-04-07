@@ -1,0 +1,897 @@
+// // .container {
+// //     display: flex;
+// //     flex-direction: row;
+// //     width: 100%;
+// //     min-height: 640px;
+// //     justify-content: center;
+// // }
+
+// .product_list {
+//     display: flex;
+//     background-color: #FAF9EC;
+//     width: 81%;
+//     flex-wrap: wrap;
+//     // margin-top: 242px;
+// }
+
+// .product_filter_container {
+//     display: flex;
+//     justify-content: space-between;
+//     width: 91%;
+//     margin-left: 58px;
+// }
+
+
+
+
+
+// .product-item {
+//     cursor: pointer;
+//     display: flex;
+//     width: 230px;
+//     height: 492px;
+//     border-radius: 8px;
+//     background-color: white;
+//     margin-bottom: 15px;
+//     margin-right: 14px;
+// }
+
+// .product_card {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     padding: 0px 0px 16px 0px;
+//     position: relative;
+// }
+
+
+// .img_container {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: 227px;
+//     height: 227px;
+// }
+
+// .prod_desc {
+//     height: 80px;
+//     padding: 0px 12px;
+// }
+
+// .product_name {
+//     display: flex;
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 15px;
+//     line-height: 18px;
+//     color: #000000;
+// }
+
+// .measure_brandName {
+//     margin-top: 7px;
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     font-weight: 400;
+//     font-size: 12px;
+//     line-height: 15px;
+// }
+
+// .brand_name {
+//     color: #9CB538;
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     font-weight: 400;
+//     font-size: 12px;
+//     line-height: 15px;
+// }
+
+// .discount_price_container {
+//     display: flex;
+//     flex-direction: column;
+//     padding: 0px 12px;
+// }
+
+// .discount_price {
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 15px;
+//     line-height: 18px;
+//     color: red;
+//     display: flex;
+//     align-items: flex-end;
+// }
+
+// .old_proce {
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 12px;
+//     line-height: 18px;
+//     color: black;
+//     display: flex;
+//     align-items: flex-end;
+//     padding-top: 18px;
+// }
+
+// .price {
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 15px;
+//     line-height: 18px;
+//     color: black;
+//     display: flex;
+//     align-items: flex-end;
+//     padding-top: 18px;
+//     padding-left: 20px;
+// }
+
+// .current_price {
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 15px;
+//     line-height: 18px;
+//     color: black;
+//     display: flex;
+//     align-items: flex-end;
+//     padding-top: 36px;
+//     padding-left: 12px;
+// }
+
+// .btn_bin {
+//     display: block;
+//     margin: 0 auto;
+//     text-decoration: none;
+//     font-style: normal;
+//     font-weight: 600;
+//     font-size: 13px;
+//     line-height: 16px;
+//     text-align: center;
+//     background-color: #ff7308;
+//     color: #fff;
+//     border: 1px solid #9cb538;
+//     box-sizing: border-box;
+//     border-radius: 4px;
+//     padding: 11px;
+//     align-self: flex-end;
+//     transition: none;
+//     max-height: 40px;
+//     width: calc(100% - 32px) !important;
+//     // width:184px !important;
+
+//     &:hover {
+//         background-color: #FFF;
+//         color: #FF7308;
+//     }
+// }
+
+// .special {
+//     margin-left: -38px;
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     font-weight: 600;
+//     font-size: 12px;
+//     line-height: 15px;
+//     color: #FFFFFF;
+// }
+
+// .discount_new_container {
+//     height: 45px;
+//     padding: 0px 12px 0px 0px;
+//     // position: relative;
+
+// }
+
+// .new_product {
+//     margin-left: -41px;
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     font-weight: 600;
+//     font-size: 12px;
+//     line-height: 15px;
+//     color: #FFFFFF;
+// }
+
+// .star {
+//     position: absolute;
+//     top: 10px;
+//     right: 10px;
+//     display: none;
+// }
+
+// .product_card:hover .star {
+//     display: block;
+
+// }
+
+// .fav {
+//     position: absolute;
+//     top: 10px;
+//     right: 10px;
+//     display: flex;
+//     background-image: url("../../../../assets/images/img/filledstar.png");
+//     background-repeat: no-repeat;
+//     background-position: center;
+
+// }
+
+// @media all and (max-width: 480px) {
+//     .add_product .product_counter .tooltip_prod {
+//         bottom: -17px !important;
+//         z-index: 9999;
+//     }
+
+//     .new_prod {
+//         width: 100%;
+//         margin-top: 0;
+//         margin-right: unset;
+//     }
+// }
+
+// @media all and (min-width: 481px) and (max-width: 1200px) {
+//     .add_product .product_counter .tooltip_prod {
+//         bottom: -20px !important;
+//     }
+// }
+
+// .add_product {
+//     // width: auto;
+// }
+
+// .add_product .product_counter input {
+//     padding-top: 5px;
+//     padding-bottom: 16px;
+//     font-size: 12px;
+//     font-weight: 500;
+// }
+
+// .add_product .product_counter .product_total_price {
+//     color: #645D5D;
+//     font-size: 11px;
+//     font-weight: 400;
+//     position: absolute;
+//     bottom: 4px;
+//     left: 50%;
+//     transform: translateX(-50%);
+
+//     @media screen and (max-width: 768px) {
+//         font-size: 9px;
+//     }
+// }
+
+// .product_count_and_measure {
+//     position: relative;
+//     top: -7px;
+//     font-size: 12px;
+//     font-weight: 500;
+
+//     @media screen and (max-width: 768px) {
+//         font-size: 10px;
+//     }
+// }
+
+// .add_product {
+//     width: 231px;
+//     display: flex;
+//     align-items: end;
+//     justify-content: center;
+//     padding-left: 16px;
+//     padding-right: 16px;
+//     align-self: flex-end;
+//     height: 100px;
+// }
+
+// .add_product .product_counter {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     align-content: center;
+//     position: relative;
+//     border: 1px solid #9CB538;
+//     border-radius: 4px;
+//     width: 100%;
+//     height: 58%;
+//     max-width: 200px;
+// }
+
+// .right_sides {
+//     display: flex;
+//     flex-direction: column;
+//     margin-top: 242px;
+// }
+
+// .favorite_container {
+//     display: flex;
+//     width: 227px;
+//     height: 67px;
+//     background-color: white;
+//     border: 1px solid #e8e8e8;
+//     border-radius: 8px;
+//     // justify-content:  center;
+//     align-items: center;
+//     padding: 17px 20px;
+
+// }
+
+// .favorite_title {
+//     display: flex;
+//     flex-direction: row;
+//     font-size: 16px;
+//     line-height: 19px;
+//     color: #000;
+//     font-weight: 500;
+//     justify-content: space-between;
+//     align-items: center;
+//     cursor: pointer;
+//     width: 135px;
+
+//     &:hover {
+//         background-image: url("../../../../assets//images/img/filledstar.png");
+//         background-repeat: no-repeat;
+//         background-position-y: center;
+//         background-size: contain;
+//     }
+// }
+
+// .selected {
+//     font-size: 16px;
+//     line-height: 19px;
+//     color: #000;
+//     font-weight: 500;
+// }
+
+// .upper_filter {
+//     width: 91%;
+//     margin-left: 59px;
+// }
+
+// @media all and (max-width: 1360px) {
+
+//     .product_list {
+//         display: flex;
+//         background-color: #FAF9EC;
+//         width: 100% !important;
+//         flex-wrap: wrap;
+
+//     }
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 93%;
+//         margin-left: 58px !important;
+//     }
+
+//     .upper_filter {
+//         width: 91%;
+//         margin-left: 59px !important;
+//     }
+// }
+
+// @media all and (max-width: 1325px) {
+
+//     .product_list {
+//         display: flex;
+//         background-color: #FAF9EC;
+//         width: 100% !important;
+//         flex-wrap: wrap;
+
+//     }
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 95%;
+//         margin-left: 30px !important;
+//     }
+
+//     .upper_filter {
+//         width: 91%;
+//         margin-left: 29px !important;
+//     }
+// }
+
+// @media all and (max-width: 1297px) {
+
+//     .product_list {
+//         display: flex;
+//         background-color: #FAF9EC;
+//         width: 100% !important;
+//         flex-wrap: wrap;
+
+//     }
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 97%;
+//         margin-left: 22px !important;
+//     }
+
+//     .upper_filter {
+//         width: 91%;
+//         margin-left: 20px !important;
+//     }
+// }
+
+// @media all and (max-width: 1270px) {
+
+//     .product_list {
+//         display: flex;
+//         background-color: #FAF9EC;
+//         width: 100% !important;
+//         flex-wrap: wrap;
+
+//     }
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 0px !important;
+//     }
+
+//     .upper_filter {
+//         width: 91%;
+//         margin-left: 0 !important;
+//     }
+// }
+
+// @media all and (max-width: 1233px) {
+
+//     .product_list {
+//         display: flex;
+//         background-color: #FAF9EC;
+//         width: 100% !important;
+//         flex-wrap: wrap;
+
+//     }
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 0px !important;
+//     }
+
+//     .upper_filter {
+//         width: 91%;
+//         margin-left: 0 !important;
+//     }
+
+//     .product-item {
+//         cursor: pointer;
+//         display: flex;
+//         width: 230px;
+//         height: 492px;
+//         border-radius: 8px;
+//         background-color: white;
+//         margin-bottom: 15px;
+//         margin-right: 7px;
+//     }
+// }
+
+// @media all and (max-width: 1207px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         width: 377px;
+//     }
+// }
+
+// @media all and (max-width: 1182px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         width: 350px;
+//     }
+// }
+
+// @media all and (max-width: 1107px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         width: 320px;
+//     }
+// }
+
+// @media all and (max-width: 1080px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         max-width: 320px;
+//     }
+// }
+
+// @media all and (max-width: 1040px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         max-width: 315px;
+//     }
+// }
+
+// @media all and (max-width: 996px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         max-width: 285px;
+//     }
+// }
+
+// @media all and (max-width: 906px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         max-width: 260px;
+//     }
+// }
+
+// @media all and (max-width: 826px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         max-width: 230px;
+//     }
+// }
+
+// @media all and (max-width: 744px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         max-width: 200px;
+//     }
+
+//     .img_container {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         width: 190px;
+//         height: 227px;
+//     }
+
+//     .img {
+//         width: 160px;
+//     }
+// }
+
+// @media all and (max-width: 648px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         max-width: 160px;
+//     }
+
+//     .img_container {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         width: 156px;
+//         height: 227px;
+//     }
+
+//     .img {
+//         width: 136px;
+//     }
+// }
+
+// @media all and (max-width: 520px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         max-width: 130px;
+//     }
+
+//     .img_container {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         width: 120px;
+//         height: 227px;
+//     }
+
+//     .img {
+//         width: 100px;
+//     }
+// }
+
+// @media all and (max-width: 428px) {
+
+//     .product_filter_container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         margin-left: 19px !important;
+//     }
+
+//     .right-side_filter {
+//         display: none !important;
+//     }
+
+//     .product-item {
+//         max-width: 100px;
+//     }
+
+//     .img_container {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         width: 99px;
+//         height: 200px;
+//     }
+
+//     .product_name {
+//         display: flex;
+//         font-family: "Montserrat";
+//         font-style: normal;
+//         font-weight: 500;
+//         font-size: 10px;
+//         line-height: 18px;
+//         color: #000000;
+//     }
+
+//     .btn_bin {
+//         font-size: 10px;
+//     }
+
+//     .img {
+//         width: 76px;
+//     }
+// }
+
+// .product_list_item {
+//     display: flex;
+//     width: 100%;
+//     height: 40px;
+//     flex-direction: column;
+// }
+
+// .main_container {
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
+// }
+
+// .product_block {
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
+//     height: 250px;
+// }
+
+// .product_block_card {
+//     display: flex;
+// }
+
+// .product_block_container {}
+
+// .product_card_container {
+//     display: flex;
+//     flex-direction: row;
+// }
+
+// .product_card_container {
+
+//     .add_product {
+//         width: 209px;
+//         display: flex;
+//         /* align-items: end; */
+//         justify-content: center;
+//         padding-left: 145px;
+//         padding-right: 16px;
+//         align-self: center;
+//         max-height: 40px;
+//         /* height: 100px; */
+//         //  margin-bottom: 89px;
+//     }
+
+//     .btn_bin {
+//         flex: 0 0 209px;
+//         width: 209px;
+//         margin-right: 78px;
+//         align-self: center;
+//         max-height: 40px;
+//     }
+
+//     .product_counter {
+//         display: flex;
+//         align-items: center;
+//         justify-content: space-between;
+//         align-content: center;
+//         position: relative;
+//         border: 1px solid #9cb538;
+//         border-radius: 4px;
+//         width: 100%;
+//         height: 100%;
+//         max-width: 200px;
+//     }
+
+//     .img_container {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         width: 90px;
+//         height: 118px;
+//     }
+
+//     .img {
+//         width: 64px;
+//         height: 64px;
+//     }
+
+//     .discount_new_container {
+//         height: 45px;
+//         padding: 0px 12px 0px 0px;
+//         margin-top: -80px;
+//     }
+
+//     .product_name {
+//         display: flex;
+//         font-family: "Montserrat";
+//         font-style: normal;
+//         font-weight: 500;
+//         font-size: 15px;
+//         line-height: 18px;
+//         color: #000000;
+//         width: 285px;
+    
+//     }
+
+//     .current_price {
+//         font-family: "Montserrat";
+//         font-style: normal;
+//         font-weight: 600;
+//         font-size: 16px;
+//         line-height: 18px;
+//         color: black;
+//         display: flex;
+//         align-items: flex-end;
+//         padding-top: 36px;
+//         padding-left: 12px;
+//     }
+
+    
+// }
+
+// .main_container {
+
+//     .product_block {
+//         display: flex;
+//         flex-direction: column;
+//         width: 100%;
+//         height: 126px;
+//     }
+
+//     .prod_desc {
+//         display: flex;
+//         height: 80px;
+//         padding: 0px 12px;
+//         justify-content: center;
+//         align-items: center;
+//         flex-direction: column;
+//     }
+
+//     .measure_brandName {
+//         margin-top: 7px;
+//         font-family: "Montserrat";
+//         font-style: normal;
+//         font-weight: 400;
+//         font-size: 12px;
+//         line-height: 15px;
+//         display: flex;
+//         width: 100%;
+//     }
+// }

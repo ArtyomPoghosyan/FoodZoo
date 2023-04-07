@@ -1,0 +1,22 @@
+<div class="order-complete">
+    <div class="order-complete__image">
+        <svg xmlns="http://www.w3.org/2000/svg" width="101" height="96" viewBox="0 0 101 96" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M40.1799 93.6968C44.6579 93.6968 48.2865 89.967 48.2865 85.3679C48.2865 80.7689 44.6579 77.0391 40.1799 77.0391C35.7019 77.0391 32.0732 80.7689 32.0732 85.3679C32.0732 89.967 35.7019 93.6968 40.1799 93.6968V93.6968Z" stroke="#FF7308" stroke-width="4"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M74.6359 93.6968C79.1139 93.6968 82.7426 89.967 82.7426 85.3679C82.7426 80.7689 79.1139 77.0391 74.6359 77.0391C70.1579 77.0391 66.5293 80.7689 66.5293 85.3679C66.5293 89.967 70.1579 93.6968 74.6359 93.6968V93.6968Z" stroke="#FF7308" stroke-width="4"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.4454 12.8926H97.3958C98.5379 12.8926 99.2046 13.0466 98.8702 14.1139L86.9897 52.3827C86.6618 53.4301 85.7662 54.702 84.9828 54.702H31.8584C31.0773 54.702 30.1861 53.1111 29.8516 52.0438L17.9711 14.4923C17.641 13.4449 18.2968 12.8926 19.4454 12.8926V12.8926Z" stroke="#FF7308" stroke-width="4"/>
+            <path d="M18.3707 16.1128L13.29 2.56445" stroke="#FF7308" stroke-width="4" stroke-linecap="round"/>
+            <path d="M32.076 54.2227C31.3278 54.2227 30.4718 55.0676 30.1506 56.1503L23.4512 74.2574" stroke="#FF7308" stroke-width="4" stroke-linecap="round"/>
+            <path d="M2 2H12.7258" stroke="#FF7308" stroke-width="4" stroke-linecap="round"/>
+            <path d="M23.875 74.5068H87.6894" stroke="#FF7308" stroke-width="4" stroke-linecap="round"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M46.2979 32.065C46.7049 31.644 47.3761 31.6326 47.7971 32.0395L56.8847 40.824C57.3057 41.2309 57.3171 41.9021 56.9102 42.3231C56.5032 42.7441 55.832 42.7555 55.411 42.3486L46.3234 33.5641C45.9024 33.1572 45.891 32.486 46.2979 32.065Z" fill="#FF7308" stroke="#FF7308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M55.3952 42.3288C54.9851 41.9108 54.9915 41.2396 55.4095 40.8295L70.1315 26.2761C70.5494 25.866 71.2207 25.8724 71.6308 26.2903C72.0409 26.7083 72.0345 27.3796 71.6165 27.7897L56.8945 42.3431C56.4766 42.7531 55.8053 42.7467 55.3952 42.3288Z" fill="#FF7308" stroke="#FF7308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+    <h1 class="order-complete__title">
+        Ваш заказ № {{orderID}} успешно оформлен!
+    </h1>
+    <!-- <p class="order-complete__detalis">
+        Вы можете посмотреть подробности  в <a [routerLink]="['/', 'history-orders']">истории заказов</a>
+    </p> -->
+    <a class="order-complete__back_to_catalog btn green mt-4" [routerLink]="['/','category']">Перейти в каталог</a>
+</div>

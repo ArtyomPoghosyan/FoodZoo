@@ -1,0 +1,140 @@
+.total_amount{
+  margin-right: 51px!important;
+}
+.new{
+  position: absolute;
+  width: 50px;
+  left: 0;
+  top: 16px;
+}
+@media screen and (max-width: 1210px) {
+  .total_amount {
+    top: 0!important;
+  }
+  .new{
+    top: 60px;
+  }
+  picture {
+    margin-top: 0!important;
+  }
+}
+@media all and (max-width: 480px){
+  .cart_list_item_title_right {
+    width: 100%;
+  }
+  .total_order_history {
+    position: relative;
+    right: -50%;
+    max-width: 142px !important;
+  }
+  .total_order_history_fs {
+    float: left;
+    margin-right: 8px;
+  }
+  .date_input_his {
+    margin-left: 0px !important;
+    max-width: 186px;
+  }
+  .total_amount {
+    left: 12px!important;
+  }
+}
+@media all and (min-width: 481px) and (max-width: 710px){
+  .cart_list_item_title_right {
+    width: 100%;
+  }
+  .total_order_history {
+    position: relative;
+    right: -46%;
+    max-width: 142px !important;
+  }
+  .total_order_history_fs {
+    float: left;
+    margin-right: 8px;
+  }
+  .date_input_his {
+    margin-left: 0px !important;
+    max-width: 186px;
+  }
+}
+@media all and (min-width: 711px) and (max-width: 1100px) {
+  .cart_list_item_info_for_planshet_second {
+    margin-top: 0;
+    width: auto;
+  }
+  .cart_list_item_info_for_planshet {
+    margin-right: 100px;
+  }
+  .cart_list_item_title_mobile{
+    display: none;
+  }
+  .data_picker_planshet {
+    width: 100% !important;
+  }
+  .cont {
+    margin-top: 0 !important;
+  }
+}
+@media (max-width: 710px) {
+  .cart_list_item_title_planshet {
+    display: none;
+  }
+  .new{
+    top: 16px;
+  }
+}
+@media (min-width: 1101px) {
+  .cart_list_item_title_planshet {
+    display: none;
+  }
+}
+@media screen and (min-width: 501px) and (max-width: 768px) {
+  .new{
+    top: 16px;
+  }
+  .total_amount_order_history {
+    position: absolute !important;
+    bottom: -2px !important;
+    right: -50px !important;
+    left: unset !important;
+    top: 56px!important;;
+  }
+  .add_product {
+    bottom: 30px !important;
+    left: unset !important;
+  }
+  .total_order_history  {
+    span {
+       text-align: right!important;
+    }
+  }
+
+}
+@media screen and (max-width: 500px) {
+  .add_product  {
+    .product_counter {
+      right: 50px!important;
+      bottom: 26px!important;
+    }
+  }
+
+}
+@media screen and (max-width: 420px) {
+  .total_amount {
+    left: -25px!important;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .add_product {
+    top: unset!important;
+  }
+  .total_amount {
+    left: -50px!important;
+  }
+}
+@media screen and (max-width: 330px) {
+  .total_amount {
+    left: -75px!important;
+  }
+}

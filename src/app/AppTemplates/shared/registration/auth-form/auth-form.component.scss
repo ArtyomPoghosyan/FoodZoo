@@ -1,0 +1,186 @@
+.form-title {
+    font-size: 18px;
+    color: #000;
+    line-height: 1;
+    margin: 0;
+}
+.form-subtitle {
+    font-size: 12px;
+    color: #000;
+    line-height: 1.5;
+    margin-block: 15px 28px;
+    width: 259px;
+    margin-inline: auto;
+    max-width: 100%;
+    @media screen and(max-width:768px) {
+        font-size: 10px;
+    }
+}
+.radio-phone-or-email {
+    background-color: #F3F6F7;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-inline: 12px;
+    height: 38px;
+    width: 160px;
+    max-width: 100%;
+    border: 1px solid #F3F6F7;
+    transition: all 0.2s ease;
+    font-size: 12px;
+    color: #000;
+    cursor: pointer;
+    @media screen and (max-width:768px) {
+        width: 118px;
+        font-size: 10px;
+    }
+    &:first-child{
+        margin-right: 16px;
+    }
+    &.active {
+        background-color: #FFF;
+        border: 1px solid #FF7308;
+    }
+    .circle {
+        width: 14px;
+        height: 14px;
+        min-width: 14px;
+        max-width: 14px;
+        min-height: 14px;
+        max-height: 14px;
+        margin-right: 10px;
+        border-radius: 50%;
+        border: 1px solid #8290A7;
+        position: relative;
+        &.active::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background-color: #FF7308;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+    }
+}
+
+.private-politics {
+    display: flex;
+    align-items: flex-start;
+    @media screen and (max-width: 768px) {
+        margin-bottom: 16px;
+    }
+    .checker {
+        top: 3px;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #D4D9E1;
+        border-radius: 2px;
+        cursor: pointer;
+        position: relative;
+        margin-right: 10px;
+        &.active::before {
+            content: "\2713";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 16px;
+            font-weight: 700;
+            color: #FF7308;
+        }
+    }
+    p{
+        flex: 0 0 calc(100% - 26px);
+        font-size: 12px;
+        @media screen and (max-width:768px) {
+            font-size: 11px;
+            font-weight: 500;
+        }
+        a{
+            color: #FF7308!important;
+        }
+    }
+}
+
+.form-row{
+    margin-inline: 0;
+    &.form-field{
+        label {
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            margin-block: 32px 23px;
+            width: 100%;
+            position: relative;
+            input{
+                height: 40px;
+                padding-inline: 13px;
+                padding-block: 12px;
+                background-color: #F3F6F7;
+                border-radius: 4px;
+                outline: none;
+                border: 1px solid #F3F6F7;
+                font-size: 13px;
+                line-height: 16px;
+            }
+            small {
+                color: red;
+                position: absolute;
+                top: 100%;
+            }
+        }
+    }
+    button[type="submit"] {
+        margin-bottom: 22px;
+        width: 100%;
+        border: none;
+        padding: 12px 0;
+        background-color: #FF7300;
+        border-radius: 4px;
+        color: #FFF;
+        outline: none;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 16px;
+        transition: all 0.2s ease;
+        &:hover {
+            color: #FF7308;
+            background-color: transparent;        
+        }
+        &[disabled]{
+            color: #FFF;
+            background-color: #FF7300;
+            opacity: 0.65;
+        }
+    }
+    button[type="button"] {
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #FF7308;
+        text-decoration: underline;
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 500;
+        margin: 0 auto;
+        @media screen and (max-width:768px) {
+            margin-inline: auto 0;
+            text-decoration: none;
+        }
+    }
+}
+
+.form-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.row-links {
+    font-size: 12px;
+    margin-bottom: 52px;
+}

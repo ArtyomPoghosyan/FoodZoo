@@ -1,0 +1,143 @@
+<app-loader *ngIf="!isLoad" class="cont_load"></app-loader>
+<div class="container-fluid cont" *ngIf="isLoad">
+  <div class="container cont_body main-container">
+    <div class="row no-gutters law">
+      <div class="col-5 first_block">
+        <h1 class="title">
+          Онлайн-гипермаркет
+        </h1>
+        <h2 class="subtitle">Бесплатная доставка продуктов домой <br><span>в течение часа</span></h2>
+        <a class="btn green" *ngIf="!resScreen" [routerLink]="['/category']">Перейти в каталог</a>
+      </div>
+      <div class="col-7  second_block">
+        <img src="assets/images/food.svg" class="img-fluid" alt="Онлайн-гипермаркет" style="height: 100%;width: 100%;">
+      </div>
+      <div *ngIf="resScreen">
+        <a class="btn green" [style.margin-top]="'6px'"  [routerLink]="['/category']">Перейти в каталог</a>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col slider_block">
+        <owl-carousel [options]="mySlideOptions" class="my-owl" [items]="mainSlideImages" [carouselClasses]="['owl-theme', 'sliding']" >
+          <div class="row" *ngFor="let image of mainSlideImages;let i = index">
+            <div class="col-12">
+              <a class="img-fluid" [href]="image.url ? ['/catalog/?'+image.url+ (image.isNew ? '&isNew='+image.isNew : '')] : ''">
+                <picture *ngIf="returnWidth() > 480">
+                  <source 
+                  [srcset]="image.imgDesktop">
+                  <img 
+                  [src]="image.imgDesktop" alt="{{image.title}}" 
+                  loading="lazy" alt="{{image.title}}" style="height: 100%;width: 100%;">
+                </picture>
+                <picture *ngIf="returnWidth() < 480">
+                  <source 
+                  [srcset]="image.imgMobile">
+                  <img 
+                  [src]="image.imgMobile" alt="{{image.title}}" 
+                  loading="lazy" alt="{{image.title}}" style="height: 100%;width: 100%;">
+                </picture>
+              </a>
+            </div>
+          </div>
+        </owl-carousel>
+      </div>
+    </div>
+    <!-- special products -->
+    <div class="row no-gutters special_offer">
+      <div class="col ttl">
+          <h2 class="title">Специальные предложения </h2>
+          <a *ngIf="specialProducts && specialProducts.length > 0" [routerLink]="['/catalog']" [queryParams]="{has_discount:'1'}">Смотреть
+              все</a>
+      </div>
+    </div>
+
+    <div *ngIf="specialProducts && specialProducts.length > 0 && isLoadedSpecialProd" class="row product_items special_prod ">
+      <owl-carousel [options]="_mySlideOptions" [carouselClasses]="['owl-theme', 'sliding']">
+          <div class="col" *ngFor="let product of specialProducts;let i = index;trackBy: identify">
+            <app-product-list-item
+             [product]="product" 
+            ></app-product-list-item>
+          </div>
+      </owl-carousel>
+    </div>
+    <div *ngIf="specialProducts && specialProducts.length <= 0 && isLoadingSpecialProd && !specialProductError">
+        Нет данных
+    </div>
+    <div *ngIf="specialProductError && specialProductErrorCode != null">
+        Внутренняя ошибка. Код ошибки: {{specialProductErrorCode}}
+    </div>
+    <!-- special products -->
+
+    <!-- new products -->
+    <div class="ttl mt-5">
+      <h2 class="title_new">Новинки</h2>
+      <a *ngIf="newProducts && newProducts.length > 0" class="new_prod" [routerLink]="['/catalog']" [queryParams]="{is_new:'1'}">Смотреть
+          все</a>
+      <div *ngIf="!isLoadedNewProducts" class="w-100">
+          <app-loader></app-loader>
+      </div>
+    </div>
+    <div *ngIf="newProducts && newProducts.length > 0 && isLoadedNewProducts" class="row product_items special_prod ">
+        <owl-carousel [options]="_mySlideOptions" [carouselClasses]="['owl-theme', 'sliding']">
+            <div class="col" *ngFor="let product of newProducts;let i = index; trackBy: identify">
+              <app-product-list-item
+                [product]="product"   
+              ></app-product-list-item>
+            </div>
+        </owl-carousel>
+    </div>
+    <div *ngIf="newProducts && newProducts.length <= 0 && isLoadedNewProducts && newProductsListErrorCode === null">
+        Нет данных
+    </div>
+    <div *ngIf="newProductsListErrorCode != null">
+        Внутренняя ошибка. Код ошибки {{newProductsListErrorCode}}
+    </div>
+    <!-- new products -->
+
+    <!-- categories list -->
+    <div class="row no-gutters categories">
+      <div class="col-12 ttl">
+          <h2 class="title">Категории товаров</h2>
+      </div>
+      <div class="col-12">
+        <div *ngIf="categorieslist && categorieslist?.length > 0" class="row categories-container">
+            <div class="col">
+                <div class="cat_block">
+                    <div class="main_block">
+                        <a [routerLink]="['/special','skidki']" class="cat_img">
+                            <svg width="100" height="100" viewBox="0 0 90 90" class="icon_sale_cat" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M45 0L54.3175 10.2267L67.5 6.02886L70.4558 19.5442L83.9711 22.5L79.7733 35.6825L90 45L79.7733 54.3175L83.9711 67.5L70.4558 70.4558L67.5 83.9711L54.3175 79.7733L45 90L35.6825 79.7733L22.5 83.9711L19.5442 70.4558L6.02886 67.5L10.2267 54.3175L0 45L10.2267 35.6825L6.02886 22.5L19.5442 19.5442L22.5 6.02886L35.6825 10.2267L45 0Z" fill="#F44336"/>
+                                <path d="M34.9571 46.1495C32.9678 46.1495 31.3632 45.4466 30.1431 44.0409C28.923 42.6351 28.313 40.7918 28.313 38.5108C28.313 36.2298 28.923 34.3864 30.1431 32.9807C31.3632 31.5749 32.9678 30.8721 34.9571 30.8721C36.9463 30.8721 38.551 31.5749 39.771 32.9807C41.0176 34.3599 41.6409 36.2032 41.6409 38.5108C41.6409 40.8183 41.0176 42.6749 39.771 44.0807C38.551 45.4599 36.9463 46.1495 34.9571 46.1495ZM51.6667 31.1506H55.5656L36.5485 59H32.6495L51.6667 31.1506ZM34.9571 43.3645C36.0445 43.3645 36.88 42.9402 37.4635 42.0914C38.0736 41.2427 38.3786 40.0491 38.3786 38.5108C38.3786 36.9724 38.0736 35.7789 37.4635 34.9301C36.88 34.0814 36.0445 33.657 34.9571 33.657C33.9227 33.657 33.0872 34.0946 32.4506 34.9699C31.8406 35.8187 31.5356 36.9989 31.5356 38.5108C31.5356 40.0226 31.8406 41.2161 32.4506 42.0914C33.0872 42.9402 33.9227 43.3645 34.9571 43.3645ZM53.2183 59.2785C51.2291 59.2785 49.6244 58.5756 48.4044 57.1699C47.1843 55.7642 46.5743 53.9208 46.5743 51.6398C46.5743 49.3588 47.1843 47.5154 48.4044 46.1097C49.6244 44.704 51.2291 44.0011 53.2183 44.0011C55.2076 44.0011 56.8122 44.704 58.0323 46.1097C59.2789 47.5154 59.9022 49.3588 59.9022 51.6398C59.9022 53.9208 59.2789 55.7642 58.0323 57.1699C56.8122 58.5756 55.2076 59.2785 53.2183 59.2785ZM53.2183 56.4935C54.2793 56.4935 55.1148 56.0692 55.7248 55.2204C56.3348 54.3452 56.6398 53.1516 56.6398 51.6398C56.6398 50.128 56.3348 48.9477 55.7248 48.0989C55.1148 47.2237 54.2793 46.786 53.2183 46.786C52.1574 46.786 51.3219 47.2104 50.7119 48.0591C50.1019 48.9079 49.7968 50.1014 49.7968 51.6398C49.7968 53.1781 50.1019 54.3717 50.7119 55.2204C51.3219 56.0692 52.1574 56.4935 53.2183 56.4935Z" fill="white"/>
+                            </svg>
+                        </a>
+                        <a [routerLink]="['/special','skidki']" class="cat_title" >Акции</a>
+                    </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="cat_block">
+                    <div class="main_block">
+                        <a [routerLink]="['/special','novinki']" class="cat_img">
+                            <svg width="78" height="40" viewBox="0 0 78 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect y="0.5" width="78" height="39" rx="7.8" fill="#8D8BFD"/>
+                                <path d="M15.0896 30.2998V13.8124H17.6489L25.8298 25.3639H25.9326V13.8124H28.7662V30.2998H26.2297L18.0374 18.7369H17.9346V30.2998H15.0896ZM42.3515 30.2998H31.6798V13.8124H42.3515V16.3032H34.6276V20.7593H41.9287V23.1016H34.6276V27.809H42.3515V30.2998ZM51.1493 30.2998H48.3729L43.9511 13.8124H47.0132L49.8696 26.3008H49.961L53.2745 13.8124H55.8796L59.1931 26.3008H59.2845L62.1409 13.8124H65.203L60.7813 30.2998H58.0048L54.6342 18.3713H54.5199L51.1493 30.2998Z" fill="white"/>
+                            </svg>
+                        </a>
+                        <a [routerLink]="['/special','novinki']" class="cat_title" >Новинки</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" *ngFor="let category of categorieslist">
+                <app-category-list-item
+                [category]="category"
+                ></app-category-list-item>
+            </div>
+        </div>
+        <div *ngIf="(categorieslist && categorieslist.length <= 0) && !isLoading">
+            Нет данных
+        </div>
+      </div>
+    </div>
+    <p class='seoText mt-4' [innerHTML]="seoText | safeHtml"></p>
+  </div>
+</div>

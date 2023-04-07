@@ -1,0 +1,80 @@
+:host{
+  .main-container {
+      padding: 238px 0 65px 0;
+  }
+  .cal_search{
+    button{
+      padding: 7px 18px 7px 18px;
+      margin-top: 18px;
+    }
+  }
+  .transparent{
+    font-size: 13px;
+    line-height: 16px;
+    color: #43495a;
+    &:hover{
+      background: #E5E5E5!important;
+      border-color: transparent!important;
+      border-width: 1px!important;
+    }
+  }
+  @media (max-width: 1206px) {
+    .main-container {
+      padding: 188px 0 65px 0;
+    }
+  }
+}
+
+@media all and (max-width: 835px) {
+  .cal_search{
+    position: absolute;
+    width: 268px;
+    margin-top: 42px;
+  }
+  .date_history{
+    height: 115px;
+  }
+}
+@media all and (max-width: 525px) {
+  .cal_search{
+    width: 370px;
+    button {
+      padding: 7px 44px 7px 48px!important;
+    }
+  }
+  .transparent{
+    margin-left: 14px!important;
+  }
+}
+@media all and (max-width: 400px) {
+  .cal_search{
+    width: 98%;
+    button {
+      padding: 7px 40px 7px 40px!important;
+      width: 48%;
+    }
+  }
+  .transparent{
+    margin-left: 12px!important;
+  }
+}
+@media all and (max-width: 320px) {
+  .cal_search{
+    width: 99%;
+    button {
+      padding: 7px 20px 7px 20px !important;
+      width: 46%;
+    }
+  }
+  .transparent{
+    margin-left: 4px!important;
+  }
+}
+@media screen and (min-width: 711px) and (max-width: 1100px) {
+  .cont_history {
+    margin-top: 100px;
+  }
+  .cont {
+    margin-top: 0;
+  }
+}

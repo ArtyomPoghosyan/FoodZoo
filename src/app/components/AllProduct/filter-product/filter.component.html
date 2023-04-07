@@ -1,0 +1,167 @@
+<!-- <div class="sort_panel col-12 sorter">
+
+    <div class="left_block">
+
+      <div class=" control_product">
+
+        <div class="left-sort">
+
+          <ng-select [items]="orderNames" bindLabel="name" bindValue="id" placeholder="Без сортировки"
+            notFoundText="Без сортировки" (change)="changeSort($event)" (open)="addEl()" (close)="removeEl()"
+            [(ngModel)]="selectedOrderName>=0 ||  selectedOrderName>=99999 ? 0 : selectedOrderName">
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+
+              <span>{{item.name}}</span>
+
+              <img height="18" width="18" class="float-right f_img" [src]="item.avatar" />
+
+            </ng-template>
+
+          </ng-select>
+
+        </div>
+
+        <div class="right-sort">
+
+          <div class="list_type">
+
+            <div class="list_items" [class.active]="productListype" (click)="changeProductsType(true)">
+
+              <svg width="24" height="20">
+                <use xlink:href="#list_items"></use>
+              </svg>
+
+            </div>
+
+            <div class="block_items" [class.active]="!productListype" (click)="changeProductsType(false)">
+
+              <svg width="22" height="22">
+                <use xlink:href="#block_items"></use>
+              </svg>
+
+            </div>
+
+          </div>
+          <div *ngIf="router.url !== '/catalog'" (click)="resetFilter()" class="cleare_search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M1 1L10.9987 10.9987" stroke="#645D5D" stroke-linecap="round" />
+              <path d="M10.9993 1L1.00055 10.9987" stroke="#645D5D" stroke-linecap="round" />
+            </svg>
+            <span>
+              Очистить фильтры
+            </span>
+          </div>
+
+        </div>
+
+        <div class="fill_all" *ngIf="showButton">
+          <svg class="mb-1" width="15" height="15" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M1.37997 0.959961H10.62C10.7298 0.96003 10.8375 0.991125 10.9304 1.04967C11.0234 1.10821 11.0979 1.19182 11.1455 1.29087C11.193 1.38992 11.2116 1.50038 11.1992 1.60954C11.1867 1.7187 11.1436 1.82211 11.075 1.90788L7.29497 6.63346C7.212 6.73687 7.16674 6.86546 7.16663 6.99804V10.0016C7.16663 10.0922 7.14555 10.1815 7.10505 10.2625C7.06455 10.3435 7.00575 10.414 6.9333 10.4683L5.76663 11.3433C5.67997 11.4083 5.57691 11.4479 5.46902 11.4576C5.36112 11.4673 5.25265 11.4468 5.15576 11.3984C5.05886 11.3499 4.97737 11.2755 4.92042 11.1833C4.86347 11.0912 4.8333 10.985 4.8333 10.8766V6.99746C4.83306 6.86508 4.78781 6.73672 4.70497 6.63346L0.924966 1.90788C0.856298 1.82211 0.813248 1.7187 0.800771 1.60954C0.788294 1.50038 0.806899 1.38992 0.854442 1.29087C0.901986 1.19182 0.976536 1.10821 1.06951 1.04967C1.16248 0.991125 1.2701 0.96003 1.37997 0.959961Z"
+              fill="#9CB538" />
+          </svg>
+          <span (click)="_toggleSidebar()" class="ml-1 filter_button">Фильтр </span>
+          <svg *ngIf="countFilter > 0" (click)="resetFilter()" class="ml-1 cursor-pointer mb-1" width="11" height="11"
+            viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12L1.375 1.375M1.375 12L12 1.375L1.375 12Z" stroke="#9CB538" stroke-width="1.21429"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="mobile_filters_choosen" *ngIf="choosenFilter && choosenFilter.hasOwnProperty('avatar')">
+          <img (click)="openMobileSorts()" (clickOutside)="closeFilter()" width="18" height="18"
+            src="{{choosenFilter.avatar}}">
+        </div>
+        <div *ngIf="showFilter" class="filters">
+          <div *ngFor=" let orderName of orderNames" class="col-12" (click)="changeSort(orderName, true)"
+            [style.background-color]="(choosenFilter && choosenFilter.id == orderName.id) ? '#ECF5C9' : '#FFFFFF'">
+            <span>{{orderName.name}} </span>
+            <img style="float: right" src="{{orderName.avatar}}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="sort_panel col-12 sorter">
+
+    <div class="left_block">
+
+      <div class=" control_product">
+
+        <div class="left-sort">
+
+          <ng-select [items]="orderNames" bindLabel="name" bindValue="id" placeholder="Без сортировки"
+            notFoundText="Без сортировки" (change)="changeSort($event)" (open)="addEl()" (close)="removeEl()"
+            [(ngModel)]="selectedOrderName>=0 ||  selectedOrderName>=99999 ? 0 : selectedOrderName">
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+
+              <span>{{item.name}}</span>
+
+              <img height="18" width="18" class="float-right f_img" [src]="item.avatar" />
+
+            </ng-template>
+
+          </ng-select>
+
+        </div>
+
+        <div class="right-sort">
+
+          <div class="list_type">
+
+            <div class="list_items" [class.active]="productListype" (click)="changeProductsType(true)">
+
+              <svg width="24" height="20">
+                <use xlink:href="#list_items"></use>
+              </svg>
+
+            </div>
+
+            <div class="block_items" [class.active]="!productListype" (click)="changeProductsType(false)">
+
+              <svg width="22" height="22">
+                <use xlink:href="#block_items"></use>
+              </svg>
+
+            </div>
+
+          </div>
+          <div *ngIf="router.url !== '/catalog'" (click)="resetFilter()" class="cleare_search"[routerLink]="['/catalog']">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M1 1L10.9987 10.9987" stroke="#645D5D" stroke-linecap="round" />
+              <path d="M10.9993 1L1.00055 10.9987" stroke="#645D5D" stroke-linecap="round" />
+            </svg>
+            <span>
+              Очистить фильтры
+            </span>
+          </div>
+
+        </div>
+
+        <div class="fill_all" *ngIf="showButton">
+          <svg class="mb-1" width="15" height="15" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M1.37997 0.959961H10.62C10.7298 0.96003 10.8375 0.991125 10.9304 1.04967C11.0234 1.10821 11.0979 1.19182 11.1455 1.29087C11.193 1.38992 11.2116 1.50038 11.1992 1.60954C11.1867 1.7187 11.1436 1.82211 11.075 1.90788L7.29497 6.63346C7.212 6.73687 7.16674 6.86546 7.16663 6.99804V10.0016C7.16663 10.0922 7.14555 10.1815 7.10505 10.2625C7.06455 10.3435 7.00575 10.414 6.9333 10.4683L5.76663 11.3433C5.67997 11.4083 5.57691 11.4479 5.46902 11.4576C5.36112 11.4673 5.25265 11.4468 5.15576 11.3984C5.05886 11.3499 4.97737 11.2755 4.92042 11.1833C4.86347 11.0912 4.8333 10.985 4.8333 10.8766V6.99746C4.83306 6.86508 4.78781 6.73672 4.70497 6.63346L0.924966 1.90788C0.856298 1.82211 0.813248 1.7187 0.800771 1.60954C0.788294 1.50038 0.806899 1.38992 0.854442 1.29087C0.901986 1.19182 0.976536 1.10821 1.06951 1.04967C1.16248 0.991125 1.2701 0.96003 1.37997 0.959961Z"
+              fill="#9CB538" />
+          </svg>
+          <span (click)="_toggleSidebar()" class="ml-1 filter_button">Фильтр </span>
+          <svg *ngIf="countFilter > 0" (click)="resetFilter()" class="ml-1 cursor-pointer mb-1" width="11" height="11"
+            viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12L1.375 1.375M1.375 12L12 1.375L1.375 12Z" stroke="#9CB538" stroke-width="1.21429"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="mobile_filters_choosen" *ngIf="choosenFilter && choosenFilter.hasOwnProperty('avatar')">
+            <img (click)="openMobileSorts()" (clickOutside)="closeFilter()" width="18" height="18"
+              src="{{choosenFilter.avatar}}">
+          </div>
+        <div *ngIf="showFilter" class="filters">
+          <div *ngFor=" let orderName of orderNames" class="col-12" (click)="changeSort(orderName, true)"
+            [style.background-color]="(choosenFilter && choosenFilter.id == orderName.id) ? '#ECF5C9' : '#FFFFFF'">
+            <span>{{orderName.name}} </span>
+            <img style="float: right" src="{{orderName.avatar}}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

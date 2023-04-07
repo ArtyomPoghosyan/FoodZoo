@@ -1,0 +1,40 @@
+<div class="container-fluid login-form"
+[ngClass]="{'cart_form' : this.router.url == '/cart'}">
+    <div class="form-wrapper" [ngClass]="{'code-enter' : enterCode}">
+        <app-auth-form
+        *ngIf="!enterCode"
+        (requestOut)="sendForm($event)"
+        (skip)="skip($event)"
+        [url] = "this.router.url"
+        [captcha]="captcha"
+        (isShowRobotEmit)="recieveData($event)"
+        [eventUrl] = "eventUrl"
+        [selectedEvent]="selectedEvent"
+        ></app-auth-form>
+
+        <app-confirmation
+        (resendCode)="sendForm($event)"
+        (sendCode)="sendCode($event)"
+        [sendError]="sendCodeError"
+        (skip)="skip($event)"
+        (back) = "enterCode = !enterCode"
+        [senderInfo]="senderInfo"
+        [captcha]="captcha"
+        (backToReg) = "backToRegistr($event)"
+        *ngIf="enterCode"
+        ></app-confirmation>
+        <div class ="captcha">
+          <!-- <form [formGroup]="aFormGroup" style="margin-top: 10px;" *ngIf="isShowCaptcha" >
+              <ngx-recaptcha2 #captchaElem
+                [siteKey]="siteKey"
+                (success)="handleSuccess($event)"
+                formControlName="recaptcha"> 
+              </ngx-recaptcha2>
+            </form> -->
+            <ng-hcaptcha *ngIf="isShowCaptcha" (verify)="onVerify($event)"
+              (expired)="onExpired($event)" (error)="onError($event)">
+            </ng-hcaptcha>
+            
+        </div>
+    </div>
+</div>

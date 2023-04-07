@@ -1,0 +1,109 @@
+<div class="edit-profile_data__block">
+    <script defer src="https://api-maps.yandex.ru/2.1/?apikey=0d2ae518-d1d0-4f48-8a2e-9e484579e4e1&lang=ru_RU"></script>
+    <div [ngClass]="{'yande-map':editMode === EDITmode?.ADDRESS,'edit_profile_modal':editMode !== EDITmode?.ADDRESS}"
+        class="edit_profile_modal" *ngIf="!showConfirm">
+        <span class="close" (click)="this.closeModal.emit(true)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 12 12" fill="none">
+                <path d="M1 1L10.9987 10.9987" stroke="#AA4A44" stroke-linecap="round" />
+                <path d="M10.999 1L1.00031 10.9987" stroke="#AA4A44" stroke-linecap="round" />
+            </svg>
+        </span>
+        <h2 class="modal-title" *ngIf="editMode !== EDITmode.ADDRESS">
+            Добро пожаловать!
+        </h2>
+        <form [formGroup]="editForm" (ngSubmit)="getCode()">
+            <div class="form-row">
+                <label *ngIf="editMode == EDITmode.PHONE">
+                    <span>
+                        Ваш телефон
+                    </span>
+                    <input formControlName="value" type="text" pattern="[\(\)a-z0-9-+]*" inputmode="numeric"
+                        [textMask]="{mask: mask, showMask: showMask }" placeholder="+7(___)___-__-__">
+                </label>
+                <label *ngIf="editMode == EDITmode.E_MAIL">
+                    <span>
+                        Ваш e-mail
+                    </span>
+                    <input formControlName="value" type="email" placeholder="example@mail.com">
+                </label>
+                <small class="error" *ngIf="getValidatorErrors()">
+                    {{getValidatorErrors()}}
+                </small>
+            </div>
+            <div class="form-row" *ngIf="editMode !== EDITmode.ADDRESS">
+                <label class="private-politics" (click)="checker = !checker">
+                    <span class="checker" [ngClass]="{'active' : checker}"></span>
+                    <p>
+                        Я соглашаюсь с <a href="https://foodzo.ru/assets/doc/usloviya.pdf" target="_blank">Пользовательским
+                            соглашением</a> и
+                        <a href="https://foodzo.ru/assets/doc/personaldata.pdf" target="_blank">Политикой обработки персональных
+                            данных</a>.
+                    </p>
+                </label>
+            </div>
+            <div class="form-row" *ngIf="editMode !== EDITmode.ADDRESS">
+                <button *ngIf="editMode !== EDITmode.NAME; else changeName" class="submit-button" type="submit"
+                    [disabled]="!checker || editForm.invalid || getValidatorErrors()">
+                    Получить код
+                </button>
+                <ng-template #changeName>
+                    <button class="submit-button" type="submit"
+                        [disabled]="!checker || editForm.invalid || getValidatorErrors()">
+                        Изменить имя
+                    </button>
+                </ng-template>
+            </div>
+            <div class="map" *ngIf="editMode == EDITmode.ADDRESS">
+                <div class="information_map" id="information_map"></div>
+            </div>
+        </form>
+    </div>
+    <div class="confirm-edited" *ngIf="showConfirm">
+        <span class="close" (click)="this.closeModal.emit(true)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="12 12 12 12" fill="none">
+                <path d="M1 1L10.9987 10.9987" stroke="#8290A7" stroke-linecap="round" />
+                <path d="M10.999 1L1.00031 10.9987" stroke="#8290A7" stroke-linecap="round" />
+            </svg>
+        </span>
+        <h2 *ngIf="editMode === EDITmode.PHONE" class="confirm-title">
+            Подтверждение телефона
+        </h2>
+        <h2 *ngIf="editMode === EDITmode.E_MAIL">
+            Подтверждение E-mail
+        </h2>
+        <p>
+            Код был отправлен на <span *ngIf="editMode === EDITmode.PHONE">телефон </span><span
+                *ngIf="editMode === EDITmode.E_MAIL">e-mail </span>{{sendParams.value}}
+        </p>
+        <p>
+            Введите код
+        </p>
+
+        <div style="display: flex; justify-content: center; align-items: center;" (click)="focusInput($event)">
+            <span class="field mx-1">
+                {{value != null && value[0] ? value[0] : " "}}
+            </span>
+            <span class="field mx-1">
+                {{value != null && value[1] ? value[1] : " "}}
+            </span>
+            <span class="field mx-1">
+                {{value != null && value[2] ? value[2] : " "}}
+            </span>
+            <span class="field mx-1">
+                {{value != null && value[3] ? value[3] : " "}}
+            </span>
+        </div>
+
+        <input id="codeInputField" style="opacity: 0;" type="text" inputmode="numeric" pattern="[0-9]" maxlength="4"
+            (paste)="onPaste($event)" (keydown)="codeInput($event)" (keyup)="codeKeyUp()" [(ngModel)]="value"
+            #codeInputField>
+
+        <span class="resend" *ngIf="subscribeTimer !=0; else ResetTimer">
+            Повторная отправка через - {{subscribeTimer}}
+        </span>
+        <ng-template #ResetTimer>
+            <button type="button" class="resend-button" (click)="getCode(); subscribeTimer = 60; timer(60)">Отправить
+                повторно</button>
+        </ng-template>
+    </div>
+</div>

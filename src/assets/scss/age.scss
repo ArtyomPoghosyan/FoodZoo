@@ -1,0 +1,45 @@
+.age_container {
+  padding-top: 101px;
+  padding-bottom: 0;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 100vh;
+  .age_image {
+    width: 90%;
+    max-width: 492px;
+    height: auto;
+    display: block;
+    margin: auto;
+    margin-bottom: 32px;
+  }
+  p {
+    font-size: 36px;
+    line-height: 44px;
+    text-align: center;
+    color: $textGrey;
+    font-weight: 700;
+    span {
+      color: $red;
+    }
+  }
+}
+
+@media screen and (max-width: 1206px) {
+  .age_container .age_image {
+    margin-bottom: 52px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .age_container{
+    padding-top: 72px;
+  }
+  .age_container p{
+    font-size: 18px;
+line-height: 22px;
+  }
+  .age_container .age_image{
+    margin-bottom: 15px;
+  }
+}

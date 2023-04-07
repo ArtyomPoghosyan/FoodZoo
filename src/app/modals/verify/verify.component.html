@@ -1,0 +1,37 @@
+<ng-template #modalVerifyPhonePassword let-modal>
+  <div class="modal_content">
+      <app-loader *ngIf="isLoading" class="loader-code"></app-loader>
+    <div class="form">
+      <div class="modal_close" (click)="modal.dismiss('Cross click'); closed()">
+        <svg style="font-weight: bold;" width='14px' height="14px" viewBox="0 0 68 68">
+          <g>
+            <path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/>
+          </g>
+        </svg>
+      </div>
+      <p class="verify_number text-center">Подвердите номер телефона</p>
+      <p class="text-center code_verify">На ваш телефон отправлено сообщение <br>с кодом подтверждения</p>
+     <form class="profile__form_container" [formGroup]="verifyPhoneNumber" (ngSubmit)="verification()">
+        <div class="form_row">
+          <span class="input-error-message text-right mb-2" *ngIf="errorMatch">{{errorMatch}}</span>
+          <input type="text"  inputmode="numeric" (input)="valHide()" [ngClass]="{ 'is-invalid': submitted && verifyCode.errors }"
+                 formControlName="verifyCode" class="input" id="verifyCode" placeholder="Введите код подтверждения..." autocomplete="off">
+            <div *ngIf="submitted && verifyCode.errors" class="input-error-message collapse show">
+                <div *ngIf="verifyCode.errors.required">
+                    Необходимо заполнить «Код из sms».
+                </div>
+                <div *ngIf="verifyCode.errors.pattern">
+                    Поле должно содержать только цифры.
+                </div>
+                <div *ngIf="verifyCode.errors.maxlength || verifyCode.errors.minlength">
+                    Длина кода должна быть ровно 4 символа.
+                </div>
+            </div>
+        </div>
+        <div class="form_row">
+          <button [disabled]="oneTime && errorMatch"  class="btn green">Подтвердить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

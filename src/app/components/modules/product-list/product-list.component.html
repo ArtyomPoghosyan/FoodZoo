@@ -1,0 +1,356 @@
+<app-age-verify *ngIf="(hasCensoredProd || hasCensoredCat) && !status"></app-age-verify>
+<div id="search_block">
+  <!-- <div *ngIf="showBrandBlock">
+    <div class="tags">
+      <tag-input [(ngModel)]='cutBrand' [removable]='false' [hideForm]="true" theme='minimal' [identifyBy]="'id'"
+        [displayBy]="'name'" (onSelect)="onSelected($event)">
+      </tag-input>
+    </div>
+  </div> -->
+
+  <h1 class="seoH1" *ngIf="seoH1">{{seoH1}}</h1>
+
+  <p class='seoText mt-5' [innerHTML]="seoText | safeHtml"></p>
+
+  <div class="sort_panel col-12 sorter" *ngIf="productslist.length > 0 || returnWidth() <= 1205">
+
+    <div class="left_block">
+
+      <div class=" control_product">
+
+        <div class="left-sort">
+
+          <ng-select [items]="orderNames" bindLabel="name" bindValue="id" placeholder="Без сортировки"
+            notFoundText="Без сортировки" (change)="changeSort($event)" (open)="addEl()" (close)="removeEl()"
+            [(ngModel)]="selectedOrderName>=0 ||  selectedOrderName>=99999 ? 0 : selectedOrderName">
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+
+              <span>{{item.name}}</span>
+
+              <img height="18" width="18" class="float-right f_img" [src]="item.avatar" />
+
+            </ng-template>
+
+          </ng-select>
+
+        </div>
+
+        <div class="right-sort">
+
+          <div class="list_type">
+
+            <div class="list_items" [class.active]="productListype" (click)="changeProductsType(true)">
+
+              <svg width="24" height="20">
+                <use xlink:href="#list_items"></use>
+              </svg>
+
+            </div>
+
+            <div class="block_items" [class.active]="!productListype" (click)="changeProductsType(false)">
+
+              <svg width="22" height="22">
+                <use xlink:href="#block_items"></use>
+              </svg>
+
+            </div>
+
+          </div>
+          <div *ngIf="router.url !== '/catalog'" (click)="resetFilter()" class="cleare_search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M1 1L10.9987 10.9987" stroke="#645D5D" stroke-linecap="round" />
+              <path d="M10.9993 1L1.00055 10.9987" stroke="#645D5D" stroke-linecap="round" />
+            </svg>
+            <span>
+              Очистить фильтры
+            </span>
+          </div>
+
+        </div>
+
+        <div class="fill_all" *ngIf="showButton">
+          <svg class="mb-1" width="15" height="15" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M1.37997 0.959961H10.62C10.7298 0.96003 10.8375 0.991125 10.9304 1.04967C11.0234 1.10821 11.0979 1.19182 11.1455 1.29087C11.193 1.38992 11.2116 1.50038 11.1992 1.60954C11.1867 1.7187 11.1436 1.82211 11.075 1.90788L7.29497 6.63346C7.212 6.73687 7.16674 6.86546 7.16663 6.99804V10.0016C7.16663 10.0922 7.14555 10.1815 7.10505 10.2625C7.06455 10.3435 7.00575 10.414 6.9333 10.4683L5.76663 11.3433C5.67997 11.4083 5.57691 11.4479 5.46902 11.4576C5.36112 11.4673 5.25265 11.4468 5.15576 11.3984C5.05886 11.3499 4.97737 11.2755 4.92042 11.1833C4.86347 11.0912 4.8333 10.985 4.8333 10.8766V6.99746C4.83306 6.86508 4.78781 6.73672 4.70497 6.63346L0.924966 1.90788C0.856298 1.82211 0.813248 1.7187 0.800771 1.60954C0.788294 1.50038 0.806899 1.38992 0.854442 1.29087C0.901986 1.19182 0.976536 1.10821 1.06951 1.04967C1.16248 0.991125 1.2701 0.96003 1.37997 0.959961Z"
+              fill="#9CB538" />
+          </svg>
+          <span (click)="_toggleSidebar()" class="ml-1 filter_button">Фильтр </span>
+          <svg *ngIf="countFilter > 0" (click)="resetFilter()" class="ml-1 cursor-pointer mb-1" width="11" height="11"
+            viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12L1.375 1.375M1.375 12L12 1.375L1.375 12Z" stroke="#9CB538" stroke-width="1.21429"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="mobile_filters_choosen" *ngIf="choosenFilter && choosenFilter.hasOwnProperty('avatar')">
+          <img (click)="openMobileSorts()" (clickOutside)="closeFilter()" width="18" height="18"
+            src="{{choosenFilter.avatar}}">
+        </div>
+        <div *ngIf="showFilter" class="filters">
+          <div *ngFor=" let orderName of orderNames" class="col-12" (click)="changeSort(orderName, true)"
+            [style.background-color]="(choosenFilter && choosenFilter.id == orderName.id) ? '#ECF5C9' : '#FFFFFF'">
+            <span>{{orderName.name}} </span>
+            <img style="float: right" src="{{orderName.avatar}}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row products">
+  <ng-sidebar-container>
+    <div ng-sidebar-content>
+      <div class="col-12">
+        <div class="left_block">
+          <div *ngIf="productslist.length <= 0 && !getProductLoading" class="not_offers_product_list">
+            <div class="not_offers_container">
+              <span class="not_offers_container_title">К сожалению, мы ничего не нашли по вашему запросу</span>
+              <button class="btn green" [routerLink]="['/', 'category']">Перейти в каталог</button>
+            </div>
+          </div>
+          <div [class.product_list]="productListype" class="row product_items">
+            <div class="col-10">
+              <div class="row">
+                <div *ngFor="let product of productslist;let i = index" class="col" id="{{i}}">
+                  <app-product-list-item [product]="product"></app-product-list-item>
+
+                </div>
+              </div>
+            </div>
+            <!-- A sidebar -->
+            <div *ngIf="!hideFilter" class="col-2">
+              <!-- <ng-sidebar 
+              #sidebar 
+              [(opened)]="helperService._opened"
+              sidebarClass="{{!showButton ? 'custom-width' : 'col-12'}} customClass" 
+              position="right"
+              mode="{{!showButton ? 'push' : 'over'}}" 
+              [animate]="true"> -->
+              <div id="filter_block" class="filter_block" [class.top]="countFilter === 0"
+                [ngClass]="{'right_data': leftClass, 'active': filterOpened, 'act': filterOpened}">
+                <div class="right_block" [class.r-bl]="showBrandBlock">
+                  <div class="filter_container search_filter">
+                    <div class="filter_body" [class.viewfilter]="helperService._opened && showButton">
+                      <div class="filter-header" *ngIf="showButton">
+                        <span (click)="helperService._opened = false; closed($event)"
+                          class="float-left mr-2 cursor-pointer back_to">
+                          <svg width="14" height="14" class=" icon_marker mb-1">
+                            <use xlink:href="#arrow_back"></use>
+                          </svg>
+                          <span class="ml-1">Назад</span>
+                        </span>
+                        <span class="ml-1 float-right filter_icon">
+                          <svg class="mr-1 mb-1" width="13" height="13" viewBox="0 0 12 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M1.37997 0.959961H10.62C10.7298 0.96003 10.8375 0.991125 10.9304 1.04967C11.0234 1.10821 11.0979 1.19182 11.1455 1.29087C11.193 1.38992 11.2116 1.50038 11.1992 1.60954C11.1867 1.7187 11.1436 1.82211 11.075 1.90788L7.29497 6.63346C7.212 6.73687 7.16674 6.86546 7.16663 6.99804V10.0016C7.16663 10.0922 7.14555 10.1815 7.10505 10.2625C7.06455 10.3435 7.00575 10.414 6.9333 10.4683L5.76663 11.3433C5.67997 11.4083 5.57691 11.4479 5.46902 11.4576C5.36112 11.4673 5.25265 11.4468 5.15576 11.3984C5.05886 11.3499 4.97737 11.2755 4.92042 11.1833C4.86347 11.0912 4.8333 10.985 4.8333 10.8766V6.99746C4.83306 6.86508 4.78781 6.73672 4.70497 6.63346L0.924966 1.90788C0.856298 1.82211 0.813248 1.7187 0.800771 1.60954C0.788294 1.50038 0.806899 1.38992 0.854442 1.29087C0.901986 1.19182 0.976536 1.10821 1.06951 1.04967C1.16248 0.991125 1.2701 0.96003 1.37997 0.959961Z"
+                              fill="#9CB538" />
+                          </svg>
+                          Фильтр
+                        </span>
+                      </div>
+                      <form [formGroup]="filterForm">
+                        <div class="filter">
+                          <div class="filter_item sale_fl">
+                            <div class="filter_item_title sale_filter" (click)="getProductsFavorites()"
+                              [class.active]="is_favorite">
+                              <svg width="24" height="24">
+                                <use xlink:href="#productStars"></use>
+                              </svg>
+                              <span>Избранные</span>
+                            </div>
+                          </div>
+                          <div class="filter_item sale_fl">
+                            <div class="filter_item_title sale_filter" [class.active]="has_discount"
+                              (click)="getActionProduct()">
+                              <svg class="icon_sale" width="24" height="24">
+                                <use xlink:href="#icon_sale"></use>
+                              </svg>
+                              <span>Акции</span>
+                            </div>
+                          </div>
+                          <div class="filter_item sale_fl">
+                            <div class="filter_item_title filter_item_new sale_filter" [class.active]="hasNew"
+                              (click)="getNewProduct()">
+                              <svg width="34" height="19" viewBox="0 0 34 19" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.25" y="0.25" width="33.5" height="18.5" rx="3.15" stroke="#8290A7"
+                                  stroke-width="0.5" />
+                                <path
+                                  d="M6.66295 13V5.75279H7.68248L11.4392 11.0965H11.4794V5.75279H12.5742V13H11.5597L7.80301 7.66127H7.75781V13H6.66295ZM18.5156 13H13.9152V5.75279H18.5156V6.7221H15.0402V8.84152H18.3298V9.77567H15.0402V12.0257H18.5156V13ZM22.2422 13H21.1775L19.2238 5.75279H20.394L21.7349 11.428H21.7751L23.3069 5.75279H24.3516L25.8884 11.428H25.9286L27.2695 5.75279H28.4397L26.481 13H25.4213L23.8544 7.53571H23.8041L22.2422 13Z"
+                                  fill="#8290A7" />
+                              </svg>
+                              <span>Новинки</span>
+                            </div>
+                          </div>
+                          <div *ngIf="categorieslist" class="filter_item">
+                            <div class="filter_item_title fill_mob" (click)="openAccordeon('category')"
+                              [class.is-opened]="categoryActive">
+                              <span>Категории</span>
+                              <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M6.30693 7.69341L0.287337 1.67362C-0.0957794 1.29069 -0.0957794 0.669828 0.287337 0.287082C0.670113 -0.0956941 1.29094 -0.0956941 1.67368 0.287082L7.0001 5.61367L12.3263 0.287237C12.7093 -0.0955393 13.33 -0.0955393 13.7128 0.287237C14.0957 0.670014 14.0957 1.29084 13.7128 1.67377L7.69312 7.69356C7.50164 7.88495 7.25095 7.98054 7.00013 7.98054C6.74919 7.98054 6.49832 7.88476 6.30693 7.69341Z"
+                                  fill="#FF7308" />
+                              </svg>
+                            </div>
+                            <!-- {{returnQuery() | json}} -->
+                            <ul [ngClass]="{'style-1': categorieslist.length > 10 && categoryActive}" class="cat_hover">
+                              <li *ngFor="let category of categorieslist">
+                                <a [class]="category?.subcats?.length > 0" [routerLink]="['/category/'+category.slug]"
+                                  [queryParams]="returnQuery()" (click)="openAccordeon('subcategory', category);"
+                                  [class.is-opened]="returnActiveElement(category)">{{category.name}}
+                                  <!-- <svg class="arrow_filter" width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                      d="M6.30693 7.69341L0.287337 1.67362C-0.0957794 1.29069 -0.0957794 0.669828 0.287337 0.287082C0.670113 -0.0956941 1.29094 -0.0956941 1.67368 0.287082L7.0001 5.61367L12.3263 0.287237C12.7093 -0.0955393 13.33 -0.0955393 13.7128 0.287237C14.0957 0.670014 14.0957 1.29084 13.7128 1.67377L7.69312 7.69356C7.50164 7.88495 7.25095 7.98054 7.00013 7.98054C6.74919 7.98054 6.49832 7.88476 6.30693 7.69341Z"
+                                      fill="#FF7308" />
+                                  </svg> -->
+                                </a>
+                                <!-- <span *ngIf="!showButton" (click)="sortProduct('category_ids', category?.id, true, 'cat_id')"
+                                  class="is-opened"
+                                  [class.is-click]="(hasParentActive === category.id || subcategorydActive)">{{category.name}}</span> -->
+                                <ul *ngIf="category?.subcats?.length > 0">
+                                  <li *ngIf="showButton"
+                                    (click)="sortProduct('category_ids', category?.id, true, 'cat_id')"
+                                    [class.is-click]="hasParentActive === category.slug && catBold"> Вся категория </li>
+                                  <li *ngFor="let subcategory of category?.subcats">
+                                    <div class="checkbox">
+                                      <input id="category{{subcategory?.id}}" type="checkbox"
+                                        formControlName="category{{subcategory?.id}}"
+                                        (change)="sortProduct('category_ids', subcategory?.id, $event.target.checked,'sub_cat')">
+                                      <label for="category{{subcategory?.id}}">{{subcategory.name}}</label>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
+                          <div *ngIf="brandslist" class="filter_item">
+                            <div class="filter_item_title fill_mob" (click)="openAccordeon('brand')"
+                              [class.is-opened]="brandActive">
+                              <span>Торговые марки</span>
+                              <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M6.30693 7.69341L0.287337 1.67362C-0.0957794 1.29069 -0.0957794 0.669828 0.287337 0.287082C0.670113 -0.0956941 1.29094 -0.0956941 1.67368 0.287082L7.0001 5.61367L12.3263 0.287237C12.7093 -0.0955393 13.33 -0.0955393 13.7128 0.287237C14.0957 0.670014 14.0957 1.29084 13.7128 1.67377L7.69312 7.69356C7.50164 7.88495 7.25095 7.98054 7.00013 7.98054C6.74919 7.98054 6.49832 7.88476 6.30693 7.69341Z"
+                                  fill="#FF7308" />
+                              </svg>
+                            </div>
+                            <!-- <ul *ngIf="isLoading">
+                              <li>
+                                <app-loader></app-loader>
+                              </li>
+                            </ul> -->
+                            <ul *ngIf="!isLoading">
+                              <li class="mark-point">
+                                <input type="text" id="search_input22" name="search" autocomplete="off"
+                                  placeholder="Поиск" (keyup)="returnBrandsBySearch($event.target.value)">
+                                <label for="search_input22">
+                                  <svg width="16" height="16" viewBox="0 0 10 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                      d="M9.96996 9.28121L6.72372 6.03497C7.22747 5.38373 7.49997 4.58748 7.49997 3.74998C7.49997 2.74749 7.10872 1.80749 6.40122 1.09875C5.69372 0.389998 4.75123 0 3.74998 0C2.74874 0 1.80624 0.391248 1.09875 1.09875C0.389998 1.80624 0 2.74749 0 3.74998C0 4.75123 0.391248 5.69372 1.09875 6.40122C1.80624 7.10997 2.74749 7.49997 3.74998 7.49997C4.58748 7.49997 5.38248 7.22747 6.03372 6.72497L9.27996 9.96996C9.28948 9.97948 9.30078 9.98704 9.31322 9.99219C9.32566 9.99735 9.33899 10 9.35246 10C9.36592 10 9.37926 9.99735 9.3917 9.99219C9.40414 9.98704 9.41544 9.97948 9.42496 9.96996L9.96996 9.42621C9.97948 9.41669 9.98704 9.40539 9.99219 9.39295C9.99735 9.38051 10 9.36717 10 9.35371C10 9.34024 9.99735 9.32691 9.99219 9.31447C9.98704 9.30203 9.97948 9.29073 9.96996 9.28121ZM5.72998 5.72998C5.19998 6.25872 4.49748 6.54997 3.74998 6.54997C3.00249 6.54997 2.29999 6.25872 1.76999 5.72998C1.24124 5.19998 0.949996 4.49748 0.949996 3.74998C0.949996 3.00249 1.24124 2.29874 1.76999 1.76999C2.29999 1.24124 3.00249 0.949996 3.74998 0.949996C4.49748 0.949996 5.20123 1.23999 5.72998 1.76999C6.25872 2.29999 6.54997 3.00249 6.54997 3.74998C6.54997 4.49748 6.25872 5.20123 5.72998 5.72998Z"
+                                      fill="#FF7308" />
+                                  </svg>
+                                </label>
+                              </li>
+                              <!-- brandslist -->
+                              <li
+                                *ngFor="let brand of (( serchedBrands && serchedBrands.length > 0 ? serchedBrands : brandslist ) | slice :0:loadNum) ">
+                                <div *ngIf="returnFilterFormControlForBrands(brand.id)" class="checkbox">
+                                  <input id="brand{{brand.id}}" formControlName="brand{{brand.id}}" type="checkbox"
+                                    (change)="sortProduct('brand_ids', brand.id, $event.target.checked)">
+                                  <label for="brand{{brand.id}}">{{brand.name}}</label>
+                                </div>
+                              </li>
+                              <li *ngIf="brandslist.length > loadNum" class="any-more">
+                                <span *ngIf="(brandslist | filter:searchText).length >loadNum"
+                                  (click)="loadMore(loadNum)">Показать еще...</span>
+                              </li>
+                              <li *ngIf="(brandslist | filter:searchText).length ===0 " class="text-center">
+                                <span>Ничего не найдено</span>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <div *ngIf="unitlist" class="filter_item">
+                            <div class="filter_item_title fill_mob" (click)="openAccordeon('units')"
+                              [class.is-opened]="unitActive">
+                              <span>Вес, объем</span>
+                              <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M6.30693 7.69341L0.287337 1.67362C-0.0957794 1.29069 -0.0957794 0.669828 0.287337 0.287082C0.670113 -0.0956941 1.29094 -0.0956941 1.67368 0.287082L7.0001 5.61367L12.3263 0.287237C12.7093 -0.0955393 13.33 -0.0955393 13.7128 0.287237C14.0957 0.670014 14.0957 1.29084 13.7128 1.67377L7.69312 7.69356C7.50164 7.88495 7.25095 7.98054 7.00013 7.98054C6.74919 7.98054 6.49832 7.88476 6.30693 7.69341Z"
+                                  fill="#FF7308" />
+                              </svg>
+                            </div>
+                            <!-- <ul *ngIf="isLoading">
+                              <li>
+                                <app-loader></app-loader>
+                              </li>
+                            </ul> -->
+                            <ul *ngIf="!isLoading">
+                              <li class="mark-point">
+                                <input [ngModelOptions]="{standalone: true}" type="text" id="search_unity" name="search"
+                                  [(ngModel)]="searchUnit" autocomplete="off" placeholder="Поиск"
+                                  (keyup)="searchUnits($event.target.value)">
+                                <label for="search_unity">
+                                  <svg width="16" height="16" viewBox="0 0 10 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                      d="M9.96996 9.28121L6.72372 6.03497C7.22747 5.38373 7.49997 4.58748 7.49997 3.74998C7.49997 2.74749 7.10872 1.80749 6.40122 1.09875C5.69372 0.389998 4.75123 0 3.74998 0C2.74874 0 1.80624 0.391248 1.09875 1.09875C0.389998 1.80624 0 2.74749 0 3.74998C0 4.75123 0.391248 5.69372 1.09875 6.40122C1.80624 7.10997 2.74749 7.49997 3.74998 7.49997C4.58748 7.49997 5.38248 7.22747 6.03372 6.72497L9.27996 9.96996C9.28948 9.97948 9.30078 9.98704 9.31322 9.99219C9.32566 9.99735 9.33899 10 9.35246 10C9.36592 10 9.37926 9.99735 9.3917 9.99219C9.40414 9.98704 9.41544 9.97948 9.42496 9.96996L9.96996 9.42621C9.97948 9.41669 9.98704 9.40539 9.99219 9.39295C9.99735 9.38051 10 9.36717 10 9.35371C10 9.34024 9.99735 9.32691 9.99219 9.31447C9.98704 9.30203 9.97948 9.29073 9.96996 9.28121ZM5.72998 5.72998C5.19998 6.25872 4.49748 6.54997 3.74998 6.54997C3.00249 6.54997 2.29999 6.25872 1.76999 5.72998C1.24124 5.19998 0.949996 4.49748 0.949996 3.74998C0.949996 3.00249 1.24124 2.29874 1.76999 1.76999C2.29999 1.24124 3.00249 0.949996 3.74998 0.949996C4.49748 0.949996 5.20123 1.23999 5.72998 1.76999C6.25872 2.29999 6.54997 3.00249 6.54997 3.74998C6.54997 4.49748 6.25872 5.20123 5.72998 5.72998Z"
+                                      fill="#FF7308" />
+                                  </svg>
+                                </label>
+                                <app-loader *ngIf="isLoading"></app-loader>
+                              </li>
+
+                              <li
+                                *ngFor="let unit of ((searchUnitsList && searchUnitsList.length > 0 ? searchUnitsList : unitlist) | slice:0:loadunit); let idx = index">
+                                <div class="checkbox" *ngIf="unit">
+                                  <input [id]="'unit_'+idx" type="checkbox" [formControlName]="'units'+unit"
+                                    (change)="sortProduct('units', unit, $event.target.checked)">
+                                  <label for="unit_{{idx}}">{{unit}}</label>
+                                </div>
+                              </li>
+                              <li *ngIf="unitlist.length > loadunit" class="any-more">
+                                <span *ngIf="(unitlist | filter:searchUnit)?.length >loadunit"
+                                  (click)="loadMoreUnit(loadunit)">Показать еще...</span>
+                              </li>
+                              <!-- <li *ngIf="(unitlist | filter:searchUnit)?.length ===0 " class="text-center">
+                                <span>Ничего не найдено</span>
+                              </li> -->
+                            </ul>
+                          </div>
+                        </div>
+                        <button *ngIf="showButton && helperService._opened" class="btn green w-100 apply_filter"
+                          (click)="getFillters()">
+                          {{countFilter > 0 ? "Применить фильтры" : "Очистить фильтры"}}
+                          {{(countFilter > 0 && totalCount >= 0) ? '('+totalCount+')': ''}}</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- </ng-sidebar> -->
+            </div>
+            <div class="mt-3 col-12" *ngIf="!getProductLoading && productslist.length > 0">
+              <button [hidden]="noDownladMore" infiniteScroll [infiniteScrollDistance]="2.5"
+                [infiniteScrollThrottle]="10" (scrolled)="downloadMore(false)" class="btn more">Показать
+                еще</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <p class="to_top" *ngIf="productslist.length > 0" (click)="toTop()">
+          <svg width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 8L8 1L1 8" stroke="white" stroke-width="1.3125" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </p>
+      </div>
+
+    </div>
+  </ng-sidebar-container>
+</div>

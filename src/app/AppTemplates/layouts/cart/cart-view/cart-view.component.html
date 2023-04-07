@@ -1,0 +1,165 @@
+<div *ngIf="products || obsolets">
+    <div class="row" *ngIf="isDesktopView; else mobile">
+
+        <div class="col-lg-9 col-md-9 col-sm-12 col-12">
+            <div *ngIf="products && products.length" class="product_items product_list">
+                <div 
+                *ngFor="let product of products; let idx = index"
+                class="col mb-3" [id]="idx">
+                    <app-product-list-item
+                        (deleteFromCart)="deleteFromCart($event)"
+                        [product] = "product">
+                    </app-product-list-item>
+                </div>
+            </div>
+
+            <div *ngIf="obsolets && obsolets.length > 0" class="product_items product_list">
+                <p class="obsolets__products__title">Отсутствуют ({{obsolets.length}})</p>
+                <div 
+                *ngFor="let product of obsolets; let idx = index"
+                class="col mb-3" [id]="idx">
+                    <app-product-list-item
+                        (deleteFromCart)="deleteFromCart($event)"
+                        [disable] = "true"
+                        [product] = "product">
+                    </app-product-list-item>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+            <div class="cart-sidebar">
+                <app-cart-sidebar 
+                [orderSum]="returnProductTotalPrice()"
+                [minOrderSum]="minSum"
+                [productCount]="returnProductsLength()"
+                ></app-cart-sidebar>
+            </div>
+            <div class="cart-promocod mt-4">
+                <app-cart-promocode
+                (changeProducts) = "pushProductshWithPromocode($event)"
+                ></app-cart-promocode>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-9 col-sm-12 col-12 before-order-info">
+            <div>
+                <button tabindex="0" class="btn green mt-4 order-cart" (click)="goToOrder()"
+                onclick="ym(90837098,'reachGoal','target'); return true;">Оформить</button>
+            </div>
+            <p class="text-center"><strong>Обратите внимание!</strong></p>
+            <p class="text-center">Время доставки зависит от транспортной обстановки на дорогах общего пользования.</p>
+            <p class="text-center">Итоговая стоимость заказа может быть изменена в соответствии с весовыми характеристиками товаров.</p>
+            <p class="text-center">Изображения товаров, которые присутствуют в каталоге, могут незначительно отличаться от оригинала.</p>
+        </div>
+    </div>
+<!-- mobile-cart -->
+    <ng-template #mobile>
+        <div class="row">
+            <div class="col-12 mobile-total-cart">
+                <p class="percent">
+                    {{returnProductTotalPrice() | number:'1.2-2':'ru-RU'}} ₽ ({{returnPercents(returnProductTotalPrice(), minSum) | number:'1.0-2':'ru-RU'}}%)
+                </p>
+                <p class="percentCounter">
+                    <span class="percentCount" [style.width]="returnPercents(returnProductTotalPrice(), minSum) + '%'"></span>
+                </p>
+                <p class="minimal-total-price">
+                    Минимальная сумма заказа: {{minSum}}₽
+                </p>
+            </div>
+            <div class="col-12 clear_cart_wrapper">
+                <button class="clearAllCatr" (click)="clearCart()">
+                    Удалить все
+                </button>
+            </div>
+        </div>
+
+        <div class="product_items product_list">
+            <div 
+            *ngFor="let product of products; let idx = index"
+            class="col mb-3" [id]="idx">
+                <app-product-list-item
+                    (deleteFromCart)="deleteFromCart($event)"
+                    [product] = "product">
+                </app-product-list-item>
+            </div>
+        </div>
+        
+        <div *ngIf="obsolets && obsolets.length > 0" class="product_items product_list">
+            <p class="obsolets__products__title">Отсутствуют ({{obsolets.length}})</p>
+            <div 
+            *ngFor="let product of obsolets; let idx = index"
+            class="col mb-3" [id]="idx">
+                <app-product-list-item
+                    (deleteFromCart)="deleteFromCart($event)"
+                    [disable] = "true"
+                    [product] = "product">
+                </app-product-list-item>
+            </div>
+        </div>
+
+        <div class="mobile-promocod">
+            <div class="promocod-button">
+                <p>
+                    Промокод 
+                    <span *ngIf="promocode">Применен</span> 
+                    <svg  (click)="tooglePromo()" *ngIf="!promocode" xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                        <path d="M1 9L5 5L1 1" stroke="#A7A1A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <svg *ngIf="promocode" (click)="clearPromocode()" xmlns="http://www.w3.org/2000/svg" width="15" height="17" viewBox="0 0 15 17" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0493 16.0326H4.29482C2.97224 16.0326 2.02734 14.7911 2.02734 13.4703V4.10443C2.02734 3.72725 2.20626 3.7334 2.58429 3.7334H12.4178C12.7958 3.7334 12.9747 3.72725 12.9747 4.10443V13.8119C12.9747 14.9441 12.1831 16.0326 11.0493 16.0326V16.0326Z" stroke="#A7A1A1" stroke-linecap="round"/>
+                        <path d="M1 3.7334H14" stroke="#A7A1A1" stroke-linecap="round"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.89543 3.04986C9.89543 3.23845 9.74217 3.39151 9.55333 3.39151H5.44806C5.25922 3.39151 5.10596 3.23845 5.10596 3.04986V1.34164C5.10596 1.15306 5.25922 1 5.44806 1H9.55333C9.74217 1 9.89543 1.15306 9.89543 1.34164V3.04986V3.04986Z" stroke="#A7A1A1" stroke-linecap="round"/>
+                        <path d="M4.76172 6.80859V12.9582" stroke="#A7A1A1" stroke-linecap="round"/>
+                        <path d="M7.50049 6.80762V12.9572" stroke="#A7A1A1" stroke-linecap="round"/>
+                        <path d="M10.2378 6.80762V12.9572" stroke="#A7A1A1" stroke-linecap="round"/>
+                    </svg>
+                </p>
+            </div>
+
+            <div *ngIf="mobileEnterPromo" class="promododModal">
+                <div class="promocodModal__body">
+                    <span (click)="mobileEnterPromo = false" class="closePromoModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M1 1L10.9987 10.9987" stroke="#8290A7" stroke-linecap="round"/>
+                            <path d="M10.999 1L1.00031 10.9987" stroke="#8290A7" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <p class="promocod-title">
+                        Промокод
+                    </p>
+                    <input type="text" [(ngModel)]="promoInput" class="promocod-input">
+                    <button class="promocod-send" (click)="addPromocode()">Применить</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="total-price_and_total-count">
+            <p class="total-count">
+                Товаров: <span class="count">{{returnProductsLength()}}</span>
+            </p>
+            <hr>
+            <p class="min-price-info">
+                <span *ngIf="(minSum - returnProductTotalPrice()) < 0">Минимальная сумма заказа набрана.</span>
+                <span style="justify-content: space-between;display: flex;" *ngIf="(minSum - returnProductTotalPrice()) > 0">Не хватает до минимальной суммы доставки:
+                    <span class="price">{{minSum - returnProductTotalPrice() | number:'1.2-2':'ru-RU'}} ₽</span></span>
+            </p>
+            <hr>
+            <p class="total-price-info">
+                Сумма заказов: <span>{{returnProductTotalPrice() | number:'1.2-2':'ru-RU'}} ₽</span>
+            </p>
+        </div>
+
+        <div class="before-order-info">
+            <div >
+                <button tabindex="0"  class="btn green mt-4 order-cart"  (click)="goToOrder()">Оформить</button>
+            </div>
+            <p class="text-center"><strong>Обратите внимание!</strong></p>
+            <p class="text-center">Время доставки зависит от транспортной обстановки на дорогах общего пользования.</p>
+            <p class="text-center">Итоговая стоимость заказа может быть изменена в соответствии с весовыми характеристиками товаров.</p>
+            <p class="text-center">Изображения товаров, которые присутствуют в каталоге, могут незначительно отличаться от оригинала.</p>
+        </div>
+
+    </ng-template>
+<!-- mobile-cart -->
+</div>

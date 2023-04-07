@@ -1,0 +1,89 @@
+<div class="container scroll_filter" [class.filter_hide]="helperService._opened">
+    <form 
+    [formGroup]="srcForm" 
+    (submit)="searchProduct()"
+    (clickOutside)="searchProductList = null; searchCategorytList = null">
+        <div class="search_container">
+            <div class="input-group cat_header">
+                <input 
+                    id="search_input" class="input" 
+                    formControlName="srcString" type="text"
+                    name="search" 
+                    (keyup)="searchImkrement($event.target.value,$event)" 
+                    (focus)="searchImkrement($event.target.value,$event)"
+                    placeholder="поиск"
+                    autocomplete="off">
+                <label for="search_input">
+                    <svg class="icon_search" x="0px" y="0px" viewBox="0 0 451 451"
+                        style="enable-background:new 0 0 451 451;" xml:space="preserve">
+                        <g>
+                            <path d="M447.05,428l-109.6-109.6c29.4-33.8,47.2-77.9,47.2-126.1C384.65,86.2,298.35,0,192.35,0C86.25,0,0.05,86.3,0.05,192.3
+                                s86.3,192.3,192.3,192.3c48.2,0,92.3-17.8,126.1-47.2L428.05,447c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4
+                                C452.25,441.8,452.25,433.2,447.05,428z M26.95,192.3c0-91.2,74.2-165.3,165.3-165.3c91.2,0,165.3,74.2,165.3,165.3
+                                s-74.1,165.4-165.3,165.4C101.15,357.7,26.95,283.5,26.95,192.3z" />
+                        </g>
+                    </svg>
+                </label>
+                <span class="cleare_search" (click)="cleareSearch()"
+                    [class.hide]="(returnSearchString() && (returnSearchString().length == 0 || returnSearchString() == ' ')) || !returnSearchString()">
+                    <svg style="font-weight: bold;" viewBox="0 0 64 64" enable-background="new 0 0 64 64" class="icon_cancel">
+                        <g>
+                            <path fill="#1D1D1B"
+                                d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z" />
+                        </g>
+                    </svg>
+                </span>
+            </div>
+            <button class="btn red" (click)="searchButton()">Найти</button>
+            <!-- <div class="filters m_fil" *ngIf="filterShow && !this.helperService._hideFooter" [ngClass]="{'brand_top': cutBrandCl}">
+                <svg class="mb-1" width="15" height="15" viewBox="0 0 12 12" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M1.37997 0.959961H10.62C10.7298 0.96003 10.8375 0.991125 10.9304 1.04967C11.0234 1.10821 11.0979 1.19182 11.1455 1.29087C11.193 1.38992 11.2116 1.50038 11.1992 1.60954C11.1867 1.7187 11.1436 1.82211 11.075 1.90788L7.29497 6.63346C7.212 6.73687 7.16674 6.86546 7.16663 6.99804V10.0016C7.16663 10.0922 7.14555 10.1815 7.10505 10.2625C7.06455 10.3435 7.00575 10.414 6.9333 10.4683L5.76663 11.3433C5.67997 11.4083 5.57691 11.4479 5.46902 11.4576C5.36112 11.4673 5.25265 11.4468 5.15576 11.3984C5.05886 11.3499 4.97737 11.2755 4.92042 11.1833C4.86347 11.0912 4.8333 10.985 4.8333 10.8766V6.99746C4.83306 6.86508 4.78781 6.73672 4.70497 6.63346L0.924966 1.90788C0.856298 1.82211 0.813248 1.7187 0.800771 1.60954C0.788294 1.50038 0.806899 1.38992 0.854442 1.29087C0.901986 1.19182 0.976536 1.10821 1.06951 1.04967C1.16248 0.991125 1.2701 0.96003 1.37997 0.959961Z"
+                        fill="#9CB538" />
+                </svg>
+                <span (click)="_toggleSidebar()" class="ml-1 filter_button">Фильтр </span>
+                <svg *ngIf="helperService._filterCount > 0" (click)="cleareFilter()" class="ml-1 cursor-pointer mb-1" width="11"
+                    height="11" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12L1.375 1.375M1.375 12L12 1.375L1.375 12Z" stroke="#9CB538" stroke-width="1.21429"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div> -->
+            <div *ngIf="searchCategorytList?.length || searchProductList?.length;else second">
+                <div class="search_result show">
+                    <!-- <ul class="result_list" *ngIf="searchCategorytList || searchCategorytList.length > 0">
+                         <li *ngFor="let category of searchCategorytList"> 
+                            <a
+                                (click)="redirectToCategory(category.id, category.parent_id, category.hasCensored)">{{category.name}}
+                            </a> 
+                         </li> 
+                    </ul> -->
+                    <ul class="result_list" *ngIf="searchProductList || searchProductList.length > 0">
+                        <li *ngFor="let product of searchProductList">
+                            <a [routerLink]="(product.hasCensored === true ) ? ['']  : ['/product/', product.id]"
+                                (click)="stopEvent(product.hasCensored, $event)">{{product.name}}, {{product.unit}}
+                                ({{product.pack}}) </a>
+                        </li>
+                        <li *ngIf="searchProductList.length >= 10" class="any-more-prod">
+                            <span (click)="searchProduct()">Показать все</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <ng-template #second>
+                <app-loader *ngIf="isLoadingSearch && returnSearchString() && returnSearchString().trim().length>0;else third"></app-loader>
+                <ng-template #third>
+                    <div class="nothing"
+                        *ngIf="((searchCategorytList?.length == 0 || searchProductList?.length == 0) && returnSearchString().trim().length>0) && !isErrorSearch; else searchError">
+                        <p class="text-center">Ничего не найдено</p>
+                    </div>
+                    <ng-template #searchError>
+                        <div class="nothing" *ngIf="isErrorSearch && isSerchErrorCode != null">
+                            <p class="text-center">Внутрення ошибка поиска. Код: {{isSerchErrorCode}}</p>
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </ng-template>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,80 @@
+<div class="cart_container">
+    <div class="cart_container-left is-opened" [class.is-opened]="isOpend">
+        <app-history-orders-list-item *ngFor="let item of items;let ind = index" [item]="item"
+            (isOpened)="handleIsOpenedEvent($event,ind)" [typeUser]="userType" (repeateOrder)="handleIsRepeateEvent($event,ind)" (sendProblem)="handleIsSendEvent($event,ind)"></app-history-orders-list-item>
+
+        <div class="col-12" *ngIf="isLoad && items.length >= 20">
+            <button [hidden]="noMore" (click)="onSelectListItem()" (pagination)="downloadMore()" class="btn more">Показать
+                еще</button>
+        </div>
+
+    </div>
+    <div  (click)="prevent($event)" class="cart_container-right" *ngIf="rightCardInfo || userType == 3 || userType == 4">
+        <div class="total_info">
+            <div class="total_info-container" *ngIf="userType == 2">
+                <div class="order_history_code"> №{{rightCardInfo?.number}} </div>
+                <div class="delivery_order_info ">
+                        <span class="delivery_order_info-status"
+                            [class.green]="rightCardInfo.status !== 2">{{rightCardInfo?.statusName}}</span>
+                        <div *ngIf="rightCardInfo.status == 0 || rightCardInfo.status == 4" class="delivery_order_info-end">
+                            <span>Прибудет: </span>
+                        </div>
+                          <span *ngIf="rightCardInfo.status !== 3 && rightCardInfo.status !== 5"> {{ rightCardInfo.deliveryDate}}</span>
+                    </div>
+                <div class="point_name"><span>{{rightCardInfo?.recipientAddress}}</span>
+                </div>
+                <button [disabled]="oneClick" (click)="repeatOrder($event, rightCardInfo)" class="btn green">Добавить в корзину</button>
+                <button (click)="modalProblem($event, rightCardInfo)" *ngIf="rightCardInfo?.status == 2" class="btn green transparent">Сообщить о проблеме</button>
+                <!--
+                  <button *ngIf="rightCardInfo.status !== 0 && rightCardInfo.status !== 1" (click)="repeatOrder($event, rightCardInfo)" class="btn green transparent">Повторить заказ</button>
+                -->
+            </div>
+            <div class="total_info-container" *ngIf="(userType == 3 || userType == 4) && items">
+                <div class="total_info_header">
+                </div>
+                <div class="total_info_footer">
+                  <div class="total_info_item">
+                    <span>Итого заказов на сумму:</span>
+                    <span>{{amount}} ₽</span>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+<ng-template #modalProblemOrder let-modal>
+  <div  class="modal_cancel_order">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal_content">
+      <div class="form">
+        <div class="modal_close"  aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <svg width='24px' height="24px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>
+                <path d="M0 0h48v48h-48z" fill="none"/>
+            </svg>
+        </div>
+        <div class="form_content" (click)="prevent($event)">
+          <span class="form-title">Укажите проблему</span>
+          <div class="form_row">
+            <!-- <ng-select class="select_default " [items]="reason" bindLabel="name" placeholder="Выберите тип проблемы"
+              [(ngModel)]="selectReason">
+            </ng-select> -->
+          </div>
+          <div class="form_row">
+            <label for="comment_problem">Опишите проблему</label>
+          <textarea [ngModel]="comment "
+          (ngModelChange)="comment = $event" id="comment_problem" class="input" cols="30" rows="6"></textarea>
+          </div>
+          <button [disabled]="comment == '' || modalClick" (click)="setProblem($event)" class="btn green">Отправить</button>
+        </div>
+        <div [class.active]="success_send"  class="message_form success">
+          <span>{{problemMessage}}</span>
+        </div>
+        <div [class.active]="error_send" class="message_form error">
+          {{problemMessage}}
+     </div>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-template>

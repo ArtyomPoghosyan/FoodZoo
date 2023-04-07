@@ -1,0 +1,91 @@
+<h3 class="text-center form-title">
+    Добро пожаловать!
+</h3>
+<p class="text-center form-subtitle" *ngIf="url !== '/cart'">
+    Чтобы продолжить, укажите свой номер телефона или электронный адрес
+</p>
+<div class="form-row" *ngIf="url !== '/cart'">
+    <div tabindex="0" (keypress)="regPhone = true" class="radio-phone-or-email" [ngClass]="{'active' : regPhone}"
+        (click)="regPhone = true">
+        <span class="circle" [ngClass]="{ 'active': regPhone }"></span>
+        <span>
+            Номер телефона
+        </span>
+    </div>
+    <div tabindex="0" (keypress)="regPhone = false" class="radio-phone-or-email" [ngClass]="{'active' : !regPhone}"
+        (click)="regPhone = false">
+        <span class="circle" [ngClass]="{ 'active': !regPhone }"></span>
+        <span>
+            E-mail
+        </span>
+    </div>
+</div>
+<form [formGroup]="formPhone" (ngSubmit)="submitPhone(this.formPhone)" *ngIf="regPhone; else regMail">
+    <div class="form-row form-field">
+        <label>
+            <span class="input-name">
+                Ваш телефон
+            </span>
+            <input formControlName="phone" type="text" pattern="[\(\)a-z0-9-+]*" inputmode="numeric" selectedEvent=phone
+                (click)="returnPosition($event)" [textMask]="{mask: mask, showMask: false, placeholderChar: '_'}"
+                placeholder="+7(___)___-__-__">
+            <small *ngIf="returnError(formPhone.controls.phone)">
+                {{returnError(formPhone.controls.phone)}}
+            </small>
+        </label>
+    </div>
+    <div class="form-container">
+        <div class="private-politics" (click)="checker = !checker" >
+            <span class="checker" [ngClass]="{'active' : checker}"></span>
+        </div>
+        <div class = "row-links">
+            Я соглашаюсь с <a style="color: #FF7308;" href="https://foodzo.ru/assets/doc/usloviya.pdf" target="_blank">Пользовательским
+                соглашением</a> и
+            <a style="color: #FF7308;" href="https://foodzo.ru/assets/doc/personaldata.pdf" target="_blank">Политикой обработки персональных
+                данных</a>.
+        </div>
+    </div>
+    <div class="form-row" >
+        <button type="submit" (click)="getCode()" [disabled]="!checker || returnValid(formPhone) || !captcha ">
+            Получить код
+        </button>
+        <button type="button" (click)="this.skip.emit(true)">
+            Пропустить
+        </button>
+    </div>
+</form>
+
+<ng-template #regMail>
+    <form [formGroup]="formMail" (ngSubmit)="submitMail(this.formMail)">
+        <div class="form-row form-field">
+            <label>
+                <span class="input-name">
+                    Ваш e-mail
+                </span>
+                <input formControlName="Email" type="email">
+                <small *ngIf="returnError(formMail.controls.Email)">
+                    {{returnError(formMail.controls.Email)}}
+                </small>
+            </label>
+        </div>
+        <div class="form-container">
+            <div class="private-politics" (click)="checker = !checker" >
+                <span class="checker" [ngClass]="{'active' : checker}"></span>
+            </div>
+            <div class = "row-links">
+                Я соглашаюсь с <a style="color: #FF7308;" href="https://foodzo.ru/assets/doc/usloviya.pdf" target="_blank">Пользовательским
+                    соглашением</a> и
+                <a style="color: #FF7308;" href="https://foodzo.ru/assets/doc/personaldata.pdf" target="_blank">Политикой обработки персональных
+                    данных</a>.
+            </div>
+        </div>
+        <div class="form-row">
+            <button type="submit" (click)="getCode()"  [disabled]="!checker || returnValid(formMail) || !captcha ">
+                Получить код
+            </button>
+            <button type="button" (click)="this.skip.emit(true)">
+                Пропустить
+            </button>
+        </div>
+    </form>
+</ng-template>

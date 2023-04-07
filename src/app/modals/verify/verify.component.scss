@@ -1,0 +1,43 @@
+.form{
+    padding: 34px 26px 34px 26px;
+    .verify_number {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .code_verify{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #5E697F;
+    }
+    .repet_send{
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: 500;
+        color: #5E697F;
+        p:first-child{
+            color: #000000;
+            font-weight: 600;
+        }
+        .again_send{
+            color: #FF7308;
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+    input.ng-invalid.ng-touched {
+        border: unset
+    }
+    input.is-invalid{
+        border: 1px solid #ff0201!important;
+    }
+
+}
+.loader-code{
+    position: absolute;
+    z-index: 999;
+    background: white;
+    opacity: 0.5;
+    padding: 25%;
+}

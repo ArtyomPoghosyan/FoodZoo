@@ -1,0 +1,57 @@
+<div class="container-fluid cont">
+  <div class="container cont_body main-container cart-container history-container history-customer" [ngClass]="{'history-customer': historyCutomer == 2,'history-supplier': historyCutomer == 3,'cont_history' : isLoading == true}">
+    <app-loader *ngIf="isLoading" class="his-order"></app-loader>
+      <h1 class="auth_title">История заказов</h1>
+      <form class="date_history" [formGroup]="_filterForm">
+        <div class="date_history-item date_history_ih">
+          <label for="date_start">Отображать с:</label>
+          <div class="form-group data_picker data_picker_planshet">
+            <input type="text" class="form-control" id="date_start" #startDate="bsDatepicker" formControlName="startDate"
+              bsDatepicker [bsConfig]="{ dateInputFormat: 'DD.MM.YYYY', adaptivePosition: false, showWeekNumbers:false}"
+              [maxDate]="currentDate" (bsValueChange)="onChangesForm()" (onShown)="addClass()" [bsValue]="one ? one : ''" autocomplete="off">
+            <span class="btn-calendar" (click)="startDate.toggle()"><i class="fa fa-calendar fa-2x"></i></span>
+          </div>
+        </div>
+        <div class="date_history-item date_history_ih ">
+          <label for="date_end">по:</label>
+          <div class="form-group data_picker">
+            <input type="text" class="form-control" id="date_end" #endDate="bsDatepicker" formControlName="endDate" autocomplete="off"
+              [minDate]="minCurrentDate" [maxDate]="currentDate" (onShown)="addClass('onShown')" (bsValueChange)="onChangesForm()" [bsValue]="two ? two : ''"  bsDatepicker [bsConfig]="{ dateInputFormat: 'DD.MM.YYYY', adaptivePosition: false, showWeekNumbers:false}">
+            <span class="btn-calendar" (click)="endDate.toggle()"><i class="fa fa-calendar fa-2x"></i></span>
+          </div>
+        </div>
+        <div class="form_row cal_search">
+          <button class="btn green" (click)="_formBuilder()" [disabled]="!try_to_send">Применить</button>
+          <button class="btn ml-4 transparent" (click)="clear()">
+            <svg width="17" height="17" viewBox="0 0 17 17">
+              <use xlink:href="#icon_delete"></use>
+            </svg>
+            Сбросить
+          </button>
+        </div>
+      </form>
+    <ng-container *ngIf="!isLoading && (!!orders && orders.length > 0)">
+      <app-history-orders-list
+              (pagination)="downloadMore()"
+              [isLoad]="isLoadPage"
+              [noMore]="noDownladMore"
+              (update)="setAllStates()"
+              (orderEvent)="receiveOrder($event)"
+              [amount]="amountOrders"
+              [userType]="historyCutomer"
+              [items]="orders">
+      </app-history-orders-list>
+    </ng-container>
+    <ng-container *ngIf="!isLoading && (!orders || orders.length <= 0)">
+      <div class="page_container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10 col-12">
+            <div class="text_block text-center mt-5">
+              <span class="title mb-3 d-block">Заказов не найдено </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

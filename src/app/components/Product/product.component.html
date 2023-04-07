@@ -1,0 +1,257 @@
+<app-age-verify *ngIf="product.censoredImage && product.censoredImage.length > 0 && !status"></app-age-verify>
+<div class="container-fluid cont products_page">
+  <div class="container cont_body main-container">
+ <ng-container *ngIf="!getDataLoading">
+      <div class="product_top" *ngIf="!notOffers && !isLoading">
+        <div class="product_breadcrubms">
+            <div class="bread">
+                <a [routerLink]="['/']">Главная</a>
+                <svg width="6" height="10" class="bread-sign" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L5 5L1 9" stroke="#5E737F" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <a [routerLink]="['/category',this.parSlug]" (click)="goToCat()">{{catName}}</a>
+                <svg width="6" *ngIf="catName" height="10" class="bread-sign" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L5 5L1 9" stroke="#5E737F" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <a [routerLink]="['/category', this.parSlug, this.subCatSlug]" (click)="goToSubCat()">{{subCatName}}</a>
+                <svg width="6" *ngIf="subCatName" height="10" class="bread-sign" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L5 5L1 9" stroke="#5E737F" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="prod-name">{{product.name}}</span>
+            </div>
+          <div (click)="backClicked()" class="back_link">
+            <svg class="icon_marker">
+              <use xlink:href="#arrow_back"></use>
+            </svg>
+            <span>Назад</span>
+          </div>
+        </div>
+        <div class="row product_each">
+          <div class="col-6">
+            <div class="product_left">
+              <span (click)="toogleProductFavorites(product, $event)" class="favoriteToggler">
+                <svg *ngIf="!product.isFavorite" xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none">
+                  <path d="M15 2.03659L18.8899 8.93798L19.1146 9.33669L19.5633 9.42721L27.3289 10.9941L21.9674 16.8263L21.6576 17.1632L21.7102 17.6178L22.6197 25.4876L15.4162 22.1907L15 22.0002L14.5838 22.1907L7.3803 25.4876L8.28983 17.6178L8.34237 17.1632L8.03263 16.8263L2.67107 10.9941L10.4367 9.42721L10.8854 9.33669L11.1101 8.93798L15 2.03659Z" stroke="#FF7308" stroke-width="2"/>
+                </svg>
+                <svg *ngIf="product.isFavorite" xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 26 25" fill="none" height="30">
+                  <path d="M13 1L16.7074 8.5716L25 9.78485L19 15.6786L20.416 24L13 20.0716L5.584 24L7 15.6786L1 9.78485L9.29143 8.5716L13 1Z" fill="#FF7308" stroke="#FF7308" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <picture *ngIf="returnWidth() > 480">
+                <source [srcset]="product.status ? product.censoredImage['desktopLarge'] : product.mainImage['desktopLarge']">
+                <img  
+                [src]="product.status ? product.censoredImage['desktopLarge'] : product.mainImage['desktopLarge']"
+                loading="lazy" alt="{{product.fullName}}" style="height: 100%;width: 100%;">
+              </picture>
+              <picture *ngIf="returnWidth() < 480">
+                  <source [srcset]="product.status ? product.censoredImage['mobileLarge'] : product.mainImage['mobileLarge']">
+                  <img [src]="product.status ? product.censoredImage['mobileLarge'] : product.mainImage['mobileLarge']"
+                    loading="lazy" alt="{{product.fullName}}" style="height: 100%;width: 100%;">
+              </picture>
+             
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="product_right">
+              <div>
+                <div *ngIf="product.hasAction > 0 || product.isNew > 0" class="sale_or_new__product">
+                  <div 
+                  class="new-product"
+                  *ngIf="product.isNew > 0"
+                  [ngClass]="{'new-only' : product.hasAction === 0}">
+                    <span class="new-product__text">
+                      NEW
+                    </span>
+                  </div>
+                  <div 
+                  class="sale-product" 
+                  *ngIf="product.hasAction > 0"
+                  [ngClass]="{'sale-only' : product.isNew === 0}">
+                    <span class="sale-product__percent">
+                      -{{product.discount.percent | number:'1.0-0'}}%
+                    </span>
+                    <span class="sale-product__text">до конца акции осталось {{product.discount.endDays}}</span>
+                  </div>
+                </div>
+                <div class="product_desc">
+                  <h1 class="product_name" title="{{product.name}}">{{product.name}}</h1>
+                  <div *ngIf="!product.desc">
+                      <span class="type_product">{{product.unit ? product.unit+',': ''}} {{product.pack}}</span>
+                      <span *ngIf="!!product.brand.slug" class="type_product">{{product.brand.name ? 'Торговая марка: ' : ''}} <a [routerLink]="['/brand', product.brand.slug]" class="br_slug" (click)="goToBrand(product.brand.slug)">{{ product.brand.name }}</a> </span>
+                      <span class="type_product">{{ product.manufacture ? 'Страна производитель: '+product.manufacture : ''}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="product_favorites">
+                <div *ngIf="auth" class="product_favorites" (click)="toogleProductFavorites(product, $event)">
+                  <div class="star" [class.fav]="product.isFavorite == 1">
+                    <svg width="24" height="24">
+                      <use xlink:href="#productStars"></use>
+                    </svg>
+                  </div>
+                  <span *ngIf="product.isFavorite == 0" class="stark">
+                    Сохранить в избранное
+                  </span>
+                  <span *ngIf="product.isFavorite == 1" class="stark">
+                    Добавлен в избранное
+                  </span>
+                </div>
+                <div class="product_price">
+                  <p *ngIf="product.discount" class="new-price">{{product.discount.price | number:'1.2-2':'ru-RU'}} ₽/{{product.measure}}</p>
+                  <p *ngIf="!product.discount" class="price"> <span> {{product.price | number:'1.2-2':'ru-RU'}} </span> ₽/{{product.measure}}</p>
+                  <p *ngIf="product.discount" class="old_price">{{product.price | number:'1.2-2':'ru-RU'}} ₽/{{product.measure}}</p>
+                </div>
+                <p class="input-error-message collapse show mt-3" *ngIf="(product.discount?.maxCount == 0)">
+                  Максимальное количество товара по акции {{product.discount.maxCount * product.unitSize
+                  | number:'1.0-3':'ru-RU'}} {{product.measure}}
+                </p>
+                <div *ngIf="auth && !userCustomer" class="info_supplier">
+                  <div class="summ_prod">
+                    <div>
+                      <span class="color-gray">Артикул: </span>
+                      <span class="color-gray"><span class="color-gray">{{product.barcode}}</span></span>
+                    </div>
+                  </div>
+                  <div class="summ_prod">
+                    <span class="color-gray">Поставки от: </span>
+                    <span class="color-gray"><span class="color-gray">{{minAmountProduct}} {{product.measure}}</span> </span>
+                  </div>
+                </div>
+                <div *ngIf="product.quantity == 0" [class.product_buttons]="!product.quantity">
+                  <button [disabled]="(product.censoredImage.length > 0 ? !status : false) || disableBTN" *ngIf="!product.addProduct && product.discount?.maxCount != 0" class="btn green"
+                          (click)="addProductCart(product)" onclick="ym(90837098,'reachGoal','cart'); return true;">В корзину</button>
+                </div>
+                <div *ngIf="product.quantity > 0" class="product_buttons add_cart">
+                  <div class="btn_cart">
+                    <div class="add_cart">
+                      <div class="add_product prodcut-page">
+                        <div class="product_counter product-page-coutner">
+                          <button *ngIf="product.quantity > 1" class="button_count"
+                                  (click)='changeProductCart(false, product)' [disabled]="disableBTN">
+                            <svg>
+                              <use xlink:href="#icon_minus"></use>
+                            </svg>
+                          </button>
+                          <button *ngIf="product.quantity < 2" class="button_count" (click)='removeProductCart(product)' [disabled]="disableBTN">
+                            <svg>
+                              <use xlink:href="#icon_delete"></use>
+                            </svg>
+                          </button>
+                          <div class="prodcut_count_and_measure">
+                            <span class="total-count_mesure">{{product.quantity * product.unitSize | number:'1.0-2':'ru-RU'}} {{product.measure}}</span>
+                            <span class="total-price_unit-size">
+                              {{returnTotalPrice(product) | number:'1.2-2':'ru-RU'}} ₽
+                            </span>
+                          </div>
+                          <!-- <input readonly="readonly" class="number_product" [(ngModel)]="product.quantity" (blur)="inputBlur(product)"
+                                 type="text" (keypress)="numberOnly($event)" [value]="product.quantity" onCopy="return false"
+                                 onDrag="return false" inputmode="numeric" onDrop="return false" onPaste="return false" autocomplete=off> -->
+
+                          <div class="tooltip_prod" [class.visible]="tooltipmessage !== '' && changeProductCounter">
+                            <span>{{tooltipmessage}}</span>
+                          </div>
+                          <button class="button_count" (click)='changeProductCart(true, product)' [disabled]="disableBTN">
+                            <svg>
+                              <use xlink:href="#icon_plus"></use>
+                            </svg>
+                          </button>
+                          <div class="tooltip_prod my_tooltip" [class.visible]="errorMsg !== '' && changeProductCounter" *ngIf="(errorMsg && (product.quantity == product.discount.maxCount || product.quantity%product.discount.maxCount!=0)  && product.discount.length !==0)">
+                            <span>{{errorMsg}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div *ngIf="offerExist">
+                          <div class="summ_prod">
+                            <span class="color-gray" *ngIf="product.unitSize != 1 && product.quantity != 0">Всего: </span>
+                            <span class="color-gray" *ngIf="product.unitSize != 1">
+                             5 <span class="color-gray" *ngIf="product.quantity != 0">{{(product.unitSize*product.quantity) | number:'1.0-3':'ru-RU'}}{{product.measure}} </span></span><br>
+                            <span class="color-gray">Всего на сумму: </span>
+                            <span class="color-gray"><span class="color-gray">{{total | number:'1.2-2':'ru-RU'}}₽</span></span>
+                          </div>
+                      </div> -->
+                    </div>
+                  </div>
+                  <button class="btn orange" (click)="backClicked()">Продолжить покупки</button>
+                </div>
+                <div class="product-description" *ngIf="!product.desc">
+                  <span class="type_product">{{product.unit ? product.unit+',': ''}} {{product.pack}}</span>
+                  <span *ngIf="!!product.brand.slug" class="type_product">{{product.brand.name ? 'Торговая марка: ' : ''}} <a [routerLink]="['/brand', product.brand.slug]" class="br_slug" (click)="goToBrand(product.brand.slug)">{{ product.brand.name }}</a> </span>
+                  <span class="type_product">{{ product.manufacture ? 'Страна производитель: '+product.manufacture : ''}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="notOffers && !isLoading">
+        <div class="product_top">
+          <div class="row">
+            <div class="col-6">
+              <div class="product_left">
+                <div  *ngIf="product.isNew" class="mt-3 new">
+                  <svg *ngIf="!is_new" width="67" height="24" viewBox="0 0 67 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0H66.5L55.5 12.5L66.5 24H0V0Z" fill="#8B8BEF"/>
+                    <path d="M19.15 7.2V17H17.288L12.402 11.05V17H10.162V7.2H12.038L16.91 13.15V7.2H19.15ZM29.0566 15.18V17H21.4686V7.2H28.8746V9.02H23.7226V11.148H28.2726V12.912H23.7226V15.18H29.0566ZM45.5365 7.2L42.3305 17H39.8945L37.7385 10.364L35.5125 17H33.0905L29.8705 7.2H32.2225L34.4345 14.088L36.7445 7.2H38.8445L41.0845 14.144L43.3665 7.2H45.5365Z" fill="white"/>
+                  </svg>
+                  <svg *ngIf="is_new" width="52" height="24" viewBox="0 0 52 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0H51.5L40.5 12.5L51.5 24H0V0Z" fill="#8B8BEF"/>
+                    <path d="M14.7 7.6V16H13.104L8.916 10.9V16H6.996V7.6H8.604L12.78 12.7V7.6H14.7ZM23.1914 14.44V16H16.6874V7.6H23.0354V9.16H18.6194V10.984H22.5194V12.496H18.6194V14.44H23.1914ZM37.317 7.6L34.569 16H32.481L30.633 10.312L28.725 16H26.649L23.889 7.6H25.905L27.801 13.504L29.781 7.6H31.581L33.501 13.552L35.457 7.6H37.317Z" fill="white"/>
+                  </svg>
+
+                </div>
+                <picture *ngIf="returnWidth() > 480">
+                  <source [srcset]="product.status ? product.censoredImage['desktopLarge'] : product.mainImage['desktopLarge']">
+                  <img  
+                  [src]="product.status ? product.censoredImage['desktopLarge'] : product.mainImage['desktopLarge']"
+                  loading="lazy" alt="{{product.fullName}}" style="width: 100%; height: 100%;">
+                </picture>
+                <picture *ngIf="returnWidth() < 480">
+                    <source [srcset]="product.status ? product.censoredImage['mobileLarge'] : product.mainImage['mobileLarge']">
+                    <img  
+                      [src]="product.status ? product.censoredImage['mobileLarge'] : product.mainImage['mobileLarge']"
+                      loading="lazy" alt="{{product.fullName}}" style="width: 100%; height: 100%;">
+                </picture>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="product_right">
+                  <div class="product_desc">
+                    <h1 class="product_name" title="{{product.name}}">{{product.name}}</h1>
+                    <div *ngIf="!product.desc">
+                        <span class="type_product">{{product.unit ? product.unit+',': ''}} {{product.pack}}</span>
+                        <span *ngIf="!!product.brand.slug" class="type_product">{{product.brand.name ? 'Торговая марка: ' : ''}} <a [routerLink]="['/brand', product.brand.slug]" class="br_slug" (click)="goToBrand(product.brand.slug)">{{product.brand.name }}</a> </span>
+                        <span class="type_product">{{ product.manufacture ? 'Страна производитель: '+product.manufacture : ''}}</span>
+                    </div>
+                  </div>
+                <div class="not_offers_container">
+                  <p class="not_offers_container_title text-left">Товара нет на складе</p>
+                  <a class="btn green" [routerLink]="['/category']">Перейти в каталог</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="description" *ngIf="product.desc">
+        <h1>Описание</h1>
+        <div class="row">
+          <div class="p_desc">
+           <div class="style-1" [innerHTML]="product.desc | safeHtml"></div>
+           <!-- <div class="style-1">
+             <p>{{product.desc}}</p>
+           </div> -->
+          </div>
+          <div class="carat">
+            <p>Характеристики</p>
+            <p class="type_product">{{product.unit ? product.unit+',': ''}} {{product.pack}}</p>
+            <span *ngIf="!!product.brand.slug" class="type_product">{{product.brand.name ? 'Торговая марка: ' : ''}} <a [routerLink]="['/brand', product.brand.slug]" class="br_slug" (click)="goToBrand(product.brand.slug)">{{product.brand.name }}</a> </span>
+            <p class="type_product last">{{ product.manufacture ? 'Страна производитель: '+product.manufacture : ''}}</p>
+          </div>
+        </div>
+
+      </div>
+ </ng-container>
+  <app-loader *ngIf="getDataLoading"></app-loader>
+  </div>
+</div>

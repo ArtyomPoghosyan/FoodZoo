@@ -1,0 +1,46 @@
+<div class="cat_block"  [ngClass]="{'hide-title': category.subcats.length}">
+    <div class="main_block" [ngClass]="{'is-opened': category.opened, 'children_list': category.subcats.length > 0}" [routerLink]="(returnWidth() <= 1100 && category.subcats.length == 0) ? ['category/catalog', category.id] : null">
+        <a [routerLink]="['/category', category?.slug]" class="cat_img">
+            <picture *ngIf="returnWidth() > 480">
+                <source 
+                [srcset]="category.status ? category.censoredImage.desktop : category.mainImage.desktop">
+                <img 
+                [src]="category.status ? category.censoredImage.desktop : category.mainImage.desktop"
+                loading="lazy" alt="{{category.name}}">
+            </picture>
+            <picture *ngIf="returnWidth() < 480">
+                <source 
+                [srcset]="category.status ? category.censoredImage.mobile : category.mainImage.mobile">
+                <img 
+                [src]="category.status ? category.censoredImage.mobile : category.mainImage.mobile"
+                loading="lazy" alt="{{category.name}}">
+            </picture>                
+
+            <svg *ngIf="!category.mainImage.desktop && !category.mainImage.mobile" width="100" height="100" viewBox="0 0 54 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M44.1236 27.4336H10.0971C9.27303 27.4336 8.60577 26.7634 8.60577 25.9356C8.60577 25.1078 9.27303 24.4375 10.0971 24.4375H44.1236C44.9477 24.4375 45.615 25.1078 45.615 25.9356C45.615 26.7634 44.9464 27.4336 44.1236 27.4336Z" fill="#FF7308"/>
+                <path d="M11.6389 32.2207H42.5803C43.4044 32.2207 44.073 32.891 44.073 33.7188C44.073 34.5466 43.4044 35.2182 42.5803 35.2182H11.6389C10.8148 35.2182 10.1475 34.5466 10.1475 33.7188C10.1475 32.8923 10.8148 32.2207 11.6389 32.2207Z" fill="#9CB538"/>
+                <path d="M8.01289 40.0032H26.6976H27.3263H46.0111L50.1861 19.6537H27.0126H3.83916L8.01289 40.0032ZM27.3263 43.0007H26.6976H8.01289C6.60392 43.0007 5.3744 41.9939 5.08995 40.608L0.916229 20.2586C0.735456 19.372 0.957434 18.4614 1.52634 17.7604C2.09524 17.0581 2.93796 16.6562 3.83916 16.6562H26.6976H27.3263H50.1861C51.086 16.6562 51.9287 17.0581 52.4976 17.7604C53.0678 18.4614 53.2898 19.372 53.1077 20.2586L48.934 40.608C48.6509 41.9939 47.42 43.0007 46.0111 43.0007H27.3263Z" fill="#FF7308"/>
+                <path d="M35.8454 12.9651C35.8454 13.8396 36.5525 14.5486 37.4218 14.5486C38.2925 14.5486 38.9983 13.8396 38.9983 12.9651C38.9983 9.64049 37.6571 6.631 35.4878 4.45199C33.3186 2.27298 30.3225 0.925781 27.0128 0.925781C23.7031 0.925781 20.707 2.27298 18.5377 4.45199C16.3685 6.631 15.026 9.64049 15.026 12.9651C15.026 13.8396 15.7331 14.5486 16.6024 14.5486C17.473 14.5486 18.1788 13.8396 18.1788 12.9651C18.1788 10.515 19.1678 8.29597 20.7668 6.69108C22.3645 5.08486 24.5724 4.09282 27.0128 4.09282C29.4519 4.09282 31.661 5.08486 33.2588 6.69108C34.8578 8.29597 35.8454 10.515 35.8454 12.9651Z" fill="#FF7308"/>
+            </svg>
+        </a>
+        <a  [routerLink]="returnWidth()>=1100 ? ['/category', category?.slug] : (category.subcats.length ==0 ? ['/category', category?.slug] : '/' )"  class="qw cat_title"
+            href="#">{{category.name}}</a>
+        <div class="arrow_cat" (click)="returnOpened()">
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.30693 7.69341L0.287337 1.67362C-0.0957794 1.29069 -0.0957794 0.669828 0.287337 0.287082C0.670113 -0.0956941 1.29094 -0.0956941 1.67368 0.287082L7.0001 5.61367L12.3263 0.287237C12.7093 -0.0955393 13.33 -0.0955393 13.7128 0.287237C14.0957 0.670014 14.0957 1.29084 13.7128 1.67377L7.69312 7.69356C7.50164 7.88495 7.25095 7.98054 7.00013 7.98054C6.74919 7.98054 6.49832 7.88476 6.30693 7.69341Z" fill="#FF7308"/>
+            </svg>
+        </div>
+    </div>
+    <div 
+    class="list_cat" 
+    [ngClass]="{'opened' : opened}"
+    *ngIf="category.subcats.length > 0">
+        <ul>
+            <a [routerLink]="category.status === true ? [] : ['/category', category?.slug]" class="list_cat_title"> Вся категория</a>
+
+            <li *ngFor="let subcategory of category.subcats">
+                <a [routerLink]="category.status === true ? [] : ['/category', category?.slug, subcategory.slug]">{{subcategory.name}} </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div 
+[ngClass]="{'old_product': !product.product.price}"
+class="row orders_history_page__element__product__wrapper">
+    <div 
+    [ngClass]="{'old_product': !product.product.price}"
+    class="orders_history_page__element__product__image">
+        <img 
+        loading = "lazy"
+        [src]="returnImage(product)" [alt]="product.product.fullName" 
+        class="orders_history_page__element__product__image__image">
+    </div>
+    <div class="orders_history_page__element__product__desctiption">
+        <span class="orders_history_page__element__product__desctiption__name">
+            {{product.product.fullName}}
+        </span>
+        <span *ngIf="product.product.unit"
+        class="orders_history_page__element__product__desctiption__unit">
+            {{product.product.unit}},
+        </span>
+        <a 
+        *ngIf="product.product.brand.slug && product.product.brand.name" 
+        [routerLink]="['/brand/'+ product.product.brand.slug]"
+        class="orders_history_page__element__product__desctiption__brand">{{product.product.brand.name}}</a>
+    </div>
+    <div class="orders_history_page__element__product__total_count">
+        <span class="orders_history_page__element__product__total_count__quantity">
+            {{product.quantity * product.unitSize | number:"1.0-2":"ru-RU"}} {{product.product.measure}}
+        </span>
+    </div>
+    <div class="orders_history_page__element__product__total_price">
+        <span class="orders_history_page__element__product__total_price__price">
+            {{product.price | number:"1.2-2":"ru-RU"}} ₽
+        </span>
+    </div>
+    <div 
+    *ngIf="product.product.price"
+    class="orders_history_page__element__product__toggle_favorites">
+        <svg *ngIf="product.product.isFavorite === 0" xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
+            <path d="M13 1L16.7074 8.5716L25 9.78485L19 15.6786L20.416 24L13 20.0716L5.584 24L7 15.6786L1 9.78485L9.29143 8.5716L13 1Z" stroke="#FF7308" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg *ngIf="product.product.isFavorite > 0" xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
+            <path d="M13 1L16.7074 8.5716L25 9.78485L19 15.6786L20.416 24L13 20.0716L5.584 24L7 15.6786L1 9.78485L9.29143 8.5716L13 1Z" fill="#FF7308" stroke="#FF7308" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+    <!-- <div 
+    *ngIf="product.product.price"
+    class="orders_history_page__element__product__toggle_cart">
+        <span 
+        (click)="this.toggleChecked.emit({id:product.product.id, quantity:product.quantity})"
+        [ngClass]="{'checked': returnCheked()}"
+        class="orders_history_page__element__product__toggle_cart__checkbox"></span>
+    </div> -->
+    <!-- <div 
+    *ngIf="!product.product.price"
+    class="orders_history_page__element__product__exchange_product">
+        <button class="orders_history_page__element__product__exchange_product__button">
+            Заменить
+        </button>
+    </div> -->
+</div>

@@ -1,0 +1,121 @@
+<div class="container-fluid cont">
+    <div class="container cont_body main-container ">
+        <app-loader *ngIf="isLoading; else isLoad"></app-loader>
+        <ng-template #isLoad>
+            <div class="profile-form-block">
+                <h1 class="profile-title">
+                    Пpофиль
+                </h1>
+                <div class="profile-form-fields">
+                    <div  class="form-row" (click)="this.Edit = EDITVALUES.PHONE; WiewEdit=true">
+                        <p class="field-title">
+                            Номер телефона
+                        </p>
+                        <label >
+                            <span>
+                                {{userData.profile.phone ? userData.profile.phone : "Укажите номер телефона..."}}
+                            </span>
+                            <img tabindex="0" (keypress)="this.Edit = EDITVALUES.PHONE; WiewEdit=true" src="../../../../assets/images/img/pen.png" alt="">
+                        </label>
+                    </div>
+
+                    <div  class="form-row"  (click)="this.Edit = EDITVALUES.E_MAIL; WiewEdit=true">
+                        <p  class="field-title">
+                            E-mail
+                        </p>
+                        <label >
+                            <span>
+                                {{userData.profile.email ? userData.profile.email : "Укажите e-mail..."}}
+                            </span>
+                            <img tabindex="0" (keypress)="this.Edit = EDITVALUES.E_MAIL; WiewEdit=true" src="../../../../assets/images/img/pen.png" alt="">
+                        </label>
+                    </div>
+
+                    <form [formGroup]="nameForm">
+                        <div class="form-row">
+                            <p class="field-title">
+                                Имя
+                            </p>
+                            <label class="name">
+                                <input 
+                                formControlName="value"
+                                type="text" 
+                                placeholder="Укажите имя..." 
+                                (blur)="changeName($event)">
+                                <img src="../../../../assets/images/img/pen.png" alt="">
+                                <small class="name-error" *ngIf="returnNameErrors()">
+                                    {{returnNameErrors()}}
+                                </small>
+                            </label>
+                        </div>
+                    </form>
+
+                    <div class="form-row with-slide-toggle">
+                        <p class="field-title">
+                            Перезванивать после сборки заказа, если все позиции в наличии
+                        </p>
+                        <label class="switch">
+                            <input type="checkbox" (click)="cnhageRecallStatus(userData.profile.isRecallEnabled)" [checked]="userData.profile && userData.profile?.isRecallEnabled > 0 || false">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="form-row with-slide-toggle">
+                        <p class="field-title">
+                            Получать e-mail рассылки
+                        </p>
+                        <label class="switch">
+                            <input  
+                             type="checkbox" (click)="changeEmailSendedStatus(userData.profile.isEmailEnabled)" [checked]="userData.profile && userData.profile?.isEmailEnabled > 0 || false">
+                            <span tabindex="0" (keypress)="changeEmailSendedStatus(userData.profile.isEmailEnabled)" class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="form-row address-field">
+                        <p class="field-title">
+                            Мой адрес
+                        </p>
+                        <label (click)="this.Edit = EDITVALUES.ADDRESS; WiewEdit= true">
+                            <span>
+                                <!-- {{userData.profile.shownAddress || ""}} -->
+                                {{currentLocation  || ""}}
+                            </span>
+                                <img  src="../../../../assets/images/img/pen.png" alt="">
+                        </label>
+                    </div>
+                    <!-- <div class="form-row"  (click)="this.Edit = EDITVALUES.E_MAIL; WiewEdit=true">
+                        <p class="field-title">
+                            E-mail
+                        </p>
+                       
+                    </div> -->
+                    
+
+                    <!-- <div class="form-row">
+                        <div class="radio-phone-or-email" [ngClass]="{'active' : (userData.profile && +userData.profile.storeChoice === 1) }" (click)="changeStorage(userData.profile.storeChoice)">
+                            <span class="circle" [ngClass]="{ 'active': (userData.profile && +userData.profile.storeChoice === 1) }"></span>
+                            <span class="radio-lable">
+                                Ближний склад <small>(в течение часа)</small>
+                            </span>
+                        </div>
+                        <div class="radio-phone-or-email" [ngClass]="{'active' : (userData.profile && +userData.profile.storeChoice !== 1)}" (click)="changeStorage(userData.profile.storeChoice)">
+                            <span class="circle" [ngClass]="{ 'active': (userData.profile && +userData.profile.storeChoice !== 1) }"></span>
+                            <span class="radio-lable">
+                                Главный склад <small>(в течение дня)</small>
+                            </span>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+<app-edit-profile-modal
+*ngIf="Edit != undefined && WiewEdit"
+[UserData]="userData"
+[editMode]="Edit"
+[EDITmode]="EDITVALUES"
+(closeModal)="WiewEdit = false; Edit = undefined; this.getUserData()"
+
+></app-edit-profile-modal>

@@ -1,0 +1,145 @@
+.off-1{
+  margin-right: 6.333333%;
+  margin-left: 6.333333%;
+}
+.box_auto {
+  width: auto !important;
+  height: auto !important;
+}
+
+.google_play {
+  margin-top: -10px;
+  margin-left: -5px;
+}
+.app_store {
+  margin-top: -2px;
+}
+#how_work_item_1 .st0 {
+  fill: #ff0201;
+}
+#how_work_item_1 .st1 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #fefefe;
+}
+#how_work_item_1 .st2 {
+  fill: #07a557;
+}
+#how_work_item_1 .st3 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #07a557;
+}
+#how_work_item_1 .st4 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #ff0201;
+}
+#how_work_item_1 .st5 {
+  fill: #fefefe;
+}
+#how_work_item_1 .st6 {
+  fill: #393430;
+}
+#how_work_item_2 .st0 {
+  fill: #ff0201;
+}
+#how_work_item_2 .st1 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #07a557;
+}
+#how_work_item_2 .st2 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #fefefe;
+}
+#how_work_item_2 .st3 {
+  fill: #07a557;
+}
+#how_work_item_2 .st4 {
+  fill: #393430;
+}
+#how_work_item_3 .st0 {
+  fill: #ff0201;
+}
+#how_work_item_3 .st1 {
+  fill: #fefefe;
+}
+#how_work_item_3 .st2 {
+  fill: #07a557;
+}
+#how_work_item_3 .st3 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #fefefe;
+}
+#how_work_item_3 .st4 {
+  fill: #07a558;
+}
+#how_work_item_3 .st5 {
+  fill: #393430;
+}
+#how_work_item_4 .st0 {
+  fill: #ff0201;
+}
+#how_work_item_4 .st1 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #fefefe;
+}
+#how_work_item_4 .st2 {
+  fill: #07a557;
+}
+#how_work_item_4 .st3 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #07a557;
+}
+#how_work_item_4 .st4 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #ff0201;
+}
+#how_work_item_4 .st5 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #a8dbc3;
+}
+#how_work_item_4 .st6 {
+  fill: #fefefe;
+}
+#how_work_item_4 .st7 {
+  fill: #393430;
+}
+.cursor{
+  cursor: pointer;
+}
+:host{
+  .fil4 {fill:#92BA18;fill-rule:nonzero}
+  .fil2 {fill:#9CB538;fill-rule:nonzero}
+  .fil3 {fill:#9CB538;fill-rule:nonzero}
+  .fil1 {fill:#FF7308;fill-rule:nonzero}
+  .fil0 {fill:#FF7308;fill-rule:nonzero}
+
+  .info-about{
+    color: #9CB538;
+  }
+}
+.order-and-payment_mobile_only {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 22px;
+  a{
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 500;
+    color: #9CB538;
+  }
+}
+
+@media screen and (min-width:1205px) {
+  .order-and-payment_mobile_only{
+    display: none;
+  }
+}

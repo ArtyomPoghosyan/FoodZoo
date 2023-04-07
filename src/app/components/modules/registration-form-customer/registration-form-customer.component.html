@@ -1,0 +1,131 @@
+<div *ngIf="!success_send && !error_send && !fromProd && !locData" class="form registration_autorization" [class.product_form]="productForm">
+  <span class="input-error-message collapse show text-center"
+        *ngIf="errorMsg">{{errorMsg}}</span>
+  <span class="form-title"><span>
+      Регистрация
+    </span>
+  </span>
+  <div class="form_content">
+    <form [formGroup]="registrationCustomer">
+      <div class="form_row">
+        <label class="input_label" for="emailcust">Электронный адрес</label>
+        <input id="emailcust" formControlName="emailcust" (keydown)="removeSpace($event)" class="input" type="text">
+        <span class="input-error-message collapse show"
+          *ngIf="emailcust.invalid && (emailcust.dirty || emailcust.touched )">{{setValidationError('emailcust')}}</span>
+      </div>
+      <div class="form_row">
+        <label class="input_label" for="password">Пароль</label>
+        <input class="input" (keydown)="removeSpace($event)" (keyup)="onkeyUpMethod()" formControlName="passwordc" id="password" [type]="showPassword1 ? 'text' : 'password'">
+        <span class="input-error-message collapse show pass_conf"
+              *ngIf="passwordc.invalid  &&(passwordc.dirty || passwordc.touched )">{{setValidationError('passwordc')}}</span>
+        <span class="input-error-message collapse show" *ngIf="passwordConf">Пароли не совпадают</span>
+        <button class="password_visibility" [class.visible]="showPassword1" (click)="showPassword1 = !showPassword1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" class="icon_eye" viewBox="0 0 24 24">
+            <path d="M12.015 7c4.751 0 8.063 3.012 9.504 4.636-1.401 1.837-4.713 5.364-9.504 5.364-4.42 0-7.93-3.536-9.478-5.407 1.493-1.647 4.817-4.593 9.478-4.593zm0-2c-7.569 0-12.015 6.551-12.015 6.551s4.835 7.449 12.015 7.449c7.733 0 11.985-7.449 11.985-7.449s-4.291-6.551-11.985-6.551zm-.015 3c-2.209 0-4 1.792-4 4 0 2.209 1.791 4 4 4s4-1.791 4-4c0-2.208-1.791-4-4-4z"/>
+          </svg>
+          <svg width="24px" height="24px" class="icon_eye_hide">
+            <use xlink:href="#icon_eye_hide"></use>
+          </svg>
+        </button>
+      </div>
+      <div class="form_row">
+        <label class="input_label" for="password2">Подтверждение пароля</label>
+        <input class="input" (keydown)="removeSpace($event)" (keyup)="onkeyUpMethod()" formControlName="passwordc2" id="password2" [type]="showPassword2 ? 'text' : 'password'">
+        <button class="password_visibility" [class.visible]="showPassword2" (click)="showPassword2 = !showPassword2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" class="icon_eye" viewBox="0 0 24 24">
+            <path d="M12.015 7c4.751 0 8.063 3.012 9.504 4.636-1.401 1.837-4.713 5.364-9.504 5.364-4.42 0-7.93-3.536-9.478-5.407 1.493-1.647 4.817-4.593 9.478-4.593zm0-2c-7.569 0-12.015 6.551-12.015 6.551s4.835 7.449 12.015 7.449c7.733 0 11.985-7.449 11.985-7.449s-4.291-6.551-11.985-6.551zm-.015 3c-2.209 0-4 1.792-4 4 0 2.209 1.791 4 4 4s4-1.791 4-4c0-2.208-1.791-4-4-4z"/>
+          </svg>
+          <svg width="24px" height="24px" class="icon_eye_hide">
+            <use xlink:href="#icon_eye_hide"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="form_row">
+        <div class="checkbox">
+          <input [checked]="try_to_send" id="privacy" type="checkbox" name="privacy">
+          <label (click)="try_to_send = !try_to_send"><span class="agree">Я соглашаюсь с </span> <a target="_blank" href="https://foodzo.ru/assets/doc/usloviya.pdf"> Пользовательским
+              соглашением </a> <span class="agree"> и </span> <a target="_blank" href="https://foodzo.ru/assets/doc/personaldata.pdf"> Политикой
+              обработки персональных данных.</a></label>
+        </div>
+      </div>
+      <div class="form_row">
+        <button (click)="register()" class="btn green"
+                [disabled]="!try_to_send || !validForm || oneTime">Зарегистрироваться</button>
+      </div>
+    </form>
+    <div class="form_row">
+      <div class="social_registration">
+        <div class="social_registration-title">Зарегистрируйтесь с помощью:</div>
+        <div class="social_registration-type">
+          <button (click)="socialSignIn('facebook', socialModal)" class="social_registration-type_item">
+            <svg width="12px" height="24px">
+              <use xlink:href="#icon_face_reg"></use>
+            </svg>
+          </button>
+          <button (click)="socialSignIn('vkontakte', socialModal)" class="social_registration-type_item">
+            <svg width="24px" height="14px">
+              <use xlink:href="#icon_vk_reg"></use>
+            </svg>
+          </button>
+          <a href="http://www.odnoklassniki.ru/oauth/authorize?client_id={{okruClientId}}&
+scope=GET_EMAIL&response_type=code&
+redirect_uri={{currentUrl}}/registration&layout=m" class="social_registration-type_item">
+            <svg width="15px" height="24px">
+              <use xlink:href="#icon_ok_reg"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="form_row">
+      <a class="form_link center" [routerLink]="['/login']">Уже зарегистрированы?</a>
+    </div>
+    <ng-template #socialModal let-modal>
+      <div class="modal_content mt-5">
+        <div class="form">
+          <div class="modal_close" (click)="modal.dismiss('Cross click')">
+            <svg style="font-weight: bold;" width='18px' height="18px" viewBox="0 0 68 68">
+              <g>
+                <path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/>
+              </g>
+            </svg>
+          </div>
+          <div class="form_content">
+            <label class="input_label mb-3" for="emailcus">Электронный адрес</label>
+            <input (keyup)="changeEmail($event)" id="emailcus"  required class="input" type="email" [value]="email ? email : ''">
+            <span class="input-error-message collapse show"
+               *ngIf="errorMsg">{{errorMsg}}</span>
+            <div class="checkbox mt-3">
+              <input [checked]="try_to_send" id="privacyy" type="checkbox" name="privacy">
+              <label (click)="try_to_send = !try_to_send"><span>Я соглашаюсь с </span> <a target="_blank" href="https://foodzo.ru/assets/doc/usloviya.pdf"> Пользовательским
+                соглашением </a> <span> и </span> <a target="_blank" href="https://foodzo.ru/assets/doc/personaldata.pdf"> Политикой
+                обработки персональных данных.</a></label>
+            </div>
+            <div class="target_buttons mt-3">
+              <button (click)="socialRegister()" class="btn green"
+                      [disabled]="!try_to_send || oneTime">Зарегистрироваться</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<div *ngIf="success_send || fromProd" class="message_success">
+  <div class="form registration_autorization transparent">
+    <span class="form-title"><span>
+        Проверьте почту
+      </span>
+    </span>
+    <p>На электронный адрес <span>{{changedEmail ? changedEmail : (email ? email : (registrationCustomer.value.emailcust ? registrationCustomer.value.emailcust : fromProdEmail))}}</span> отправлено сообщение по активации
+      аккаунта.</p>
+  </div>
+</div>
+<div *ngIf="error_send" class="message_error">
+  <div class="form registration_autorization transparent">
+    <span class="form-title">
+      <span>{{error_message}}</span>
+    </span>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+.confirm-title {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.confirm-subtitle {
+    font-size: 12px;
+    line-height: 15px;
+    color: #000;
+    width: 320px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.confirm-code-title {
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.next-cended {
+    font-size: 13px;
+    color: #8290A7;
+    line-height: 15px;
+}
+
+button[type="button"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #FF7308;
+    text-decoration: underline;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 500;
+    margin: 0 auto;
+    display: block;
+    &.dismiss{
+        margin: 0;
+    }
+}
+span.field {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.field {
+    height: 50px;
+    width: 30px;
+    border: none;
+    border-bottom: 3px solid #CCD9DD;
+    outline: none;
+    font-size: 36px;
+    text-align: center;
+    margin: 0 5px;
+    &[disabled] {
+        background-color: transparent;
+        color: #000;
+    }
+}
+
+.code-fields{
+    position: relative;
+    .send-error {
+        color: red;
+        position: absolute;
+        top: 100%;
+        font-size: 12px;
+    }
+}
+
+.navigated_buttons {
+    display: flex;
+    justify-content: space-between;
+    .dismiss {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        span {
+            border-bottom: 1px solid transparent ;
+        }
+        &:hover span {
+            border-bottom: 1px solid;
+        }
+    }
+}

@@ -1,0 +1,881 @@
+.edit-profile_data__block {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(121, 117, 110, 0.58);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .checker {
+        top: 3px;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #D4D9E1;
+        border-radius: 2px;
+        cursor: pointer;
+        position: relative;
+        margin-right: 8px;
+
+        &.active::before {
+            content: "\2713";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            font-weight: 700;
+            color: #FF7308;
+        }
+    }
+
+    .edit_profile_modal {
+        width: 400px;
+        height: 354px;
+        max-width: calc(100% - 20px);
+        background-color: #FFF;
+        padding: 40px 32px 75px;
+        border-radius: 8px;
+        position: relative;
+
+        @media screen and (max-width:768px) {
+            padding-inline: 24px;
+            height: 304px;
+        }
+
+        .close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            line-height: 0.5;
+        }
+
+        .modal-title {
+            text-align: center;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            margin-inline: 0;
+            margin-bottom: 31px;
+
+            @media screen and (max-width:768px) {
+                margin-bottom: 16px;
+            }
+
+            position: relative;
+
+            label {
+                display: block;
+                font-size: 13px;
+                color: #000;
+                width: 100%;
+                margin: 0;
+
+                span {
+                    display: block;
+                }
+
+                input {
+                    width: 100%;
+                    outline: none;
+                    border: none;
+                    background-color: #F3F6F7;
+                    border-radius: 4px;
+                    padding: 12px 13px;
+                }
+
+                &.private-politics {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    p {
+                        max-width: calc(100% - 24px);
+                        font-size: 12px;
+                        line-height: 15px;
+                        margin: 0;
+
+                        a {
+                            color: #FF7308;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            .submit-button {
+                display: block;
+                width: 100%;
+                border: none;
+                outline: none !important;
+                background-color: #FF7308;
+                color: #FFF;
+                padding-block: 12px;
+                font-size: 13px;
+                font-weight: 600;
+                border-radius: 4px;
+            }
+
+            .error {
+                position: absolute;
+                top: 100%;
+                color: red;
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+.confirm-edited {
+    height: 354px;
+    width: 400px;
+    padding: 40px;
+    border-radius: 8px;
+    background-color: #FFF;
+    position: relative;
+    max-width: 100vw;
+    max-height: 100vh;
+    text-align: center;
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    h2 {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 22px;
+        text-align: center;
+    }
+
+    p {
+        text-align: center;
+        font-size: 12px;
+        line-height: 15px;
+        color: #000;
+    }
+
+    .resend {
+        display: block;
+        font-size: 12px;
+        text-align: center;
+        margin-top: 26px;
+
+        &-button {
+            border: none;
+            outline: none;
+            border-bottom: 1px solid;
+            padding: 0 0 0 3px;
+            margin: 26px auto 0 auto;
+            display: block;
+            color: #FF7308;
+            font-size: 13px;
+            background-color: transparent;
+            text-decoration: none;
+        }
+    }
+
+}
+
+span.field {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.field {
+    height: 50px;
+    width: 30px;
+    border: none;
+    border-bottom: 3px solid #CCD9DD;
+    outline: none;
+    font-size: 36px;
+    text-align: center;
+    margin: 0 5px;
+
+    &[disabled] {
+        background-color: transparent;
+        color: #000;
+    }
+}
+
+small.error {
+    display: block;
+    color: red;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.map {
+    display: flex;
+    flex-direction: column;
+
+    //  width: 1200px;  
+    // height: 400px;
+    justify-content: center;
+    align-items: center
+}
+
+.information_map {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 922px;
+    height: 520px;
+
+}
+
+.yandex-map {
+    width: 920px;
+    z-index: -1;
+    // min-height: 520px;
+    max-width: calc(100% - 20px);
+    background-color: #FFF;
+    padding: 40px 32px 75px;
+    border-radius: 8px;
+    position: relative;
+    height: 591px;
+
+    @media screen and (max-width:768px) {
+        padding-inline: 24px;
+        // height: 304px;
+    }
+
+    .close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        line-height: 0.5;
+    }
+
+    .modal-title {
+        text-align: center;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: #000;
+        margin-bottom: 20px;
+    }
+
+    .form-row {
+        margin-inline: 0;
+        margin-bottom: 31px;
+
+        @media screen and (max-width:768px) {
+            margin-bottom: 16px;
+        }
+
+        position: relative;
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #000;
+            width: 100%;
+            margin: 0;
+
+            span {
+                display: block;
+            }
+
+            input {
+                width: 100%;
+                outline: none;
+                border: none;
+                background-color: #F3F6F7;
+                border-radius: 4px;
+                padding: 12px 13px;
+            }
+
+            &.private-politics {
+                display: flex;
+                flex-wrap: wrap;
+
+                p {
+                    max-width: calc(100% - 24px);
+                    font-size: 12px;
+                    line-height: 15px;
+                    margin: 0;
+
+                    a {
+                        color: #FF7308;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            border: none;
+            outline: none !important;
+            background-color: #FF7308;
+            color: #FFF;
+            padding-block: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+
+        .error {
+            position: absolute;
+            top: 100%;
+            color: red;
+            font-size: 12px;
+        }
+    }
+}
+
+.search-input-container {
+    width: 700px;
+    background-color: #FF7308;
+}
+
+
+.ymaps-2-1-79-float-button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 40px;
+    background: #9CB538 !important;
+    font-family: 'Montserrat';
+    line-height: 15.85px;
+    font-size: 12px;
+    color: white;
+}
+
+//search input
+
+.ymaps-2-1-79-searchbox__normal-layout {
+    width: 850px !important;
+    padding-left: 0px !important;
+}
+
+.myButton {
+    display: flex;
+    background: #FF7308;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 40px;
+    font-family: 'Montserrat';
+    line-height: 15.85px;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+}
+
+//search-toolbar 
+
+.ymaps-2-1-79-controls__control_toolbar {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    position: inherit;
+    display: flex !important;
+    height: 75px !important;
+    width: 919px !important;
+    background: white !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.ymaps-2-1-79-controls__toolbar {
+    margin-top: 0 !important;
+}
+
+.ymaps-2-1-79-map {
+    width: 918px !important;
+    height: 520px !important;
+}
+
+.ymaps-2-1-79-map ymaps-2-1-79-i-ua_js_yes ymaps-2-1-79-map-bg ymaps-2-1-79-islets_map-lang-ru {
+    width: 917px !important;
+    height: 520px !important;
+}
+
+.form-row {
+    margin-inline: 0;
+    margin-bottom: 0 !important;
+    position: relative;
+}
+
+.yande-map {
+    width: 920px;
+    z-index: -1;
+    max-width: calc(100% - 20px);
+    background-color: #FFF;
+    padding: 40px 32px 75px;
+    border-radius: 8px;
+    position: relative;
+    height: 598px !important;
+}
+
+.ymaps-2-1-79-map {
+    width: 918px !important;
+    // z-index: -571 !important;
+    height: 594px !important;
+}
+
+.close {
+    position: absolute !important;
+    top: -14px !important;
+    right: 10px !important;
+    line-height: 3 !important;
+    color: white !important;
+    z-index: 999999;
+
+}
+
+.ymaps-2-1-79-searchbox__normal-layout .ymaps-2-1-79-searchbox-button {
+    width: 160px !important;
+    text-align: center !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    background: #FF7308 !important;
+    color: white !important;
+    justify-content: center !important;
+}
+
+
+.ymaps-2-1-79-searchbox-input__input {
+    display: block;
+    width: 100% !important;
+    height: 40px !important;
+    padding: 0 2px;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 28px;
+    background-color: transparent;
+    background-clip: padding-box;
+    box-sizing: border-box !important;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    // border-left: 9px solid transparent;
+    border: 1px solid #FF7308 !important;
+}
+
+.ymaps-2-1-79-searchbox-input__input {
+    border-top-left-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+}
+
+.profile-form-fields .form-row {
+    margin-bottom: 38px;
+    width: 335px;
+    max-width: 100%;
+    margin-inline: 0;
+    height: 77px !important;
+
+}
+
+@media screen and (max-width:950px) {
+    .ymaps-2-1-79-map ymaps-2-1-79-i-ua_js_yes ymaps-2-1-79-map-bg ymaps-2-1-79-islets_map-lang-ru {
+        width: 800px !important;
+        height: 520px !important;
+    }
+
+    .ymaps-2-1-79-controls__control_toolbar {
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+        position: inherit;
+        display: flex !important;
+        height: 75px !important;
+        width: 800px !important;
+        background: white !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .ymaps-2-1-79-map {
+        width: 800px !important;
+        height: 594px !important;
+    }
+
+    .yande-map {
+        width: 800px;
+        z-index: -1;
+        max-width: calc(100% - 20px);
+        background-color: #FFF;
+        padding: 40px 32px 75px;
+        border-radius: 8px;
+        position: relative;
+        height: 598px !important;
+    }
+
+    .ymaps-2-1-79-searchbox__normal-layout {
+        width: 720px !important;
+        padding-left: 0px !important;
+    }
+
+    @media screen and (max-width:825px) {
+
+        .information_map {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 620px;
+            height: 520px;
+        
+        }
+
+        .ymaps-2-1-79-map ymaps-2-1-79-i-ua_js_yes ymaps-2-1-79-map-bg ymaps-2-1-79-islets_map-lang-ru {
+            width: 650px !important;
+            height: 520px !important;
+        }
+
+        .ymaps-2-1-79-controls__control_toolbar {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+            position: inherit;
+            display: flex !important;
+            height: 75px !important;
+            width: 650px !important;
+            background: white !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .ymaps-2-1-79-map {
+            width: 650px !important;
+            height: 594px !important;
+        }
+
+        .yande-map {
+            width: 650px;
+            z-index: -1;
+            max-width: calc(100% - 20px);
+            background-color: #FFF;
+            padding: 40px 32px 75px;
+            border-radius: 8px;
+            position: relative;
+            height: 598px !important;
+        }
+
+        .ymaps-2-1-79-searchbox__normal-layout {
+            width: 580px !important;
+            padding-left: 0px !important;
+        }
+
+        .ymaps-2-1-79-float-button {
+            background: #FF7308;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 190px;
+            height: 40px;
+            font-family: "Montserrat";
+            line-height: 15.85px;
+            font-size: 12px;
+            color: white;
+            margin-left: -90px;
+            cursor: pointer;
+        }
+        .myButton {
+            display: flex;
+            background: #FF7308;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 190px;
+            height: 40px;
+            font-family: 'Montserrat';
+            line-height: 15.85px;
+            font-size: 12px;
+            color: white;
+            cursor: pointer;
+            margin-left: -55px;
+            border-radius: 4px;
+        }
+
+    }
+
+    @media screen and (max-width:680px) {
+
+        .information_map {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 520px;
+            height: 520px;
+        
+        }
+
+        .ymaps-2-1-79-float-button {
+            background: #FF7308;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 190px;
+            height: 40px;
+            font-family: "Montserrat";
+            line-height: 15.85px;
+            font-size: 12px;
+            color: white;
+            margin-left: -90px;
+            cursor: pointer;
+        }
+        .myButton {
+            display: flex;
+            background: #FF7308;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 190px;
+            height: 40px;
+            font-family: 'Montserrat';
+            line-height: 15.85px;
+            font-size: 12px;
+            color: white;
+            cursor: pointer;
+            margin-left: -150px;
+            border-radius: 4px;
+        }
+
+        .ymaps-2-1-79-map ymaps-2-1-79-i-ua_js_yes ymaps-2-1-79-map-bg ymaps-2-1-79-islets_map-lang-ru {
+            width: 550px !important;
+            height: 520px !important;
+        }
+
+        .ymaps-2-1-79-controls__control_toolbar {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+            position: inherit;
+            display: flex !important;
+            height: 75px !important;
+            width: 550px !important;
+            background: white !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .ymaps-2-1-79-map {
+            width: 550px !important;
+            height: 594px !important;
+        }
+
+        .yande-map {
+            width: 550px;
+            z-index: -1;
+            max-width: calc(100% - 20px);
+            background-color: #FFF;
+            padding: 40px 32px 75px;
+            border-radius: 8px;
+            position: relative;
+            height: 598px !important;
+        }
+
+        .ymaps-2-1-79-searchbox__normal-layout {
+            width: 480px !important;
+            padding-left: 0px !important;
+        }
+
+        .ymaps-2-1-79-searchbox__normal-layout .ymaps-2-1-79-searchbox-button {
+            width: 125px !important;
+            text-align: center !important;
+            height: 40px !important;
+            display: flex !important;
+            align-items: center !important;
+            background: #FF7308 !important;
+            color: white !important;
+            justify-content: center !important;
+        }
+
+    }
+
+    @media screen and (max-width:570px) {
+
+        .information_map {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 420px;
+            height: 520px;
+        
+        }
+
+        .ymaps-2-1-79-float-button {
+            background: #FF7308;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            height: 40px;
+            font-family: "Montserrat";
+            line-height: 15.85px;
+            font-size: 10px;
+            color: white;
+            margin-left: -90px;
+            cursor: pointer;
+        }
+        .myButton {
+            display: flex;
+            background: #FF7308;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            height: 40px;
+            font-family: 'Montserrat';
+            line-height: 15.85px;
+            font-size: 12px;
+            color: white;
+            cursor: pointer;
+            margin-left: -240px;
+            border-radius: 4px;
+        }
+
+        .ymaps-2-1-79-map ymaps-2-1-79-i-ua_js_yes ymaps-2-1-79-map-bg ymaps-2-1-79-islets_map-lang-ru {
+            width: 400px !important;
+            height: 520px !important;
+        }
+
+        .ymaps-2-1-79-controls__control_toolbar {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+            position: inherit;
+            display: flex !important;
+            height: 75px !important;
+            width: 385px !important;
+            background: white !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .ymaps-2-1-79-map {
+            width: 385px !important;
+            height: 594px !important;
+        }
+
+        .yande-map {
+            width: 400px;
+            z-index: -1;
+            max-width: calc(100% - 20px);
+            background-color: #FFF;
+            padding: 40px 32px 75px;
+            border-radius: 8px;
+            position: relative;
+            height: 598px !important;
+        }
+
+        .ymaps-2-1-79-searchbox__normal-layout {
+            width: 321px !important;
+            padding-left: 0px !important;
+        }
+
+        .ymaps-2-1-79-searchbox__normal-layout .ymaps-2-1-79-searchbox-button {
+            width: 125px !important;
+            text-align: center !important;
+            height: 40px !important;
+            display: flex !important;
+            align-items: center !important;
+            background: #FF7308 !important;
+            color: white !important;
+            justify-content: center !important;
+        }
+    }
+
+    @media screen and (max-width:410px) {
+        
+
+        .ymaps-2-1-79-float-button {
+            background: #FF7308;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            height: 40px;
+            font-family: "Montserrat";
+            line-height: 15.85px;
+            font-size: 10px;
+            color: white;
+            margin-left: -120px;
+            cursor: pointer;
+        }
+        .myButton {
+            display: flex;
+            background: #FF7308;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            height: 40px;
+            font-family: 'Montserrat';
+            line-height: 15.85px;
+            font-size: 12px;
+            color: white;
+            cursor: pointer;
+            margin-left: -290px;
+            border-radius: 4px;
+        }
+
+        .ymaps-2-1-79-map ymaps-2-1-79-i-ua_js_yes ymaps-2-1-79-map-bg ymaps-2-1-79-islets_map-lang-ru {
+            width: 300px !important;
+            height: 520px !important;
+        }
+
+        .ymaps-2-1-79-controls__control_toolbar {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+            position: inherit;
+            display: flex !important;
+            height: 75px !important;
+            width: 300px !important;
+            background: white !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .ymaps-2-1-79-map {
+            width: 300px !important;
+            height: 594px !important;
+        }
+
+        .yande-map {
+            width: 300px;
+            z-index: -1;
+            max-width: calc(100% - 20px);
+            background-color: #FFF;
+            padding: 40px 32px 75px;
+            border-radius: 8px;
+            position: relative;
+            height: 598px !important;
+        }
+
+        .ymaps-2-1-79-searchbox__normal-layout {
+            width: 240px !important;
+            padding-left: 0px !important;
+        }
+
+        .ymaps-2-1-79-searchbox__normal-layout .ymaps-2-1-79-searchbox-button {
+            width: 70px !important;
+            text-align: center !important;
+            height: 40px !important;
+            display: flex !important;
+            align-items: center !important;
+            background: #FF7308 !important;
+            color: white !important;
+            justify-content: center !important;
+        }
+    }
+}

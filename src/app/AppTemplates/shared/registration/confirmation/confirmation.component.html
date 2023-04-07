@@ -1,0 +1,71 @@
+<h3 class="text-center confirm-title" *ngIf="senderInfo.url === 'phone'">
+    Подтверждение телефона
+</h3>
+<h3 class="text-center confirm-title" *ngIf="senderInfo.url !== 'phone'">
+    Подтверждение Е-mail
+</h3>
+<p class="text-center confirm-subtitle">
+    Код был отправлен на <span *ngIf="senderInfo.url === 'phone'; else mail">телефон </span> 
+    <ng-template #mail><span>e-mail </span></ng-template>{{senderInfo.value}}
+</p>
+<p class="text-center confirm-code-title">
+    Введите код
+</p>
+<div class="code-fields">
+    <div style="display: flex; justify-content: center; align-items: center;" (click)="focusInput($event)">
+        <span class="field mx-1">
+            {{authentificatedService.confirmValue != null && authentificatedService.confirmValue[0] ? authentificatedService.confirmValue[0] : " "}}
+        </span>
+        <span class="field mx-1">
+            {{authentificatedService.confirmValue != null && authentificatedService.confirmValue[1] ? authentificatedService.confirmValue[1] : " "}}
+        </span>
+        <span class="field mx-1">
+            {{authentificatedService.confirmValue != null && authentificatedService.confirmValue[2] ? authentificatedService.confirmValue[2] : " "}}
+        </span>
+        <span class="field mx-1">
+            {{authentificatedService.confirmValue != null && authentificatedService.confirmValue[3] ? authentificatedService.confirmValue[3] : " "}}
+        </span>
+    </div>
+
+    <input
+    id="codeInputField"
+    style="opacity: 0;"
+    type="text"
+    inputmode="numeric"
+    pattern = "[0-9]"
+    maxlength="4"
+    (paste)="onPaste($event)"
+    (keydown)="codeInput($event)"
+    (keyup)="codeKeyUp()"
+    [(ngModel)] = "authentificatedService.confirmValue"
+    autocomplete = "off"
+    #codeInputField>
+</div>
+<p class="text-center next-cended" *ngIf="subscribeTimer !== 0; else resend">
+    Повторная отправка через - {{ subscribeTimer }} сек.
+</p>
+<ng-template #resend>
+    <button type="button" class="text-center" (click)="resendUserData();">
+        Повторить отправку
+    </button>
+</ng-template>
+<div class="navigated_buttons">
+    <button type="button" class="dismiss" (click)="this.back.emit(true)" (click) = "backToRegistration()" >
+        <svg class="mr-2 me-2" xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.3035 0.177475C6.5543 0.419903 6.56108 0.819741 6.31866 1.07054L1.08569 6.48414C0.843261 6.73493 0.443423 6.74172 0.192627 6.49929C-0.0581698 6.25686 -0.0649535 5.85702 0.177475 5.60623L5.41044 0.192627C5.65287 -0.0581698 6.05271 -0.0649535 6.3035 0.177475Z" fill="#FF7308"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.189259 5.59482C0.438244 5.35053 0.838121 5.35434 1.08241 5.60332L6.30527 10.9266C6.54956 11.1756 6.54575 11.5755 6.29677 11.8198C6.04778 12.064 5.6479 12.0602 5.40362 11.8113L0.180754 6.48797C-0.0635342 6.23898 -0.0597265 5.8391 0.189259 5.59482Z" fill="#FF7308"/>
+        </svg>
+        <span>
+            Назад
+        </span>
+    </button>
+    <button type="button" class="dismiss" (click)="this.skip.emit(true)">
+        <span>
+            Пропустить
+        </span>
+        <svg class="ms-2 ml-2" xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.19259 0.177475C-0.0582061 0.419903 -0.06499 0.819741 0.177438 1.07054L5.4104 6.48414C5.65283 6.73493 6.05267 6.74172 6.30347 6.49929C6.55426 6.25686 6.56105 5.85702 6.31862 5.60623L1.08565 0.192627C0.843224 -0.0581698 0.443387 -0.0649535 0.19259 0.177475Z" fill="#FF7308"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.30684 5.59482C6.05785 5.35053 5.65797 5.35434 5.41368 5.60332L0.190823 10.9266C-0.0534658 11.1756 -0.0496578 11.5755 0.199327 11.8198C0.448312 12.064 0.84819 12.0602 1.09248 11.8113L6.31534 6.48797C6.55963 6.23898 6.55582 5.8391 6.30684 5.59482Z" fill="#FF7308"/>
+        </svg>
+    </button>
+</div>

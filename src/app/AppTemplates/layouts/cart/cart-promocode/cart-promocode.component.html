@@ -1,0 +1,8 @@
+<form [formGroup]="promoForm" class="promocod-form">
+    <p class="promocod-title">
+        Промокод <span *ngIf="promo">Применен</span>
+    </p>
+    <input class="promocode-enter" formControlName="promocode" type="text">
+    <button class="promocode-button" type="submit" (click)="addPromocode()" *ngIf="!promo">Применить</button>
+    <button class="promocode-button" type="reset" (click)="clearPromocode()" *ngIf="promo">Сбросить</button>
+</form>
